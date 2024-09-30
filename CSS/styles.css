@@ -1,3 +1,44 @@
-p {
-    font-size: 11pt;
+#loginLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    width: 30%;
+    border-bottom: 2px solid green;
+}
+
+#loginLogo > img {
+    max-width: 100%;
+    height: auto;
+}
+
+.loginContainer {
+ margin: auto;
+ width: 50%;
+ border: 2px solid black;
+ padding: 15px;
+ font-size: large;
+}
+
+input {
+    width: 65%;
+    height: 20px;
+}
+
+.column {
+    float: left;
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left, .right {
+    width: 10%;
+}
+
+.center {
+    width: 80%;
 }
