@@ -6,11 +6,24 @@
         <script src="Main.js"></script>
     </head>
     <body>
-        <h1>Website Landing Page</h1>
-        <p>
-            This is a paragraph <br>
-            Breaks are important
-        </p>
+        <div id="loginLogo">
+            <img src="../Images/GoldenEagle.webp" height="200">
+        </div>
+            <h1>Website Landing Page</h1>
+            <div class="loginContainer">
+            <form>
+                <p>
+                    <label for="userName">User Name:</label>
+                    <input type="text" name="userName" id="userName">
+                </p>
+                <p>
+                    <label for="password">Password:</label>
+                    <input type="password" name="secret" size="16" maxlength="16">
+                </p>
+                <input type="submit" value="SIGN IN" id="loginSubmitButton">
+            </form>
+            <p><a href="#">Forgot Password</a></p>
+        </div>
 
     </body>
     <footer>
