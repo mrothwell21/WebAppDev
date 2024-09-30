@@ -2,12 +2,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2%;
-    width: 30%;
-    border-bottom: 2px solid green;
+    width: 20%;
 }
 
 #loginLogo > img {
+    /* min-height: 50%; */
     max-width: 100%;
     height: auto;
 }
@@ -15,31 +14,19 @@
 .loginContainer {
  margin: auto;
  width: 50%;
- border: 1.5px solid gray;
- padding-left: 15px;
- padding-right: 15px;
- padding-bottom: 15px;
+ border: 2px solid black;
+ padding: 15px;
  font-size: large;
+ height: fit-content;
 }
 
-.loginContainer > p {
-    margin-top: 10px;
+#loginSubmitButton {
+    width: fit-content;
 }
 
 input {
     width: 65%;
     height: 20px;
-}
-
-input[type=submit] {
-    width: 20%;
-    height: 30px;
-}
-
-input[type=submit]:hover {
-    color: white;
-    background-color: rgb(102, 161, 244);
-    border-radius: 5px;
 }
 
 .column {
@@ -58,4 +45,14 @@ input[type=submit]:hover {
 
 .center {
     width: 80%;
+}
+
+body{
+    background-color: #f0f0f0;
+}
+
+hr {
+    border: 1px green solid;
+    width: 50%;
+    margin-bottom: 2%;
 }
