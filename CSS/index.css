@@ -18,6 +18,11 @@
  border: 2px solid black;
  padding: 15px;
  font-size: large;
+ height: fit-content;
+}
+
+#loginSubmitButton {
+    width: fit-content;
 }
 
 input {
