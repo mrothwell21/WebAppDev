@@ -2,9 +2,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2%;
     width: 20%;
-    border-bottom: 2px solid green;
 }
 
 #loginLogo > img {
@@ -51,4 +49,10 @@ input {
 
 body{
     background-color: #f0f0f0;
+}
+
+hr {
+    border: 1px green solid;
+    width: 50%;
+    margin-bottom: 2%;
 }
