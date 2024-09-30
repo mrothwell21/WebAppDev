@@ -8,6 +8,7 @@
 }
 
 #loginLogo > img {
+    /* min-height: 50%; */
     max-width: 100%;
     height: auto;
 }
