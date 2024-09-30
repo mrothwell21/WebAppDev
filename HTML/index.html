@@ -9,21 +9,26 @@
         <div id="loginLogo">
             <img src="../Images/GoldenEagle.webp" height="200">
         </div>
-            <h1>Website Landing Page</h1>
-            <div class="loginContainer">
-            <form>
+        <h1>Website Landing Page</h1>
+        <div class="loginContainer">
+            <p>Sign In</p>
+            <form id="loginForm">
                 <p>
                     <label for="userName">User Name:</label>
+                    <br>
                     <input type="text" name="userName" id="userName">
                 </p>
                 <p>
                     <label for="password">Password:</label>
-                    <input type="password" name="secret" size="16" maxlength="16">
+                    <br>
+                    <input type="password" name="secret" id="secret" size="16" maxlength="16">
                 </p>
-                <input type="submit" value="SIGN IN" id="loginSubmitButton">
+                <p>
+                    <input type="submit" value="SIGN IN" id="loginSubmitButton">
+                </p>
             </form>
-            <p><a href="#">Forgot Password</a></p>
-        </div>
+        <p><a href="#">Forgot Password</a></p>
+       </div>
 
     </body>
     <footer>
