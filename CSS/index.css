@@ -15,14 +15,31 @@
 .loginContainer {
  margin: auto;
  width: 50%;
- border: 2px solid black;
- padding: 15px;
+ border: 1.5px solid gray;
+ padding-left: 15px;
+ padding-right: 15px;
+ padding-bottom: 15px;
  font-size: large;
+}
+
+.loginContainer > p {
+    margin-top: 10px;
 }
 
 input {
     width: 65%;
     height: 20px;
+}
+
+input[type=submit] {
+    width: 20%;
+    height: 30px;
+}
+
+input[type=submit]:hover {
+    color: white;
+    background-color: rgb(102, 161, 244);
+    border-radius: 5px;
 }
 
 .column {
