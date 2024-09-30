@@ -2,8 +2,14 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    margin-bottom: 2%;
+    width: 30%;
     border-bottom: 2px solid green;
+}
+
+#loginLogo > img {
+    max-width: 100%;
+    height: auto;
 }
 
 .loginContainer {
@@ -17,4 +23,22 @@
 input {
     width: 65%;
     height: 20px;
+}
+
+.column {
+    float: left;
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left, .right {
+    width: 10%;
+}
+
+.center {
+    width: 80%;
 }
