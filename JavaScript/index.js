@@ -52,8 +52,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         else {
             e.preventDefault();
-            errorElementUsername.innerText = "Invalid fields";
-            errorElementPassword.innerText = "Invalid fields";
+            alert("Some field is invalid. Please check inputs!")
         }
 
     });
