@@ -37,6 +37,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             e.preventDefault();
 
+            //REPLACE WITH SQL QUERYING
+
             if (username.value == "Admin"){
                 window.location.assign("../HTML/adminRole.html");
             }
