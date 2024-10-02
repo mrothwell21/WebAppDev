@@ -1,44 +1,54 @@
-// // We access to the inputs by their id's
-// let fullname = document.getElementById("fullname");
-// let address = document.getElementById("address");
+// We access to the inputs by their id's
+let username = document.getElementById("username");
+let password = document.getElementById("secret");
 
-// // Error messages
-// let errorElement = document.getElementById("name_error");
-// let errorElementAddress = document.getElementById("address_error");
+// Error messages
+let errorElementUsername = document.getElementById("usernameError");
+let errorElementPassword = document.getElementById("passwordError");
 
-// // Form
-// let contactForm = document.getElementById("form");
+// Form
+let contactForm = document.getElementById("loginForm");
 
-// // Event listener
-// contactForm.addEventListener("submit", function (e) {
-//   let messageName = [];
-//   let messageAddress = [];
+// Event listener
+contactForm.addEventListener("submit", function (e) {
+    let messageName = [];
+    let messagePassword = [];
   
-//     if (fullname.value === "" || fullname.value === null) {
-//     messageName.push("* This field is required");
-//   }
+    if (username.value === "" || username.value === null) {
+        messageName.push("* This field is required");
+    }
 
-//   if (address.value === "" || address.value === null) {
-//     messageAddress.push("* This field is required");
-//   }
+    if (password.value === "" || password.value === null) {
+        messagePassword.push("* This field is required");
+    }
 
-//   // Statement to shows the errors
-//   if (messageName.length || messageAddress.length > 0) {
-//     e.preventDefault();
-//     errorElement.innerText = messageName;
-//     errorElementAddress.innerText = messageAddress;
-//   }
+    // Statement to shows the errors
+    if (messageName.length || messagePassword.length > 0) {
+        e.preventDefault();
+        errorElementUsername.innerText = messageName;
+        errorElementPassword.innerText = messagePassword;
+    }
   
-//    // if the values length is filled and it's greater than 2 then redirect to this page
-//     if (
-//     (fullname.value.length > 2,
-//     address.value.length > 2)
-//   ) {
-//     e.preventDefault();
-//     window.location.assign("https://www.google.com");
-//   }
+    // if the values length is filled and it's greater than 4 then redirect to this page
+    if ((username.value.length > 4, password.value.length > 4)) {
 
-// });
+        e.preventDefault();
+
+        if (username.value == "Admin"){
+            window.location.assign("../HTML/adminLanding.html");
+        }
+        else if (username.value == "Teacher"){
+            window.location.assign("../HTML/teacherLanding.html");
+        }
+        else if (username.value == "Student"){
+            window.location.assign("../HTML/studentLanding.html");
+        }
+        else {
+            errorElementUsername.innerText = "Enter valid username";
+        }
+    }
+
+});
 
 //VERY LOOSE IDEA OF WHAT WE NEED TO DO FOR BASIC REDIRECT
 
