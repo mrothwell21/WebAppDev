@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let contactForm = document.getElementById("loginForm");
 
 
-    contactForm.addEventListener("submit", function (event) {
+    contactForm.addEventListener("submit", function (e) {
         let messageName = [];
         let messagePassword = [];
     
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
         // Statement to shows the errors
         if (messageName.length || messagePassword.length > 0) {
-            event.preventDefault();
+            e.preventDefault();
             errorElementUsername.innerText = messageName;
             errorElementPassword.innerText = messagePassword;
         }
@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         // if the values length is filled and it's greater than 4 then redirect to this page
         else if ((username.value.length > 4 && password.value.length > 4)) {
 
-            event.preventDefault();
+            e.preventDefault();
 
             if (username.value == "Admin"){
                 window.location.assign("../HTML/adminRole.html");
@@ -51,7 +51,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             }
         }
         else {
-            event.preventDefault();
+            e.preventDefault();
             errorElementUsername.innerText = "Invalid fields";
             errorElementPassword.innerText = "Invalid fields";
         }
