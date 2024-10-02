@@ -38,13 +38,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
             event.preventDefault();
 
             if (username.value == "Admin"){
-                window.location.assign("../HTML/adminLanding.html");
+                window.location.assign("../HTML/adminRole.html");
             }
             else if (username.value == "Teacher"){
                 window.location.assign("../HTML/teacherLanding.html");
             }
             else if (username.value == "Student"){
-                window.location.assign("../HTML/studentLanding.html");
+                window.location.assign("../HTML/userHome.html");
             }
             else {
                 errorElementUsername.innerText = "Enter valid username";
