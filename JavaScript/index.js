@@ -1,56 +1,59 @@
-// We access to the inputs by their id's
-let username = document.getElementById("username");
-let password = document.getElementById("secret");
-
-// Error messages
-let errorElementUsername = document.getElementById("usernameError");
-let errorElementPassword = document.getElementById("passwordError");
-
-// Form
-let contactForm = document.getElementById("loginForm");
-
 // Event listener
-contactForm.addEventListener("submit", function (e) {
-    let messageName = [];
-    let messagePassword = [];
-  
-    if (username.value === "" || username.value === null) {
-        messageName.push("* This field is required");
-    }
+window.addEventListener("DOMContentLoaded", (event) => {
 
-    if (password.value === "" || password.value === null) {
-        messagePassword.push("* This field is required");
-    }
+    // We access to the inputs by their id's
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
 
-    // Statement to shows the errors
-    if (messageName.length || messagePassword.length > 0) {
-        e.preventDefault();
-        errorElementUsername.innerText = messageName;
-        errorElementPassword.innerText = messagePassword;
-    }
-  
-    // if the values length is filled and it's greater than 4 then redirect to this page
-    if ((username.value.length > 4, password.value.length > 4)) {
+    // Error messages
+    let errorElementUsername = document.getElementById("usernameError");
+    let errorElementPassword = document.getElementById("passwordError");
 
-        e.preventDefault();
+    // Form
+    let contactForm = document.getElementById("loginForm");
 
-        if (username.value == "Admin"){
-            window.location.assign("../HTML/adminLanding.html");
+
+    contactForm.addEventListener("submit", function (event) {
+        let messageName = [];
+        let messagePassword = [];
+    
+        if (username.value === "" || username.value === null) {
+            messageName.push("* This field is required");
         }
-        else if (username.value == "Teacher"){
-            window.location.assign("../HTML/teacherLanding.html");
-        }
-        else if (username.value == "Student"){
-            window.location.assign("../HTML/studentLanding.html");
-        }
-        else {
-            errorElementUsername.innerText = "Enter valid username";
-        }
-    }
 
+        if (password.value === "" || password.value === null) {
+            messagePassword.push("* This field is required");
+        }
+
+        // Statement to shows the errors
+        if (messageName.length || messagePassword.length > 0) {
+            event.preventDefault();
+            errorElementUsername.innerText = messageName;
+            errorElementPassword.innerText = messagePassword;
+        }
+    
+        // if the values length is filled and it's greater than 4 then redirect to this page
+        if ((username.value.length > 4 && password.value.length > 4)) {
+
+            event.preventDefault();
+
+            if (username.value == "Admin"){
+                window.location.assign("../HTML/adminLanding.html");
+            }
+            else if (username.value == "Teacher"){
+                window.location.assign("../HTML/teacherLanding.html");
+            }
+            else if (username.value == "Student"){
+                window.location.assign("../HTML/studentLanding.html");
+            }
+            else {
+                errorElementUsername.innerText = "Enter valid username";
+            }
+        }
+
+    });
 });
 
-//VERY LOOSE IDEA OF WHAT WE NEED TO DO FOR BASIC REDIRECT
 
 
 
