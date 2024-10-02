@@ -5,20 +5,19 @@
     width: 20%;
 }
 
-#loginLogo > img {
-    /* min-height: 50%; */
+#loginLogo>img {
     max-width: 100%;
     height: auto;
 }
 
 .loginContainer {
- margin: auto;
- width: 50%;
- border: 2px solid black;
- padding: 15px;
- font-size: large;
- height: fit-content;
- background-color: #f0f0f0;
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+    padding: 15px;
+    font-size: large;
+    height: fit-content;
+    background-color: #f0f0f0;
 }
 
 #loginSubmitButton {
@@ -34,7 +33,7 @@ input {
 .column {
     float: left;
 }
-  
+
 .row:after {
     content: "";
     display: table;
