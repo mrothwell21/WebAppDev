@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
     
         // if the values length is filled and it's greater than 4 then redirect to this page
-        if ((username.value.length > 4 && password.value.length > 4)) {
+        else if ((username.value.length > 4 && password.value.length > 4)) {
 
             event.preventDefault();
 
@@ -49,6 +49,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
             else {
                 errorElementUsername.innerText = "Enter valid username";
             }
+        }
+        else {
+            event.preventDefault();
+            errorElementUsername.innerText = "Invalid fields";
+            errorElementPassword.innerText = "Invalid fields";
         }
 
     });
