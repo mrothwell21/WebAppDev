@@ -2,12 +2,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2%;
-    width: 30%;
-    border-bottom: 2px solid green;
+    width: 20%;
 }
 
 #loginLogo > img {
+    /* min-height: 50%; */
     max-width: 100%;
     height: auto;
 }
@@ -46,4 +45,14 @@ input {
 
 .center {
     width: 80%;
+}
+
+body{
+    background-color: #f0f0f0;
+}
+
+hr {
+    border: 1px green solid;
+    width: 50%;
+    margin-bottom: 2%;
 }
