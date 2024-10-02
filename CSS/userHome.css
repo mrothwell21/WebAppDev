@@ -63,6 +63,9 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
+.column {
+    float: center;
+}
 .button.red {
     background-color: #FF3333;
 }
