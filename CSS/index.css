@@ -5,23 +5,24 @@
     width: 20%;
 }
 
-#loginLogo > img {
-    /* min-height: 50%; */
+#loginLogo>img {
     max-width: 100%;
     height: auto;
 }
 
 .loginContainer {
- margin: auto;
- width: 50%;
- border: 2px solid black;
- padding: 15px;
- font-size: large;
- height: fit-content;
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+    padding: 15px;
+    font-size: large;
+    height: fit-content;
+    background-color: #f0f0f0;
 }
 
 #loginSubmitButton {
     width: fit-content;
+
 }
 
 input {
@@ -32,7 +33,7 @@ input {
 .column {
     float: left;
 }
-  
+
 .row:after {
     content: "";
     display: table;
@@ -47,12 +48,13 @@ input {
     width: 80%;
 }
 
-body{
-    background-color: #f0f0f0;
-}
-
 hr {
     border: 1px green solid;
     width: 50%;
     margin-bottom: 2%;
+}
+
+#usernameError, #passwordError {
+    color: red;
+    font-size: 13px;
 }

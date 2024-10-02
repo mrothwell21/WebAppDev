@@ -4,7 +4,8 @@
 <head>
     <title>Homepage</title>
     <link rel="stylesheet" href="../CSS/index.css">
-    <script src="Main.js"></script>
+    <link rel="icon" href="../Images/SUNY_Brockport_Logo.png">
+    <script src="../JavaScript/index.js"></script>
 </head>
 
 <body>
@@ -12,21 +13,24 @@
         <div class="column left"><p></p></div>
         <div class="column center">
             <div id="loginLogo">
-                <img src="../Images/SUNY_Brockport_Logo.png">
+                <img src="../Images/SUNY_Brockport_Logo.png" alt="SUNY Brockport Logo">
             </div>
             <hr>
             <div class="loginContainer">
-                <p>Sign In</p>
-                <form id="loginForm">
+                <h2>SUNY Brockport Course Registration</h2>
+                <h3>Sign In</h3>
+                <form id="loginForm" method="post">
                     <p>
                         <label for="username">Username:</label>
                         <br>
                         <input type="text" name="username" id="username" placeholder="username">
+                        <span id="usernameError"></span>
                     </p>
                     <p>
                         <label for="password">Password:</label>
                         <br>
-                        <input type="password" name="secret" id="secret" size="16" maxlength="16" placeholder="password">
+                        <input type="password" name="password" id="password" size="16" maxlength="16" placeholder="password">
+                        <span id="passwordError"></span>
                     </p>
                     <p>
                         <input type="submit" value="&nbsp;&nbsp;Log In&nbsp;&nbsp;" id="loginSubmitButton">
