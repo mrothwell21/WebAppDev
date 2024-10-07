@@ -40,13 +40,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
             //REPLACE WITH SQL QUERYING
 
             if (username.value == "Admin"){
-                window.location.assign("../HTML/adminRole.html");
+                window.location.assign("./adminRole.html");
             }
             else if (username.value == "Teacher"){
-                window.location.assign("../HTML/teacherLanding.html");
+                window.location.assign("./teacherLanding.html");
             }
             else if (username.value == "Student"){
-                window.location.assign("../HTML/userHome.html");
+                window.location.assign("./userHome.html");
             }
             else {
                 errorElementUsername.innerText = "Enter valid username";

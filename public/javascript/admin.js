@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
     logoutButton.addEventListener("click", function (e) {
-        window.location.assign("../HTML/index.html");
+        window.location.assign("./index.html");
 
     });
 });
