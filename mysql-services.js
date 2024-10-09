@@ -1,4 +1,4 @@
-MediaSourceHandle.exports = db = {
+module.exports = db = {
     mydb : {
         host: "localhost",
         user: "root",
