@@ -39,8 +39,39 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             //REPLACE WITH SQL QUERYING
 
+            // const mysql = require("mysql2");
+            // const db = require("../mysql-services.js");
+
+            // const conn = mysql.createConnection({
+            //     host:     "csdb.brockport.edu",
+            //     user:     "mroth5",
+            //     password: "1234",
+            //     database: "fal24_csc423_mroth5"
+            // });
+
+            // conn.connect(function(err) {
+            //     if (err) {
+            //         console.log("Error connecting to MySQL:", err);
+            //     }
+            //     else {
+            //         console.log("Connection established");
+            //     }
+            // });
+
+            // const user = db.getOne(conn,"User",username.value, password.value);
+
+            // console.log(user);
+
+            // if (user){
+            //     window.location.assign("./adminRole.html");
+            // }
+
+
             if (username.value == "Admin"){
-                window.location.assign("./adminRole.html");
+                document.getElementById("status").innerHTML = "Loading...";
+                setTimeout(function(){
+                    window.location.assign("./adminRole.html");
+                }, 2000);
             }
             else if (username.value == "Teacher"){
                 window.location.assign("./teacherLanding.html");
