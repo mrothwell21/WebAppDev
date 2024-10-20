@@ -1,9 +1,9 @@
 module.exports = db = {
     mydb : {
         host: "localhost",
-        user: "root",
-        password: "**********",
-        database: "mydb"
+        user: "mroth5",
+        password: "1234",
+        database: "fal24_csc423_mroth5"
     },
 
     selectAll: async function (conn, tableName) {

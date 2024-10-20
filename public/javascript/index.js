@@ -14,6 +14,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
     contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
         let messageName = [];
         let messagePassword = [];
     
@@ -27,71 +28,70 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
         // Statement to shows the errors
         if (messageName.length || messagePassword.length > 0) {
-            e.preventDefault();
             errorElementUsername.innerText = messageName;
             errorElementPassword.innerText = messagePassword;
         }
-    
         // if the values length is filled and it's greater than 4 then redirect to this page
-        else if ((username.value.length > 4 && password.value.length > 4)) {
+        else {
+            login(username, password);
+        }
+    });
 
-            e.preventDefault();
+    async function login(username, password) {
+        const response = await fetch("http://localhost:5050/api/auth", {
+            method: "POST",
+            body: new URLSearchParams({name: username, password: password})
+        });
 
-            //REPLACE WITH SQL QUERYING
-
-            // const mysql = require("mysql2");
-            // const db = require("../mysql-services.js");
-
-            // const conn = mysql.createConnection({
-            //     host:     "csdb.brockport.edu",
-            //     user:     "mroth5",
-            //     password: "1234",
-            //     database: "fal24_csc423_mroth5"
-            // });
-
-            // conn.connect(function(err) {
-            //     if (err) {
-            //         console.log("Error connecting to MySQL:", err);
-            //     }
-            //     else {
-            //         console.log("Connection established");
-            //     }
-            // });
-
-            // const user = db.getOne(conn,"User",username.value, password.value);
-
-            // console.log(user);
-
-            // if (user){
-            //     window.location.assign("./adminRole.html");
-            // }
-
-
-            if (username.value == "Admin"){
-                document.getElementById("status").innerHTML = "Loading...";
-                setTimeout(function(){
-                    window.location.assign("./adminRole.html");
-                }, 2000);
+        const loginStatus = document.querySelector("#loginStatus");
+        if (response.ok) {
+            const tokenResponse = await response.json();
+            localStorage.setItem("token", tokenResponse.token);
+            localStorage.setItem("role", tokenResponse.role);
+            loginStatus.innerHTML = `Successfully authenticated as ${username}`;
+            if(tokenResponse.role == "1" ){
+                window.location.assign("./admin.html");
             }
-            else if (username.value == "Teacher"){
-                window.location.assign("./teacherLanding.html");
+            else if(tokenResponse.role == "2"){
+                window.location.assign("./teacher.html");
             }
-            else if (username.value == "Student"){
-                window.location.assign("./userHome.html");
-            }
-            else {
-                errorElementUsername.innerText = "Enter valid username";
+            else{
+                window.location.assign("./student.html");
             }
         }
         else {
-            e.preventDefault();
-            alert("Some field is invalid. Please check inputs!")
+            loginStatus.innerHTML = `Login failed. Try again`;
         }
+        clearForm();
+    }
 
-    });
+    async function displayStatus() {
+        const token = localStorage.getItem("token");
+        const status = document.querySelector("ul");
+        let html = "<p>You are not authorized to see the roles. Please, login</p>";
+        const response = await fetch("/api/status", {headers:{"X-Auth": token} });
+        if (response.ok) {
+            html = "<p>Roles displayed here:</p>";
+            const users = await response.json();
+            for (const user of users) {
+                html += "<li>" + user.name + " = " + user.role + "</li>";
+            }
+        }
+        status.innerHTML = html;
+    }
+
+    function logout() {
+        localStorage.removeItem("token");
+        clearForm();
+        document.querySelector("#loginStatus").innerHTML = "Logged Out";
+    }
+
+    function clearForm() {
+        document.querySelector("#username").value = "";
+        document.querySelector("#password").value = "";
+        document.querySelector("#role").value = "";
+    }
 });
-
-
 
 
 
