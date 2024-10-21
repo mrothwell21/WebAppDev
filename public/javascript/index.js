@@ -49,10 +49,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
             localStorage.setItem("token", tokenResponse.token);
             localStorage.setItem("role", tokenResponse.role);
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            if(tokenResponse.role == "Admin" ){
+            if(tokenResponse.role == "1" ){
                 window.location.assign("../admin.html");
             }
-            else if(tokenResponse.role == "Teacher"){
+            else if(tokenResponse.role == "2"){
                 window.location.assign("../teacher.html");
             }
             else{
