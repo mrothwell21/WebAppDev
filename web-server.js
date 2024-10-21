@@ -8,10 +8,10 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-//router.use("/api", require("./api/users"));
+router.use("/api", require("./api-users"));
 
 app.use(router);
 
-app.listen(3000, function() {
-    console.log("Listening on port 3000...");
+app.listen(5050, function() {
+    console.log("Listening on port 5050...");
 });
