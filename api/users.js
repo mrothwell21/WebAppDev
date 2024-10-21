@@ -8,14 +8,16 @@ const mysql = require('mysql2');
 const db = require("../mysql-services");
 
 router.post("/auth", async function (req, res) {
-
+    console.log("auth");
     if (!req.body.name || !req.body.password) {
         res.status(401).json({ error: "Missing username, password and/or role" });
         return;
     }
 
     const conn = mysql.createConnection(db.mydb);
+    console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
+    console.log("query");
     const user_role = user.role;
 
     if (!user || !user.length) {
@@ -25,8 +27,18 @@ router.post("/auth", async function (req, res) {
         const token = jwt.encode({ Username: user.username }, secret);
         res.json({ token: token }, { role: user_role });
     }
+    console.log("response");
     return;
 });
+
+router.get("/getAll", async function (req, res){
+    console.log("getAll");
+    
+    const conn = mysql.createConnection(db.mydb);
+    console.log("connected");
+    const user = await db.selectAll(conn, "User");
+    console.log("query");
+})
 
 router.get("/status", async function (req, res) {
     //check if X-Auth header is set:

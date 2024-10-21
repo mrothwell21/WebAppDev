@@ -33,35 +33,48 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         // if the values length is filled and it's greater than 4 then redirect to this page
         else {
+            console.log("login");
             login(username.value, password.value);
         }
     });
 
     async function login(username, password) {
-        const response = await fetch("http://localhost:5050/api/auth", {
-            method: "POST",
-            body: new URLSearchParams({name: username, password: password})
-        });
+        console.log("fetch");
+        // const response = await fetch("/api/auth", {
+        //     method: "POST",
+        //     body: new URLSearchParams({name: username, password: password})
+        // });
 
-        const loginStatus = document.querySelector("#loginStatus");
-        if (response.ok) {
-            const tokenResponse = await response.json();
-            localStorage.setItem("token", tokenResponse.token);
-            localStorage.setItem("role", tokenResponse.role);
-            loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            if(tokenResponse.role == "1" ){
-                window.location.assign("../admin.html");
-            }
-            else if(tokenResponse.role == "2"){
-                window.location.assign("../teacher.html");
-            }
-            else{
-                window.location.assign("../student.html");
-            }
-        }
-        else {
-            loginStatus.innerHTML = `Login failed. Try again`;
-        }
+
+        const repsonse = await fetch("/api/getAll", {
+            method: "GET"
+        });
+        const users = await response.json();
+
+        console.log(response);
+
+        
+
+
+        // const loginStatus = document.querySelector("#loginStatus");
+        // if (response.ok) {
+        //     const tokenResponse = await response.json();
+        //     localStorage.setItem("token", tokenResponse.token);
+        //     localStorage.setItem("role", tokenResponse.role);
+        //     loginStatus.innerHTML = `Successfully authenticated as ${username}`;
+        //     if(tokenResponse.role == "1" ){
+        //         window.location.assign("../admin.html");
+        //     }
+        //     else if(tokenResponse.role == "2"){
+        //         window.location.assign("../teacher.html");
+        //     }
+        //     else{
+        //         window.location.assign("../student.html");
+        //     }
+        // }
+        // else {
+        //     loginStatus.innerHTML = `Login failed. Try again`;
+        // }
         clearForm();
     }
 
