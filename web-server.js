@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-router.use("/api", require("./api-users"));
+router.use("/api", require("./api/users"));
 
 app.use(router);
 

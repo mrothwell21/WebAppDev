@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         // if the values length is filled and it's greater than 4 then redirect to this page
         else {
-            login(username, password);
+            login(username.value, password.value);
         }
     });
 
@@ -49,14 +49,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
             localStorage.setItem("token", tokenResponse.token);
             localStorage.setItem("role", tokenResponse.role);
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            if(tokenResponse.role == "1" ){
-                window.location.assign("./admin.html");
+            if(tokenResponse.role == "Admin" ){
+                window.location.assign("../admin.html");
             }
-            else if(tokenResponse.role == "2"){
-                window.location.assign("./teacher.html");
+            else if(tokenResponse.role == "Teacher"){
+                window.location.assign("../teacher.html");
             }
             else{
-                window.location.assign("./student.html");
+                window.location.assign("../student.html");
             }
         }
         else {

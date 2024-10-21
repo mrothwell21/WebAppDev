@@ -1,6 +1,6 @@
 module.exports = db = {
     mydb : {
-        host: "localhost",
+        host: "csdb.brockport.edu",
         user: "mroth5",
         password: "1234",
         database: "fal24_csc423_mroth5"
