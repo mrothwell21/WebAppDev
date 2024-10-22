@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // Form
     let contactForm = document.getElementById("loginForm");
 
-
     contactForm.addEventListener("submit", function (e) {
         e.preventDefault();
         let messageName = [];
