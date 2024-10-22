@@ -40,41 +40,34 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     async function login(username, password) {
         console.log("fetch");
-        // const response = await fetch("/api/auth", {
-        //     method: "POST",
-        //     body: new URLSearchParams({name: username, password: password})
-        // });
-
-
-        const repsonse = await fetch("/api/getAll", {
-            method: "GET"
+        const response = await fetch("/api/auth", {
+            method: "POST",
+            body: new URLSearchParams({name: username, password: password})
         });
-        const users = await response.json();
+
 
         console.log(response);
 
         
-
-
-        // const loginStatus = document.querySelector("#loginStatus");
-        // if (response.ok) {
-        //     const tokenResponse = await response.json();
-        //     localStorage.setItem("token", tokenResponse.token);
-        //     localStorage.setItem("role", tokenResponse.role);
-        //     loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-        //     if(tokenResponse.role == "1" ){
-        //         window.location.assign("../admin.html");
-        //     }
-        //     else if(tokenResponse.role == "2"){
-        //         window.location.assign("../teacher.html");
-        //     }
-        //     else{
-        //         window.location.assign("../student.html");
-        //     }
-        // }
-        // else {
-        //     loginStatus.innerHTML = `Login failed. Try again`;
-        // }
+        const loginStatus = document.querySelector("#loginStatus");
+        if (response.ok) {
+            const tokenResponse = await response.json();
+            localStorage.setItem("token", tokenResponse.token);
+            localStorage.setItem("role", tokenResponse.role);
+            loginStatus.innerHTML = `Successfully authenticated as ${username}`;
+            if(tokenResponse.role == "1" ){
+                window.location.assign("../admin.html");
+            }
+            else if(tokenResponse.role == "2"){
+                window.location.assign("../teacher.html");
+            }
+            else{
+                window.location.assign("../student.html");
+            }
+        }
+        else {
+            loginStatus.innerHTML = `Login failed. Try again`;
+        }
         clearForm();
     }
 

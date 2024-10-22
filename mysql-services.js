@@ -1,36 +1,54 @@
+const mariadb = require('mariadb');
+
 module.exports = db = {
-    mydb : {
+    mydb: {
         host: "csdb.brockport.edu",
         user: "mroth5",
         password: "1234",
-        database: "fal24_csc423_mroth5"
+        database: "fal24_csc423_mroth5",
+        connectionLimit: 5 // Optional: connection pool limit
     },
 
-    selectAll: async function (conn, tableName) {
-        const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
+    // Create a pool for connection management
+    pool: mariadb.createPool({
+        host: "csdb.brockport.edu",
+        user: "mroth5",
+        password: "1234",
+        database: "fal24_csc423_mroth5",
+        connectionLimit: 5
+    }),
 
-        return results[0];
+    selectAll: async function(conn, tableName) {
+        try {
+            const results = await conn.query(`SELECT * FROM ${tableName}`);
+            return results;
+        } catch (err) {
+            console.error('Error in selectAll:', err);
+            throw err;
+        }
     },
 
-    //can add role later if needed
-    getOne : async function(conn, tableName, name, password) {
-        const sql = `SELECT * FROM ${tableName} WHERE name = '${name}' AND
-        password = '${password}'`;
-        const results = await conn.promise().query(sql);
-
-        return results[0];
+    getOne: async function(conn, tableName, name, password) {
+        try {
+            // Using parameterized queries for security
+            const sql = `SELECT * FROM ${tableName} WHERE username = ? AND password = ?`;
+            const results = await conn.query(sql, [name, password]);
+            return results;
+        } catch (err) {
+            console.error('Error in getOne:', err);
+            throw err;
+        }
     },
 
-    addOne : async function(conn, tableName, user) {
-
-        const newValues = `"${user.name}", "${user.address}",
-        "${user.password}"`;
-
-        const sql = `INSERT INTO ${tableName} (name,address,password)
-        Values (${newValues})`;
-
-        const results = await conn.promise().query(sql);
-
-        return results;
+    addOne: async function(conn, tableName, user) {
+        try {
+            // Using parameterized queries for security
+            const sql = `INSERT INTO ${tableName} (name, address, password) VALUES (?, ?, ?)`;
+            const results = await conn.query(sql, [user.name, user.address, user.password]);
+            return results;
+        } catch (err) {
+            console.error('Error in addOne:', err);
+            throw err;
+        }
     }
 };
