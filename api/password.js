@@ -2,23 +2,21 @@ const jwt = require("jwt-simple");
 const { error } = require("console");
 const router = require("express").Router();
 
-const secret = "webappdev";
-
 const mysql = require('mysql2');
 const db = require("../mysql-services");
 
-router.post("/auth", async function (req, res) {
+router.post("/change", async function (req, res) {
     if (!req.body.name || !req.body.password) {
-        res.status(401).json({ error: "Missing username, password and/or role" });
+        res.status(401).json({ error: "Missing username and/or current password" });
         return;
     }
 
     const conn = mysql.createConnection(db.mydb);
-    console.log("connected");
+    //console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
-    console.log("query");
+    //console.log("query");
     const user_role = user[0].role;
-    console.log(user_role);
+    //console.log(user_role);
 
 
     if (!user || !user.length) {
