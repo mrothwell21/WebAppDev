@@ -17,7 +17,7 @@ module.exports = db = {
         const sql = `SELECT * FROM ${tableName} WHERE username = '${name}' AND
         password = '${password}'`;
         const results = await conn.promise().query(sql);
-        console.log(results);
+        //console.log(results);
 
         return results[0];
     },

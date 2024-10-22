@@ -18,7 +18,7 @@ router.post("/auth", async function (req, res) {
     console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
     console.log("query");
-    const user_role = user.role;
+    const user_role = user[0].role;
     console.log(user_role);
 
 
