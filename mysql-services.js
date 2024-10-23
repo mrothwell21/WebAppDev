@@ -2,9 +2,8 @@ module.exports = db = {
     mydb : {
         host: "localhost",
         user: "root",
-        password: "root",
+        password: "",
         database: "webappdev",
-        port: "8889"
     },
 
     selectAll: async function (conn, tableName) {
@@ -30,6 +29,16 @@ module.exports = db = {
 
         const sql = `INSERT INTO ${tableName} (name,address,password)
         Values (${newValues})`;
+
+        const results = await conn.promise().query(sql);
+
+        return results;
+    },
+
+    updatePass : async function(conn, tableName, currentPass, newPass, name){
+
+        const sql = `UPDATE ${tableName} SET password = '${newPass}'
+        WHERE password = '${currentPass}' AND username = '${name}'`;
 
         const results = await conn.promise().query(sql);
 

@@ -6,14 +6,14 @@ const mysql = require('mysql2');
 const db = require("../mysql-services");
 
 router.post("/change", async function (req, res) {
-    if (!req.body.name || !req.body.password) {
-        res.status(401).json({ error: "Missing username and/or current password" });
+    if (!req.body.name || !req.body.password || !req.body.newPass) {
+        res.status(401).json({ error: "Missing username and/or password" });
         return;
     }
 
     const conn = mysql.createConnection(db.mydb);
     //console.log("connected");
-    const user = await db.getOne(conn, "User", req.body.name, req.body.password);
+    const user = await db.updatePass(conn, "User", req.body.currPassword, req.body.password, req.body.name);
     //console.log("query");
     const user_role = user[0].role;
     //console.log(user_role);
@@ -21,13 +21,11 @@ router.post("/change", async function (req, res) {
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username and/or password" });
-        console.log("bad username and/or password");
-        console.log(user);
     } else {
-        const token = jwt.encode({ Username: user.username }, secret);
-        res.status(200).json({ token: token, role: user_role });
+        const token = jwt.encode({ Username: user.username, Password: user.password}, secret);
+        res.status(200).json({ token: token});
     }
-    console.log("response");
+    // console.log("response");
     return;
 });
 
