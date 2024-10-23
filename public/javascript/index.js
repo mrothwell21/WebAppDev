@@ -59,13 +59,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
             console.log(tokenResponse.role);
             if(tokenResponse.role == "1" ){
-                window.location.assign("../adminRole.html");
+                window.location.assign("./adminRole.html");
             }
             else if(tokenResponse.role == "2"){
-                window.location.assign("../TeacherLanding.html");
+                window.location.assign("./TeacherLanding.html");
             }
             else{
-                window.location.assign("../userHome.html");
+                window.location.assign("./userHome.html");
             }
         }
         else {
@@ -101,25 +101,3 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector("#role").value = "";
     }
 });
-
-
-
-
-
-
-
-
-
-//LOCAL STORAGE OPTIONS
-// let playerNameWidget = document.getElementById("playerName");
-// let difficultyLevelWidget = document.getElementById("diffLevel");
-        
-// if (localStorage.getItem("playerName")) {                
-//    playerNameWidget.value = localStorage.getItem("playerName");
-//    difficultyLevelWidget.value = localStorage.getItem("difficultyLevel");
-// }
-        
-// document.getElementById("saveBtn").addEventListener("click", function() {
-//    localStorage.setItem("playerName", playerNameWidget.value);
-//    localStorage.setItem("difficultyLevel", difficultyLevelWidget.value);
-// });
