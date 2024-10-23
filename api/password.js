@@ -6,14 +6,14 @@ const mysql = require('mysql2');
 const db = require("../mysql-services");
 
 router.post("/change", async function (req, res) {
-    if (!req.body.name || !req.body.password || !req.body.newPass) {
+    if (!req.body.name || !req.body.currentPassword || !req.body.newPassword) {
         res.status(401).json({ error: "Missing username and/or password" });
         return;
     }
 
     const conn = mysql.createConnection(db.mydb);
     //console.log("connected");
-    const user = await db.updatePass(conn, "User", req.body.currPassword, req.body.password, req.body.name);
+    const user = await db.updatePass(conn, "User", req.body.currentPassword, req.body.newPassword, req.body.name);
     //console.log("query");
     const user_role = user[0].role;
     //console.log(user_role);

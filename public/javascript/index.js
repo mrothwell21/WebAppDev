@@ -1,3 +1,5 @@
+const jwt = require("jwt-simple");
+
 // Event listener
 window.addEventListener("DOMContentLoaded", (event) => {
 
@@ -53,15 +55,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
         const loginStatus = document.querySelector("#status");
         if (response.ok) {
             const tokenResponse = await response.json();
-            console.log(tokenResponse);
             localStorage.setItem("token", tokenResponse.token);
-            localStorage.setItem("role", tokenResponse.role);
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            console.log(tokenResponse.role);
-            if(tokenResponse.role == "1" ){
+            const token = localStorage.getItem("token", tokenResponse.token);
+            const tokenDecode = jwt.decode(token);
+            console.log(tokenDecode.role);
+            if(tokenDecode.role == "1" ){
                 window.location.assign("./adminRole.html");
             }
-            else if(tokenResponse.role == "2"){
+            else if(tokenDecode.role == "2"){
                 window.location.assign("./TeacherLanding.html");
             }
             else if (tokenResponse.role == "3"){
