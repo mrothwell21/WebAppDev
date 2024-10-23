@@ -59,13 +59,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
             console.log(tokenResponse.role);
             if(tokenResponse.role == "1" ){
-                window.location.assign("../adminRole.html");
+                window.location.assign("./adminRole.html");
             }
             else if(tokenResponse.role == "2"){
-                window.location.assign("../TeacherLanding.html");
+                window.location.assign("./TeacherLanding.html");
             }
             else{
-                window.location.assign("../userHome.html");
+                window.location.assign("./userHome.html");
             }
         }
         else {
