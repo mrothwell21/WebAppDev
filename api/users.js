@@ -14,9 +14,9 @@ router.post("/auth", async function (req, res) {
     }
 
     const conn = mysql.createConnection(db.mydb);
-    console.log("connected");
+    // console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
-    console.log("query");
+    // console.log("query");
 
 
     if (!user || !user.length) {

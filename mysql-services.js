@@ -2,8 +2,9 @@ module.exports = db = {
     mydb : {
         host: "localhost",
         user: "root",
-        password: "",
-        database: "webappdev"
+        password: "root",
+        database: "webappdev",
+        port: "8889"
     },
 
     selectAll: async function (conn, tableName) {
