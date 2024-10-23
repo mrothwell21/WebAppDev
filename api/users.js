@@ -32,6 +32,33 @@ router.post("/auth", async function (req, res) {
     return;
 });
 
+
+router.post("/change", async function (req, res) {
+    if (!req.body.name || !req.body.password) {
+        res.status(401).json({ error: "Missing username and/or current password" });
+        return;
+    }
+
+    const conn = mysql.createConnection(db.mydb);
+    //console.log("connected");
+    const user = await db.updatePass(conn, "User", req.body.newPassword, req.body.currentPassword, req.body.name);
+    //console.log("query");
+    const user_role = user[0].role;
+    //console.log(user_role);
+
+
+    if (!user || !user.length) {
+        res.status(401).json({ error: "Bad username and/or password" });
+        console.log("bad username and/or password");
+        console.log(user);
+    } else {
+        const token = jwt.encode({ Username: user.username }, secret);
+        res.status(200).json({ token: token, role: user_role });
+    }
+    console.log("response");
+    return;
+});
+
 router.get("/getAll", async function (req, res){
     console.log("getAll");
     
@@ -58,4 +85,6 @@ router.get("/status", async function (req, res) {
         res.status(401).json({ error: "Invalid JWT" });
     }
 });
+
+
 module.exports = router;
