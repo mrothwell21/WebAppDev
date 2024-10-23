@@ -1,9 +1,10 @@
 module.exports = db = {
     mydb : {
-        host: "csdb.brockport.edu",
-        user: "mroth5",
-        password: "1234",
-        database: "fal24_csc423_mroth5"
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "webappdev",
+        port: "8889"
     },
 
     selectAll: async function (conn, tableName) {
@@ -14,9 +15,10 @@ module.exports = db = {
 
     //can add role later if needed
     getOne : async function(conn, tableName, name, password) {
-        const sql = `SELECT * FROM ${tableName} WHERE name = '${name}' AND
+        const sql = `SELECT * FROM ${tableName} WHERE username = '${name}' AND
         password = '${password}'`;
         const results = await conn.promise().query(sql);
+        //console.log(results);
 
         return results[0];
     },
