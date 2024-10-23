@@ -40,6 +40,9 @@ body {
 .nav a:last-child {
     color: #808080;
 }
+.nav a:hover {
+    color: gold;
+}
 h1 {
     text-align: center;
     font-size: 36px;
@@ -62,6 +65,11 @@ h1 {
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.button:hover {
+    color: darkgreen;
+    background-color: gold;
 }
 .column {
     float: center;
