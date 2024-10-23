@@ -101,25 +101,3 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector("#role").value = "";
     }
 });
-
-
-
-
-
-
-
-
-
-//LOCAL STORAGE OPTIONS
-// let playerNameWidget = document.getElementById("playerName");
-// let difficultyLevelWidget = document.getElementById("diffLevel");
-        
-// if (localStorage.getItem("playerName")) {                
-//    playerNameWidget.value = localStorage.getItem("playerName");
-//    difficultyLevelWidget.value = localStorage.getItem("difficultyLevel");
-// }
-        
-// document.getElementById("saveBtn").addEventListener("click", function() {
-//    localStorage.setItem("playerName", playerNameWidget.value);
-//    localStorage.setItem("difficultyLevel", difficultyLevelWidget.value);
-// });
