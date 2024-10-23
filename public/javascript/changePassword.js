@@ -1,3 +1,5 @@
+const jwt = require("jwt-simple");
+
 window.addEventListener("DOMContentLoaded", (event) => {
 
     let username = document.getElementById("username");
