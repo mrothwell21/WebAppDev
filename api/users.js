@@ -17,8 +17,6 @@ router.post("/auth", async function (req, res) {
     console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
     console.log("query");
-    const user_role = user[0].role;
-    console.log(user_role);
 
 
     if (!user || !user.length) {
@@ -26,6 +24,7 @@ router.post("/auth", async function (req, res) {
         console.log("bad username and/or password");
         console.log(user);
     } else {
+        const user_role = user[0].role;
         const token = jwt.encode({ Username: user.username }, secret);
         res.status(200).json({ token: token, role: user_role });
     }
