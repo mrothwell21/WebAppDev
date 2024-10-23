@@ -25,10 +25,10 @@ router.post("/auth", async function (req, res) {
         console.log(user);
     } else {
         const user_role = user[0].role;
-        const token = jwt.encode({ Username: user.username }, secret);
-        res.status(200).json({ token: token, role: user_role });
+        const token = jwt.encode({ Username: user.username, Password: user.password, Role: user.role }, secret);
+        res.status(200).json({ token: token});
     }
-    console.log("response");
+    //console.log("response");
     return;
 });
 

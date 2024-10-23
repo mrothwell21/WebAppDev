@@ -6,8 +6,8 @@ const mysql = require('mysql2');
 const db = require("../mysql-services");
 
 router.post("/change", async function (req, res) {
-    if (!req.body.name || !req.body.password) {
-        res.status(401).json({ error: "Missing username and/or current password" });
+    if (!req.body.name || !req.body.password || !req.body.newPass) {
+        res.status(401).json({ error: "Missing username and/or password" });
         return;
     }
 
@@ -22,8 +22,8 @@ router.post("/change", async function (req, res) {
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username and/or password" });
     } else {
-        const token = jwt.encode({ Username: user.username }, secret);
-        res.status(200).json({ token: token, role: user_role });
+        const token = jwt.encode({ Username: user.username, Password: user.password}, secret);
+        res.status(200).json({ token: token});
     }
     // console.log("response");
     return;
