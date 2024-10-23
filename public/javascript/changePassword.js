@@ -10,9 +10,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let submitButton = document.getElementById("submit");
     let backButton = document.getElementById("back");
 
-    const token = localStorage.getItem("token");
-    const secret = "webappdev";
-    let tokenUn = jwt.decode(token, secret);
+    const role = localStorage.getItem("role");
+
+    // const token = localStorage.getItem("token");
+    // const secret = "webappdev";
+    // let tokenUn = jwt.decode(token, secret);
 
 
     submitButton.addEventListener("click", async function (e) {
@@ -27,7 +29,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 body: new URLSearchParams({ name: username, currentPassword: currPassword, newPassword: nPassword })
             });
 
-            let role = tokenUn.role;
+            // let role = tokenUn.role;
 
             if (role == "1") {
                 window.location.assign("./adminRole.html");
@@ -52,7 +54,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     backButton.addEventListener("click", function (e) {
 
-        let role = tokenUn.role;
+        // let role = tokenUn.role;
 
         if (role == "1") {
             window.location.assign("./adminRole.html");
