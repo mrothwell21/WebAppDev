@@ -57,13 +57,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
             const tokenResponse = await response.json();
             localStorage.setItem("token", tokenResponse.token);
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            const token = localStorage.getItem("token", tokenResponse.token);
-            const tokenDecode = jwt.decode(token);
-            console.log(tokenDecode.role);
-            if(tokenDecode.role == "1" ){
+            // const token = localStorage.getItem("token", tokenResponse.token);
+            // const tokenDecode = jwt.decode(token);
+            console.log(tokenD.role);
+            if(tokenResponse.role == "1" ){
                 window.location.assign("./adminRole.html");
             }
-            else if(tokenDecode.role == "2"){
+            else if(tokenResponse.role == "2"){
                 window.location.assign("./TeacherLanding.html");
             }
             else if (tokenResponse.role == "3"){
