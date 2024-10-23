@@ -64,8 +64,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
             else if(tokenResponse.role == "2"){
                 window.location.assign("./TeacherLanding.html");
             }
-            else{
+            else if (tokenResponse.role == "3"){
                 window.location.assign("./userHome.html");
+            }
+            else {
+                window.location.assign("./index.html");
             }
         }
         else {
