@@ -6,40 +6,38 @@
     <link rel="stylesheet" href="./css/TeacherLanding.css">
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Create</a>
-        <a href="#">Update</a>
-        <a href="#">Delete</a>
-        <a href="#">Your Courses</a>
+    <div class="window">
+        <div class="window-header">User Landing</div>
+        <div class="content">
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">Your Courses</a>
+                <a href="#">Create Course</a>
+                <a href="#">Update Course</a>
+                <a href="#">Delete Course</a>
+            </nav>
+            <h1>Welcome</h1>
+            <div class="column left">
+            <div class="button-container">
+                <button class="button">Your Courses</button>
+                <button class="button">Create Course</button>
+            </div>
+            </div>
+            <div class="column right">
+            <div class="button-container">
+                <button class="button">Update Course</button>
+                <button class="button">Delete Course</button>
+            </div>
+            </div>
+            <div class="center column">
+            <div class="button-container">
+                <button class="button">Change Password</button>
+            </div>
+            </div>
+            <div class="column right">
+            <button class="button red small logout" id="logout">Logout</button>
+        </div>
+        </div>
     </div>
-
-    <!-- Main Container -->
-    <div class="container">
-        <h1>Welcome</h1>
-
-        <!-- Top Row Buttons -->
-        <div class="buttons">
-            <button>Your Courses</button>
-            <button>Create Course</button>
-        </div>
-
-        <!-- Middle Row Buttons -->
-        <div class="buttons" style="margin-top: 40px;">
-            <button>Update Course</button>
-            <button>Delete Course</button>
-        </div>
-
-        <!-- Bottom Button -->
-        <div class="buttons" style="margin-top: 40px;">
-            <button>Change Password</button>
-        </div>
-    </div>
-
-    <!-- Logout Button -->
-    <button class="logout">Logout</button>
-
 </body>
 </html>

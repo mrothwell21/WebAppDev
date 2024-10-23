@@ -2,74 +2,86 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
+    background-color: #f0f0f0;
 }
 
-.navbar {
-    display: flex;
-    justify-content: left;
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-bottom: 2px solid #ccc;
-}
-
-.navbar a {
-    text-decoration: none;
-    padding: 10px 20px;
-    color: black;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 0px;
-}
-
-.navbar a:hover {
-    background-color: #ddd;
-}
-
-.container {
-    margin-top: 50px;
-}
-
-h1 {
-    font-size: 36px;
-    margin-bottom: 50px;
-}
-
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.buttons button:hover {
-    background-color: #0056b3;
-}
-
-.buttons button {
-    padding: 15px 30px;
-    font-size: 18px;
-    height: 100px;
-    width: 200px;
+.window {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
     border: none;
-    border-radius: 5px;
-    background-color: #007bff;
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: auto; /* Add scroll if content exceeds window height */
+}
+.window-header {
+    background-color: darkgreen;
     color: white;
+    padding: 10px;
+    font-size: 17px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.content {
+    padding: 20px;
+}
+.nav {
+    display: flex;
+    border-bottom: 1px solid #999999;
+    padding: 10px 0;
+}
+.nav a {
+    text-decoration: none;
+    color: #666666;
+    padding: 5px 10px;
+    font-size: 17px;
+}
+.nav a:last-child {
+    color: #808080;
+}
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 20px;
+    color: darkgreen;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin-top: 30px; 
+}
+.button {
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
 }
-
+.column {
+    float: center;
+}
+.button.red {
+    background-color: #FF3333;
+}
+.button.small {
+    font-size: 14px;
+    padding: 5px 10px;
+}
 .logout {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
-
-.logout:hover {
-    background-color: #b30000;
+select {
+    display: block;
+    margin: 20px auto;
+    padding: 5px;
+    font-size: 17px;
+    width: 150px;
 }
