@@ -58,10 +58,13 @@ h1 {
 }
 .button {
     background-color: darkgreen;
+    height: 40px;
+    width: 160px;
+    white-space: nowrap;
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 17px;
+    font-size: 75%;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
