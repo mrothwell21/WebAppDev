@@ -1,5 +1,3 @@
-// const jwt = require("jwt-simple");
-
 // Event listener
 window.addEventListener("DOMContentLoaded", (event) => {
 
@@ -45,12 +43,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             method: "POST",
             body: new URLSearchParams({name: username, password: password})
         });
-
-
         console.log(response);
-
-        
-
 
         const loginStatus = document.querySelector("#status");
         if (response.ok) {
@@ -65,23 +58,27 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 
                 const users = await responseUser.json();
                 role = users[0].role;
+                console.log(role);
+                console.log(users[0].username);
+
+                // switch(role){
+                //     case 1: 
+                //         window.location.assign("./adminRole.html"); 
+                //         break;
+                //     case 2: 
+                //         window.location.assign("./TeacherLanding.html"); 
+                //         break;
+                //     case 3: 
+                //         window.location.assign("./userHome.html"); 
+                //         break;
+                //     default: 
+                //         window.location.assign("./index.html");
+                //         localStorage.clear(); 
+                //         break;
+                // }
                 
             }
 
-
-            console.log(role);
-            if(role == "1" ){
-                window.location.assign("./adminRole.html");
-            }
-            else if(role == "2"){
-                window.location.assign("./TeacherLanding.html");
-            }
-            else if (role == "3"){
-                window.location.assign("./userHome.html");
-            }
-            else {
-                window.location.assign("./index.html");
-            }
         }
         else {
             loginStatus.innerHTML = `Login failed. Try again`;
@@ -116,3 +113,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector("#role").value = "";
     }
 });
+
+
+
+//eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aY1Z8Ox_XfKusiSFFVQqgBexXnqtRs1a1pn6fxpLPtA
+//eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aY1Z8Ox_XfKusiSFFVQqgBexXnqtRs1a1pn6fxpLPtA
