@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     let user;
     let role;
+    let password;
 
     getUser();
     
@@ -20,7 +21,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     submitButton.addEventListener("click", async function (e) {
         e.preventDefault();
 
-        if (nPassword.value == conPassword.value) {
+        if (nPassword.value == conPassword.value && currPassword == password) {
             const response = await fetch("/api/password/change", {
                 method: "POST",
                 body: new URLSearchParams({ name: username, currentPassword: currPassword, newPassword: nPassword })
@@ -74,7 +75,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
             let users = await responseUser.json();
             user = users[0];   
             role = user.role;
+            password = user.password;
             username.value = user.username;
+
         }
     }
 
