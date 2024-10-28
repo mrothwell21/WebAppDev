@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     async function login(username, password) {
         console.log("fetch");
-        const response = await fetch("/api/auth", {
+        const response = await fetch("/api/users/auth", {
             method: "POST",
             body: new URLSearchParams({name: username, password: password})
         });
@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             let role;
             
-            const responseUser = await fetch("/api/status", {headers:{"X-Auth": tokenResponse.token} });
+            const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": tokenResponse.token} });
             if (responseUser.ok) {
                 
                 const users = await responseUser.json();

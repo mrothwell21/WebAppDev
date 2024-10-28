@@ -10,26 +10,32 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let submitButton = document.getElementById("submit");
     let backButton = document.getElementById("back");
 
-    const role = localStorage.getItem("role");
 
-    // const token = localStorage.getItem("token");
-    // const secret = "webappdev";
-    // let tokenUn = jwt.decode(token, secret);
+
+    const token = localStorage.getItem("token");
+    
+    let role;
 
 
     submitButton.addEventListener("click", async function (e) {
 
         e.preventDefault();
 
+        const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": token.token} });
+        if (responseUser.ok) {
+            
+            const users = await responseUser.json();
+            role = users[0].role;
+            
+        }
+
         if (nPassword.value == conPassword.value) {
 
 
-            const response = await fetch("/api/change", {
+            const response = await fetch("/api/password/change", {
                 method: "POST",
                 body: new URLSearchParams({ name: username, currentPassword: currPassword, newPassword: nPassword })
             });
-
-            // let role = tokenUn.role;
 
             if (role == "1") {
                 window.location.assign("./adminRole.html");
@@ -53,8 +59,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 
     backButton.addEventListener("click", function (e) {
-
-        // let role = tokenUn.role;
 
         if (role == "1") {
             window.location.assign("./adminRole.html");
