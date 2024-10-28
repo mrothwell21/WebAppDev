@@ -14,21 +14,15 @@ router.post("/auth", async function (req, res) {
     }
 
     const conn = mysql.createConnection(db.mydb);
-    // console.log("connected");
     const user = await db.getOne(conn, "User", req.body.name, req.body.password);
-    // console.log("query");
-
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username and/or password" });
         console.log("bad username and/or password");
-        console.log(user);
     } else {
-        const user_role = user[0].role;
-        const token = jwt.encode({ Username: user.username, Password: user.password, Role: user.role }, secret);
-        res.status(200).json({ token: token, role: user_role});
+        const token = jwt.encode({ Username: user.username, Password: user.password }, secret);
+        res.status(200).json({ token: token});
     }
-    //console.log("response");
     return;
 });
 
