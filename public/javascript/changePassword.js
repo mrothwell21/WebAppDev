@@ -5,75 +5,78 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let nPassword = document.getElementById("new-password");
     let conPassword = document.getElementById("confirm-password");
 
-
-
     let submitButton = document.getElementById("submit");
     let backButton = document.getElementById("back");
 
-
-
     const token = localStorage.getItem("token");
-    
+
+    let user;
     let role;
+
+    getUser();
+    
 
 
     submitButton.addEventListener("click", async function (e) {
-
         e.preventDefault();
 
-        const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": token.token} });
-        if (responseUser.ok) {
-            
-            const users = await responseUser.json();
-            role = users[0].role;
-            
-        }
-
         if (nPassword.value == conPassword.value) {
-
-
             const response = await fetch("/api/password/change", {
                 method: "POST",
                 body: new URLSearchParams({ name: username, currentPassword: currPassword, newPassword: nPassword })
             });
 
-            if (role == "1") {
-                window.location.assign("./adminRole.html");
+            switch(role){
+                case 1: 
+                    window.location.assign("./adminRole.html"); 
+                    break;
+                case 2: 
+                    window.location.assign("./TeacherLanding.html"); 
+                    break;
+                case 3: 
+                    window.location.assign("./userHome.html"); 
+                    break;
+                default: 
+                    window.location.assign("./index.html"); 
+                    localStorage.clear();
+                    break;
             }
-            else if (role == "2") {
-                window.location.assign("./TeacherLanding.html");
-            }
-            else if (role == "3") {
-                window.location.assign("./userHome.html");
-            }
-            else {
-                window.location.assign("./index.html");
-            }
-
         }
         else {
             alert("Passwords do not match!");
-
         }
 
     });
 
     backButton.addEventListener("click", function (e) {
 
-        if (role == "1") {
-            window.location.assign("./adminRole.html");
-        }
-        else if (role == "2") {
-            window.location.assign("./TeacherLanding.html");
-        }
-        else if (role == "3") {
-            window.location.assign("./userHome.html");
-        }
-        else {
-            window.location.assign("./index.html");
+        switch(role){
+            case 1: 
+                window.location.assign("./adminRole.html"); 
+                break;
+            case 2: 
+                window.location.assign("./TeacherLanding.html"); 
+                break;
+            case 3: 
+                window.location.assign("./userHome.html"); 
+                break;
+            default: 
+                window.location.assign("./index.html");
+                localStorage.clear(); 
+                break;
         }
 
     })
+
+    async function getUser(){
+        const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": token} });
+        if (responseUser.ok) {
+            let users = await responseUser.json();
+            user = users[0];   
+            role = user.role;
+            username.value = user.username;
+        }
+    }
 
 
 });
