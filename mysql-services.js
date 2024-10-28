@@ -38,8 +38,7 @@ module.exports = db = {
 
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
-        const sql = `UPDATE ${tableName} SET password = '${newPass}'
-        WHERE password = '${currentPass}' AND username = '${name}'`;
+        const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
 
         const results = await conn.promise().query(sql);
 
