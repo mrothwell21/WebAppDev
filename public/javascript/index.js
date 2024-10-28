@@ -1,4 +1,4 @@
-const jwt = require("jwt-simple");
+// const jwt = require("jwt-simple");
 
 // Event listener
 window.addEventListener("DOMContentLoaded", (event) => {
