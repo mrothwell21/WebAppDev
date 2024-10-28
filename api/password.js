@@ -1,3 +1,4 @@
+let secret = "webappdev";
 const jwt = require("jwt-simple");
 const { error } = require("console");
 const router = require("express").Router();
