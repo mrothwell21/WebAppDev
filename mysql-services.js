@@ -1,9 +1,10 @@
 module.exports = db = {
     mydb : {
-        host: "localhost",
-        user: "root",
-        password: "",
+        host: "webappdev-webappdev.b.aivencloud.com",
+        user: "avnadmin",
+        password: "AVNS_yvUKc4DsBnUuplfviLU",
         database: "webappdev",
+        port: "19255"
     },
 
     selectAll: async function (conn, tableName) {
