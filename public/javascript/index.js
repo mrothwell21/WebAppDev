@@ -57,16 +57,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
             const tokenResponse = await response.json();
             localStorage.setItem("token", tokenResponse.token);
             loginStatus.innerHTML = `Successfully authenticated as ${username}`;
-            // const token = localStorage.getItem("token", tokenResponse.token);
-            // const tokenDecode = jwt.decode(token);
-            console.log(tokenD.role);
-            if(tokenResponse.role == "1" ){
+
+            let role;
+            
+            const responseUser = await fetch("/api/status", {headers:{"X-Auth": tokenResponse.token} });
+            if (responseUser.ok) {
+                
+                const users = await response.json();
+                role = users[0].role;
+                
+            }
+
+
+            console.log(role);
+            if(role == "1" ){
                 window.location.assign("./adminRole.html");
             }
-            else if(tokenResponse.role == "2"){
+            else if(role == "2"){
                 window.location.assign("./TeacherLanding.html");
             }
-            else if (tokenResponse.role == "3"){
+            else if (role == "3"){
                 window.location.assign("./userHome.html");
             }
             else {
