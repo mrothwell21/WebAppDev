@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             const responseUser = await fetch("/api/status", {headers:{"X-Auth": tokenResponse.token} });
             if (responseUser.ok) {
                 
-                const users = await response.json();
+                const users = await responseUser.json();
                 role = users[0].role;
                 
             }
