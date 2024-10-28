@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     submitButton.addEventListener("click", async function (e) {
         e.preventDefault();
 
-        if (nPassword.value == conPassword.value && currPassword == password) {
+        if (nPassword.value == conPassword.value && currPassword.value == password) {
             const response = await fetch("/api/password/change", {
                 method: "POST",
                 body: new URLSearchParams({ name: username, currentPassword: currPassword, newPassword: nPassword })
