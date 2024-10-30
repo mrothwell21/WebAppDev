@@ -72,8 +72,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     async function getUser(){
         const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": token} });
         if (responseUser.ok) {
-            let users = await responseUser.json();
-            user = users[0];   
+            user = await responseUser.json();
             role = user.role;
             password = user.password;
             username.value = user.username;

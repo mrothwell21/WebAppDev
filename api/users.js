@@ -6,6 +6,7 @@ const secret = "webappdev";
 
 const mysql = require('mysql2');
 const db = require("../mysql-services");
+const { decode } = require("punycode");
 
 router.post("/auth", async function (req, res) {
     if (!req.body.name || !req.body.password) {
@@ -27,12 +28,9 @@ router.post("/auth", async function (req, res) {
 });
 
 router.get("/getAll", async function (req, res){
-    console.log("getAll");
     
     const conn = mysql.createConnection(db.mydb);
-    console.log("connected");
     const user = await db.selectAll(conn, "User");
-    console.log("query");
 })
 
 router.get("/status", async function (req, res) {
@@ -45,8 +43,8 @@ router.get("/status", async function (req, res) {
     try {
         const decoded = jwt.decode(token, secret);
         const conn = mysql.createConnection(db.mydb);
-        const users = await db.selectAll(conn, "User");
-        res.json(users);
+        const user = await db.getOne(conn, "User", decoded.Username, decoded.Password);
+        res.json(user[0]);
     }
     catch (ex) {
         res.status(401).json({ error: "Invalid JWT" });

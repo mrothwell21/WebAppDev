@@ -32,18 +32,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         // if the values length is filled and it's greater than 4 then redirect to this page
         else {
-            console.log("login");
+            // console.log("login");
             login(username.value, password.value);
         }
     });
 
     async function login(username, password) {
-        console.log("fetch");
+        // console.log("fetch");
         const response = await fetch("/api/users/auth", {
             method: "POST",
             body: new URLSearchParams({name: username, password: password})
         });
-        console.log(response);
 
         const loginStatus = document.querySelector("#status");
         if (response.ok) {
@@ -56,26 +55,25 @@ window.addEventListener("DOMContentLoaded", (event) => {
             const responseUser = await fetch("/api/users/status", {headers:{"X-Auth": tokenResponse.token} });
             if (responseUser.ok) {
                 
-                const users = await responseUser.json();
-                role = users[0].role;
-                console.log(role);
-                console.log(users[0].username);
+                const user = await responseUser.json();
+                role = user.role;
+    
 
-                // switch(role){
-                //     case 1: 
-                //         window.location.assign("./adminRole.html"); 
-                //         break;
-                //     case 2: 
-                //         window.location.assign("./TeacherLanding.html"); 
-                //         break;
-                //     case 3: 
-                //         window.location.assign("./userHome.html"); 
-                //         break;
-                //     default: 
-                //         window.location.assign("./index.html");
-                //         localStorage.clear(); 
-                //         break;
-                // }
+                switch(role){
+                    case 1: 
+                        window.location.assign("./adminRole.html"); 
+                        break;
+                    case 2: 
+                        window.location.assign("./TeacherLanding.html"); 
+                        break;
+                    case 3: 
+                        window.location.assign("./userHome.html"); 
+                        break;
+                    default: 
+                        window.location.assign("./index.html");
+                        localStorage.clear(); 
+                        break;
+                }
                 
             }
 
@@ -110,7 +108,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     function clearForm() {
         document.querySelector("#username").value = "";
         document.querySelector("#password").value = "";
-        document.querySelector("#role").value = "";
     }
 });
 
