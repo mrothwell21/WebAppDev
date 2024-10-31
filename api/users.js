@@ -2,11 +2,10 @@ const jwt = require("jwt-simple");
 const { error } = require("console");
 const router = require("express").Router();
 
-const secret = "webappdev";
-
 const mysql = require('mysql2');
 const db = require("../mysql-services");
 const { decode } = require("punycode");
+const { secret } = db;
 
 router.post("/auth", async function (req, res) {
     if (!req.body.name || !req.body.password) {

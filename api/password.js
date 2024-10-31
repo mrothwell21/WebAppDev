@@ -1,10 +1,10 @@
-let secret = "webappdev";
 const jwt = require("jwt-simple");
 const { error } = require("console");
 const router = require("express").Router();
 
 const mysql = require('mysql2');
 const db = require("../mysql-services");
+const { secret } = db;
 
 router.post("/change", async function (req, res) {
     if (!req.body.name || !req.body.currentPassword || !req.body.newPassword) {

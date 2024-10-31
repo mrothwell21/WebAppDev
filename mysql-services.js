@@ -7,6 +7,8 @@ module.exports = db = {
         port: "19255"
     },
 
+    secret: require('crypto').randomBytes(64).toString('hex'),
+
     selectAll: async function (conn, tableName) {
         const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
 
