@@ -33,4 +33,3 @@ const useLogin = () => {
     return ({ error, loginUser });
 }
 export default useLogin;
-client / hooks / useLogin.js
