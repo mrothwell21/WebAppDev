@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import userLogin from '../hooks/useLogin';
+import useLogin from '../hooks/useLogin';
 
 const Login = () => {
 
@@ -17,8 +17,9 @@ const Login = () => {
             user     : form.username.value,
             password : form.password.value
         };
+
         await loginUser(values);
-    }
+    };
 
     return (
         <div class="loginContainer">
@@ -48,3 +49,5 @@ const Login = () => {
         </div>
     );
 }
+
+export default Login;
