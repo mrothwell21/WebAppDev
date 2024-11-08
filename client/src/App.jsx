@@ -1,21 +1,11 @@
-import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './Auth/Login';
+import DashboardAdmin from './pages/DashboardAdmin.jsx';
+import DashboardStudent from './pages/DashboardStudent.jsx';
+import DashboardTeacher from './pages/DashboardTeacher.jsx';
+import { useAuth } from './contexts/AuthContext.jsx';
 import './App.css';
-
-import HomePage          from './pages/Homepage'
-import AdminPage    from "./pages/AdminPage";
-
-const router = createBrowserRouter([
-   { path: '/',
-     element: <RootLayout />,
-     errorElement: <NotFound404 />,
-     children: [
-      { path : '/', element: <HomePage />},
-      { path : '/admin' , element: <AdminPage />},
-      { path : '*',          element: <NotFound404 />},
-     ]
-    }
-   
-]);
 
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
@@ -32,15 +22,15 @@ function App() {
         <Route path='/dashboard-student' element={isAuthenticated && userRole === 'student' ? <DashboardStudent /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
-    );
-  };
+  );
+};
 
-  function toDashboard(isAuthenticated, role) {
-    if (isAuthenticated && role === 'student') { return { to: '/dashboard-student', dash: <DashboardStudent /> }; }
-    if (isAuthenticated && role === 'teacher') { return { to: '/dashboard-teacher', dash: <DashboardTeacher /> }; }
-    if (isAuthenticated && role === 'admin') { return { to: '/dashboard-admin', dash: <DashboardAdmin /> }; }
-
-    return { to: '/login', dash: <Login /> };
+function toDashboard(isAuthenticated, role) {
+  if (isAuthenticated && role === 'student') { return { to: '/dashboard-student', dash: <DashboardStudent /> }; }
+  if (isAuthenticated && role === 'teacher') { return { to: '/dashboard-teacher', dash: <DashboardTeacher /> }; }
+  if (isAuthenticated && role === 'admin') { return { to: '/dashboard-admin', dash: <DashboardAdmin /> }; }
+  
+  return { to: '/login', dash: <Login /> };
 }
 
 export default App;

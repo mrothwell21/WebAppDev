@@ -3,7 +3,7 @@ import Login from "../Auth/Login";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ( { children } ) => {
     const [token, setToken] = useState(null);
     const [userData, setUserData] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,5 +34,6 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+
 export const useAuth = () => { return useContext(AuthContext) };
 

@@ -8,8 +8,8 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-router.use("/api/users", require("./controllers/users"));
-router.use("/api/password", require("./controllers/password"));
+// router.use("/api/users", require("./controllers/users"));
+// router.use("/api/password", require("./controllers/password"));
 
 app.use(router);
 

@@ -6,16 +6,19 @@ import { message } from "antd";
 const useLogin = () => {
     const { login } = useAuth() || { login: null };
     const [error, setError] = useState(null);
+
     const loginUser = async (values) => {
         try {
             setError(null);
-            const res = await fetch('http://localhost:3000/api/auth/login',
+
+            const res = await fetch('http://localhost:5050/api/auth/login',
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values)
                 }
             );
+            
             const data = await res.json();
             if (res.status === 200) {
                 message.success('User logged-in successfully');
