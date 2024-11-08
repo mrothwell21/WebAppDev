@@ -11,7 +11,7 @@ const useLogin = () => {
         try {
             setError(null);
 
-            const res = await fetch('http://localhost:5050/api/users',
+            const res = await fetch('http://localhost:5050/api/users/auth',
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

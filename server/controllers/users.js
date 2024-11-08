@@ -8,13 +8,13 @@ const { decode } = require("punycode");
 const { secret } = db;
 
 router.post("/auth", async function (req, res) {
-    if (!req.body.name || !req.body.password) {
+    if (!req.body.user || !req.body.password) {
         res.status(401).json({ error: "Missing username, password and/or role" });
         return;
     }
 
     const conn = mysql.createConnection(db.mydb);
-    const user = await db.getOne(conn, "User", req.body.name, req.body.password);
+    const user = await db.getOne(conn, "User", req.body.user, req.body.password);
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username and/or password" });
