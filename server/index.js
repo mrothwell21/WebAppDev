@@ -1,15 +1,21 @@
 const express  = require("express");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 const app = express();
 const router = express.Router();
 
-router.use(bodyParser.urlencoded({extended: false}));
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-// router.use("/api/users", require("./controllers/users"));
-// router.use("/api/password", require("./controllers/password"));
+app.use(require('./routes/authRoutes'));
 
 app.use(router);
 

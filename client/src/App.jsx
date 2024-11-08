@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './Auth/Login';
-import DashboardAdmin from './pages/DashboardAdmin.jsx';
-import DashboardStudent from './pages/DashboardStudent.jsx';
-import DashboardTeacher from './pages/DashboardTeacher.jsx';
+// import DashboardAdmin from './pages/DashboardAdmin.jsx';
+// import DashboardStudent from './pages/DashboardStudent.jsx';
+// import DashboardTeacher from './pages/DashboardTeacher.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
-import './App.css';
 
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
@@ -16,7 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to={dashboard.to} />} />
-        <Route path='/login' element={<Navigate to={dashboard.to} />} />
+        <Route path='/login' element={isAuthenticated?<Navigate to={dashboard.to} />:<Login />} />
         <Route path='/dashboard-admin' element={isAuthenticated && userRole === 'admin' ? <DashboardAdmin /> : <Navigate to={dashboard.to} />} />
         <Route path='/dashboard-teacher' element={isAuthenticated && userRole === 'teacher' ? <DashboardTeacher /> : <Navigate to={dashboard.to} />} />
         <Route path='/dashboard-student' element={isAuthenticated && userRole === 'student' ? <DashboardStudent /> : <Navigate to={dashboard.to} />} />

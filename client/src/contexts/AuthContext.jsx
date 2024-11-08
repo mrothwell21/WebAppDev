@@ -12,12 +12,13 @@ export const AuthProvider = ( { children } ) => {
 
     useEffect(() => {
         if (locallyStoredData) {
-            const { userToken, user } = locallyStoredData;
+            const { userToken } = locallyStoredData;
             setToken(userToken);
             setUserData(user);
             setIsAuthenticated(true);
         }
     }, []);
+    
 
     const login = (newToken, newData) => {
         localStorage.setItem('userData', JSON.stringify({ userToken: newToken, user: newData }));
