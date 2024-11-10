@@ -3,10 +3,10 @@ import React from 'react';
 
 function TeacherPage() {
     return (
-        <div class="window">
-            <div class="window-header">Teacher Landing</div>
-            <div class="content">
-                <nav class="nav">
+        <div className="window">
+            <div className="window-header">Teacher Landing</div>
+            <div className="content">
+                <nav className="nav">
                     <a href="#">Home</a>
                     <a href="#">Your Courses</a>
                     <a href="#">Create Course</a>
@@ -14,25 +14,25 @@ function TeacherPage() {
                     <a href="#">Delete Course</a>
                 </nav>
                 <h1>Welcome</h1>
-                <div class="column left">
-                    <div class="button-container">
-                        <button class="button">Your Courses</button>
-                        <button class="button">Create Course</button>
+                <div className="column left">
+                    <div className="button-container">
+                        <button className="button">Your Courses</button>
+                        <button className="button">Create Course</button>
                     </div>
                 </div>
-                <div class="column right">
-                    <div class="button-container">
-                        <button class="button">Update Course</button>
-                        <button class="button">Delete Course</button>
+                <div className="column right">
+                    <div className="button-container">
+                        <button className="button">Update Course</button>
+                        <button className="button">Delete Course</button>
                     </div>
                 </div>
-                <div class="center column">
-                    <div class="button-container">
-                        <button class="button" id="password">Change Password</button>
+                <div className="center column">
+                    <div className="button-container">
+                        <button className="button" id="password">Change Password</button>
                     </div>
                 </div>
-                <div class="column right">
-                    <button class="button red small logout" id="logout">Logout</button>
+                <div className="column right">
+                    <button className="button red small logout" id="logout">Logout</button>
                 </div>
             </div>
         </div>
