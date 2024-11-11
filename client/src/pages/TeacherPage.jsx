@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import '../../public/css/TeacherPage.css';
+import '../../public/css/TeacherLanding.css'
+import { useAuth } from "../contexts/AuthContext";
 
 function TeacherPage() {
+
+    const { userData, isAuthenticated, logout } = useAuth();
+
+
     return (
         <div className="window">
             <div className="window-header">Teacher Landing</div>
@@ -33,7 +38,7 @@ function TeacherPage() {
                     </div>
                 </div>
                 <div className="column right">
-                    <button className="button red small logout" id="logout">Logout</button>
+                <button className="button red small logout" id="logout" onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>
