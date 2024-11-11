@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Login from "../Auth/Login";
-import getUser from '../hooks/getUser';
+import dataUser from '../hooks/dataUser';
 
 const AuthContext = createContext();
 
@@ -10,7 +10,7 @@ export const AuthProvider = ( { children } ) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const locallyStoredData = JSON.parse(localStorage.getItem('userData'));
-    const { userRole } = getUser();
+    const { userRole } = dataUser();
 
     useEffect(() => {
         if (locallyStoredData) {
