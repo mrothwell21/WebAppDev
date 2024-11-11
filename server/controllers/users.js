@@ -21,7 +21,7 @@ router.post("/auth", async function (req, res) {
         console.log("bad username and/or password");
     } else {
         const token = jwt.encode({ Username: user[0].username, Password: user[0].password }, secret);
-        res.status(200).json({ token: token});
+        res.status(200).json({ token: token, user: { username: user[0].username, role: user[0].role}});
     }
     return;
 });
