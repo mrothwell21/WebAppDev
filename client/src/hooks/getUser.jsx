@@ -2,10 +2,10 @@ import { React, useState } from "react";
 import { message } from "antd";
 
 
-const dataUser = () => {
+const getUser = () => {
     const [error, setError] = useState(null);
 
-    const getUser = async (values) => {
+    const dataUser = async (values) => {
         try {
             setError(null);
 
@@ -19,7 +19,7 @@ const dataUser = () => {
 
             const data = await res.json();
             if (res.status === 200) {
-                await user(data);
+                return data;
             }
             else if (res.status === 404) {
                 message.error('No such user');
@@ -30,6 +30,6 @@ const dataUser = () => {
         }
         catch (err) { message.error(err); }
     };
-    return ({ error, getUser });
+    return ({ error, dataUser });
 }
-export default dataUser;
+export default getUser;
