@@ -32,4 +32,4 @@ const dataUser = () => {
     };
     return ({ error, getUser });
 }
-export default getUser;
+export default dataUser;
