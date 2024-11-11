@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import '../../public/css/adminRole.css'
 
 function AdminPage() {
     return (
