@@ -13,23 +13,33 @@ function StudentPage() {
                     <a href="#">Courses</a>
                 </nav>
 
-                <div className="space"></div>
-                
-                <nav className="bot-nav">
-                    <a href="#">All</a>
-                    <a href="#">Enrolled</a>
-                    <a href="#">Dropped</a>
-                </nav>
-
-                <h1>Courses</h1>
-
-                <div className="list">
-                    <ul></ul>
+                <h1>Welcome</h1>
+                <div className="column center">
+                <select>
+                    <option>Select Major</option>
+                </select>
                 </div>
-                    
-
-            </div>
+                <div className="column left">
+                    <div className="button-container">
+                        <button className="button">Register</button>
+                        <button className="button">Drop</button>
+                    </div>
+                </div>
+                <div className="column right">
+                    <div className="button-container">
+                        <button className="button">Courses</button>
+                    </div>
+                </div>
+                <div className="center column">
+                    <div className="button-container">
+                        <button className="button" id="password">Change Password</button>
+                    </div>
+                </div>
+                <div className="column right">
+                    <button className="button red small logout" id="logout">Logout</button>
+                </div>
         </div>
+    </div>
     );
 }
 
