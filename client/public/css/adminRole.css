@@ -63,7 +63,7 @@ h1 {
     white-space: nowrap;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 50px 20px;
     font-size: 75%;
     font-weight: bold;
     border-radius: 5px;
@@ -74,6 +74,8 @@ h1 {
     background-color: gold;
 }
 .column {
+    padding-left: 20%;
+    padding-right: 20%;
     float: center;
 }
 .button.red {

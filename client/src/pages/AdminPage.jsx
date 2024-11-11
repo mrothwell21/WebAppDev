@@ -26,7 +26,7 @@ function AdminPage() {
                         <button className="button">Edit Users</button>
                     </div>
                 </div>
-                <div className="center column">
+                <div className="column right">
                     <div className="button-container">
                         <button className="button">Delete Users</button>
                     </div>
