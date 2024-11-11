@@ -1,10 +1,8 @@
 import { React, useState } from "react";
-import { useAuth } from "../contexts/AuthContext.jsx";
 import { message } from "antd";
 
 
-const getUser = () => {
-    const { login } = useAuth() || { login: null };
+const dataUser = () => {
     const [error, setError] = useState(null);
 
     const getUser = async (values) => {
