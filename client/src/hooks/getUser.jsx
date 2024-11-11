@@ -34,4 +34,4 @@ const getUser = () => {
     };
     return ({ error, getUser });
 }
-export default useLogin;
+export default getUser;
