@@ -36,7 +36,7 @@ function ChangePassword() {
                 <form action="#" method="POST">
                     <div className="form-group">
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" required disabled />
+                        <input type="text" id="username" name="username" value={userData.username} required disabled />
                     </div>
 
                     <div className="form-group">
