@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import '../../public/css/TeacherLanding.css'
+import { useAuth } from "../contexts/AuthContext";
 
 function TeacherPage() {
 
