@@ -6,39 +6,28 @@ function StudentPage() {
         <div className="window">
             <div className="window-header">Student Landing</div>
             <div className="content">
-                <nav className="nav">
+                <nav className="top-nav">
                     <a href="#">Home</a>
                     <a href="#">Register</a>
                     <a href="#">Drop</a>
-                    <a href="#">All Courses</a>
-                    <a href="#">Your Courses</a>
+                    <a href="#">Courses</a>
                 </nav>
-                <h1>Welcome</h1>
-                    <div className="column center">
-                        <select>
-                            <option>Select Major</option>
-                        </select>
-                    </div>
-                <div className="column left">
-                    <div class="button-container">
-                        <button class="button">Register</button>
-                        <button class="button">Drop</button>
-                    </div>
+
+                <div className="space"></div>
+                
+                <nav className="bot-nav">
+                    <a href="#">All</a>
+                    <a href="#">Enrolled</a>
+                    <a href="#">Dropped</a>
+                </nav>
+
+                <h1>Courses</h1>
+
+                <div className="list">
+                    <ul></ul>
                 </div>
-                <div className="column right">
-                    <div className="button-container">
-                        <button className="button">All Courses</button>
-                        <button className="button">Your Courses</button>
-                    </div>
-                </div>
-                <div className="center column">
-                    <div className="button-container">
-                        <button className="button" id="password">Change Password</button>
-                    </div>
-                </div>
-                <div className="column right">
-                    <button className="button red small logout" id="logout">Logout</button>
-                </div>
+                    
+
             </div>
         </div>
     );
