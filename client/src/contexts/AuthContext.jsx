@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Login from "../Auth/Login";
+import getUser from '../hooks/getUser';
 
 const AuthContext = createContext();
 
@@ -9,12 +10,13 @@ export const AuthProvider = ( { children } ) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const locallyStoredData = JSON.parse(localStorage.getItem('userData'));
+    const { userRole } = getUser();
 
     useEffect(() => {
         if (locallyStoredData) {
             const { userToken } = locallyStoredData;
             setToken(userToken);
-            setUserData(user);
+            setUserData(userRole);
             setIsAuthenticated(true);
         }
     }, []);
@@ -27,7 +29,7 @@ export const AuthProvider = ( { children } ) => {
         setIsAuthenticated(true);
     };
 
-    const values = { token, isAuthenticated, login, userData, setUserData };
+    const values = { token, isAuthenticated, login, userData, setUserData, userRole };
     
     return (
         <AuthContext.Provider value={{ ...values }}>
