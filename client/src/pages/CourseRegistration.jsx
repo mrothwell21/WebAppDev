@@ -22,8 +22,8 @@ function UserRegistration() {
 
                 </div>
 
-                <button class="button">Register</button>
-                
+                <button className="button">Register</button>
+
             </div>
         </div>
     );

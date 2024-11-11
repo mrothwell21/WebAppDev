@@ -14,29 +14,29 @@ function StudentPage() {
                 </nav>
 
                 <h1>Welcome</h1>
-                <div class="column center">
+                <div className="column center">
                 <select>
                     <option>Select Major</option>
                 </select>
                 </div>
-                <div class="column left">
-                    <div class="button-container">
-                        <button class="button">Register</button>
-                        <button class="button">Drop</button>
+                <div className="column left">
+                    <div className="button-container">
+                        <button className="button">Register</button>
+                        <button className="button">Drop</button>
                     </div>
                 </div>
-                <div class="column right">
-                    <div class="button-container">
-                        <button class="button">Courses</button>
+                <div className="column right">
+                    <div className="button-container">
+                        <button className="button">Courses</button>
                     </div>
                 </div>
-                <div class="center column">
-                    <div class="button-container">
-                        <button class="button" id="password">Change Password</button>
+                <div className="center column">
+                    <div className="button-container">
+                        <button className="button" id="password">Change Password</button>
                     </div>
                 </div>
-                <div class="column right">
-                    <button class="button red small logout" id="logout">Logout</button>
+                <div className="column right">
+                    <button className="button red small logout" id="logout">Logout</button>
                 </div>
         </div>
     </div>
