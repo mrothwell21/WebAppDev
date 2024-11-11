@@ -10,16 +10,16 @@ function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
  
   console.log('App render - Auth state:', { isAuthenticated, userData });
-  const dashboard = toDashboard(isAuthenticated, userData?.role);
+  const dashboard = toDashboard(isAuthenticated, userData);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to={dashboard.to} />} />
         <Route path='/login' element={isAuthenticated?<Navigate to={dashboard.to} />:<Login />} />
-        <Route path='/dashboard-admin' element={isAuthenticated && userData?.role === 1 ? <AdminPage /> : <Navigate to={dashboard.to} />} />
-        <Route path='/dashboard-teacher' element={isAuthenticated && userData?.role === 2 ? <TeacherPage /> : <Navigate to={dashboard.to} />} />
-        <Route path='/dashboard-student' element={isAuthenticated && userData?.role === 3 ? <StudentPage /> : <Navigate to={dashboard.to} />} />
+        <Route path='/dashboard-admin' element={isAuthenticated && userData === 1 ? <AdminPage /> : <Navigate to={dashboard.to} />} />
+        <Route path='/dashboard-teacher' element={isAuthenticated && userData === 2 ? <TeacherPage /> : <Navigate to={dashboard.to} />} />
+        <Route path='/dashboard-student' element={isAuthenticated && userData === 3 ? <StudentPage /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );
