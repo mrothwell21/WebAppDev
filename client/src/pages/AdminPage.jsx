@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import '../../public/css/adminRole.css'
+import { useAuth } from "../contexts/AuthContext";
 
 function AdminPage() {
+
+    const { userData, isAuthenticated, logout } = useAuth();
+
+
     return (
         <div className="window">
             <div className="window-header">Admin Landing</div>
@@ -41,7 +46,7 @@ function AdminPage() {
                     </div>
                 </div>
                 <div className="column right">
-                    <button className="button red small logout" id="logout">Logout</button>
+                    <button className="button red small logout" id="logout" onClick={logout}>Logout</button>
                 </div>
             </div>
         </div>

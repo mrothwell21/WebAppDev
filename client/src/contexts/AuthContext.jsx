@@ -87,8 +87,15 @@ export const AuthProvider = ( { children } ) => {
             throw error; // Re-throw to handle in calling function
         }
     };
+
+    const logout = () => {
+        localStorage.removeItem("userData");
+        setToken(null);
+        setUserData(null);
+        setIsAuthenticated(false);
+    };
     
-    const values = { token, isAuthenticated, login, userData, setUserData};
+    const values = { token, isAuthenticated, login, logout, userData, setUserData};
     
     return (
         <AuthContext.Provider value={{ ...values }}>
