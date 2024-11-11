@@ -18,31 +18,17 @@ function AdminPage() {
                     <a href="#">Delete Users</a>
                     <a href="#">Edit Users</a>
                     <a href="#">View Users</a>
-                    <a href="#">Add Majors</a>
-                    <a href="#">Delete Majors</a>
-                    <a href="#">Edit Majors</a>
-                    <a href="#">View Majors</a>
                 </nav>
                 <h1>Welcome</h1>
                 <div className="column left">
                     <div className="button-container">
                         <button className="button">Add Users</button>
-                        <button className="button">Delete Users</button>
                         <button className="button">Edit Users</button>
-                        <button className="button">View Users</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="button-container">
-                        <button className="button">Add Majors</button>
-                        <button className="button">Delete Majors</button>
-                        <button className="button">Edit Majors</button>
-                        <button className="button">View Majors</button>
                     </div>
                 </div>
                 <div className="center column">
                     <div className="button-container">
-                        <button className="button" id="password">Change Password</button>
+                        <button className="button">Delete Users</button>
                     </div>
                 </div>
                 <div className="column right">
