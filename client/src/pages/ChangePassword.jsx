@@ -18,7 +18,11 @@ function ChangePassword() {
 
         const response = await fetch("http://localhost:5050/api/password/change", {
             method: "POST",
-            body: new URLSearchParams({ username: inputs.username, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirimPassword: inputs.confirmPassword })
+            body: new URLSearchParams({ username: inputs.uname, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirimPassword: inputs.confirmPassword }),
+            headers: { 
+                'Content-Type': 'application/json',
+                'x-auth': token
+            }
         });
 
         if (response.status === 200) {
@@ -51,7 +55,8 @@ function ChangePassword() {
         const curPass = event.target.currentPassword;
         const conPass = event.target.confirmPassword;
 
-        setInputs(values => ({ ...values, [username]: username, [newPassword]: nPass, [currentPassword]: curPass, [confirmPassword]: conPass }))
+        setInputs(values => ({ ...values, ["uname"]: username, ["newPassword"]: nPass, ["currentPassword"]: curPass, ["confirmPassword"]: conPass }));
+        console.log(inputs);
     }
 
 
@@ -82,7 +87,7 @@ function ChangePassword() {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" value={userData.username} required disabled />
+                        <input type="text" id="username" name="username" value={userData.username} onChange={handleChange} required disabled />
                     </div>
 
                     <div className="form-group">
