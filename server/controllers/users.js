@@ -43,7 +43,7 @@ router.get("/status", async function (req, res) {
         const decoded = jwt.decode(token, secret);
         const conn = mysql.createConnection(db.mydb);
         const user = await db.getOne(conn, "User", decoded.Username, decoded.Password);
-        res.json(user[0].role);
+        res.json({role: user[0].role, username: user[0].username});
     }
     catch (ex) {
         res.status(401).json({ error: "Invalid JWT" });
