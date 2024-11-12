@@ -2,10 +2,16 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import '../../public/css/TeacherLanding.css'
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function TeacherPage() {
 
     const { userData, isAuthenticated, logout } = useAuth();
+    const navigate = useNavigate();
+
+    function handleChangeP(){
+        navigate("/change-password")
+    }
 
 
     return (
@@ -34,7 +40,7 @@ function TeacherPage() {
                 </div>
                 <div className="center column">
                     <div className="button-container">
-                        <button className="button" id="password">Change Password</button>
+                        <button className="button" id="password" onClick={handleChangeP}>Change Password</button>
                     </div>
                 </div>
                 <div className="column right">
