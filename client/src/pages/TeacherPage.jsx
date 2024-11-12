@@ -14,27 +14,25 @@ function TeacherPage() {
             <div className="content">
                 <nav className="nav">
                     <a href="#">Home</a>
+                    <a href="#">Create</a>
+                    <a href="#">Update</a>
+                    <a href="#">Activate</a>
                     <a href="#">Your Courses</a>
-                    <a href="#">Create Course</a>
-                    <a href="#">Update Course</a>
-                    <a href="#">Delete Course</a>
                 </nav>
                 <h1>Welcome</h1>
                 <div className="column left">
                     <div className="button-container">
                         <button className="button">Your Courses</button>
-                        <button className="button">Create Course</button>
                     </div>
                 </div>
                 <div className="column right">
                     <div className="button-container">
-                        <button className="button">Update Course</button>
-                        <button className="button">Delete Course</button>
+                        <button className="button">Activate Courses</button>
                     </div>
                 </div>
                 <div className="center column">
                     <div className="button-container">
-                        <button className="button" id="password">Change Password</button>
+                        <button className="button">Change Password</button>
                     </div>
                 </div>
                 <div className="column right">

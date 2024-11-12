@@ -63,7 +63,7 @@ h1 {
     white-space: nowrap;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 75%;
     font-weight: bold;
     border-radius: 5px;
@@ -75,6 +75,10 @@ h1 {
 }
 .column {
     float: center;
+    justify-content: center;
+}
+.center {
+    justify-content: center;
 }
 .button.red {
     background-color: #FF3333;
