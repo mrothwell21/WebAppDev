@@ -28,6 +28,5 @@ function UserRegistration() {
         </div>
     );
 }
-}
 
 export default UserRegistration;

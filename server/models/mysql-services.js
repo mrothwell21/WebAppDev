@@ -38,6 +38,18 @@ module.exports = db = {
         return results;
     },
 
+    getMajorByUsername: async function(conn, username) {
+        const sql = `
+            SELECT Major.name 
+            FROM Major
+            JOIN UserInMajor ON Major.majorid = UserInMajor.majorid
+            JOIN User ON User.userid = UserInMajor.userid
+            WHERE User.username = ?`;
+    
+        const results = await conn.promise().query(sql, [username]);
+        return results;
+    },
+
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;

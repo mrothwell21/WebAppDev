@@ -28,6 +28,5 @@ function DropCourses() {
         </div>
     );
 }
-}
 
 export default DropCourses;
