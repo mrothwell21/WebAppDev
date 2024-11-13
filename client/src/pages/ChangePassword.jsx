@@ -55,7 +55,7 @@ function ChangePassword() {
         const curPass = event.target.currentPassword;
         const conPass = event.target.confirmPassword;
 
-        setInputs(values => ({ ...values, ["uname"]: username, ["newPassword"]: nPass, ["currentPassword"]: curPass, ["confirmPassword"]: conPass }));
+        setInputs(values => ({ ...values, "uname": username, "newPassword": nPass, "currentPassword": curPass, "confirmPassword": conPass }));
         console.log(inputs);
     }
 
