@@ -3,6 +3,7 @@ import React from 'react';
 import '../../public/css/TeacherLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import NavigationBar from '../components/Navigation';
 
 function TeacherPage() {
 
@@ -16,19 +17,12 @@ function TeacherPage() {
 
     return (
         <div class="container">
-    <div class="banner">Teacher Landing</div>
-    <div class="content">
-        <div class="navbar">
-            <nav>
-                <a href="#" class="nav-link">Home</a>
-                <a href="#" class="nav-link">Courses</a>
-                <a href="#" class="nav-link">Activate</a>
-            </nav>
-            <hr class="navbar-divider"/>
+        <div class="banner">
+        <NavigationBar role={"teacher"}></NavigationBar>
         </div>
 
         <div class="main-content">
-            <br/><br/>
+            <br/><br/><br/>
             <h1>Welcome</h1>
             <br/><br/>
             <div class="button-group-inline">
@@ -40,7 +34,7 @@ function TeacherPage() {
                 <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
             </div>
         </div>
-    </div>
+    
 
     <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
 </div>
