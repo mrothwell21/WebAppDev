@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import React from 'react';
+import { useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { message } from "antd";
@@ -9,9 +10,9 @@ import '../../public/css/ChangePassword.css';
 function ChangePassword() {
     const { userData, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
-    const token = localStorage.getItem("userData");
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    const token = storedData?.userToken;
     const [inputs, setInputs] = useState({});
-
 
 
     const handleSubmit = async (event) => {
@@ -28,7 +29,12 @@ function ChangePassword() {
         if (response.status === 200) {
             message.success("Password changed sucessfully!");
             const data = await response.json();
-            localStorage.setItem("userData", data.token);
+            
+            const updatedUserData = {
+                userToken: data.token,
+                user: storedData.user
+            };
+            localStorage.setItem("userData", JSON.stringify(updatedUserData));
 
 
             switch (userData.role) {
@@ -53,6 +59,30 @@ function ChangePassword() {
 
     }
 
+    useEffect(() => {
+        const storedRole = localStorage.getItem("userRole");
+        const storedUserData = JSON.parse(localStorage.getItem("userData"));
+        const isReload = performance.navigation?.type === 1 || (window.performance?.getEntriesByType('navigation')[0]?.type === 'reload');
+        
+        if (isReload && (storedRole || storedUserData?.user?.role)) {
+            const roleToUse = storedRole ? parseInt(storedRole) : storedUserData.user.role;
+            localStorage.removeItem("userRole"); // Clean up if it exists
+            
+            switch (roleToUse) {
+                case 1:
+                    window.location.href = "/dashboard-admin";
+                    break;
+                case 2:
+                    window.location.href = "/dashboard-teacher";
+                    break;
+                case 3:
+                    window.location.href = "/dashboard-student";
+                    break;
+                default:
+                    break;
+            }
+        }
+    }, [userData]);
 
     const handleChange = (event) => {
         const name = event.target.name;
