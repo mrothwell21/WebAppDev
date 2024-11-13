@@ -51,8 +51,6 @@ router.get("/status", async function (req, res) {
 });
 
 router.post("/time", async function (req, res) {
-    console.log("post");
-    console.log(req.body.username);
 
     if (!req.body.username) {
         res.status(401).json({ error: "Missing username" });
@@ -60,15 +58,12 @@ router.post("/time", async function (req, res) {
     }
 
     const conn = mysql.createConnection(db.mydb);
-    console.log("connection");
 
     const user = await db.updateLastLogin(conn, req.body.username);
-    console.log("post query");
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username" });
     } else {
-        console.log("results");
         res.status(200).json({compelete: true});
     }
     return;

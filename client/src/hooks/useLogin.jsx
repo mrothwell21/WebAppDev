@@ -22,18 +22,12 @@ const useLogin = () => {
             const data = await res.json();
             if (res.status === 200) {
                 message.success('User logged-in successfully');
-                console.log(data.user.username);
                 const updateLogTime = await fetch('http://localhost:5050/api/users/time',
                     {
                         method: 'POST',
                         body: new URLSearchParams({ username: data.user.username})
                     }
                 );
-                console.log("post fetch");
-
-                // const confirm = await updateLogTime.json();
-
-                console.log(updateLogTime);
 
                 if (updateLogTime.status === 200){
                     message.success("Time update success");

@@ -63,13 +63,10 @@ module.exports = db = {
 
         const now = new Date();
         const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
-        console.log("date created");
 
         const sql = `UPDATE User SET lastLogin = '${formattedTimestamp}' WHERE username = '${username}'`;
-        console.log(sql);
 
         const results = await conn.promise().query(sql);
-        console.log("run query");
 
         return results;
 
