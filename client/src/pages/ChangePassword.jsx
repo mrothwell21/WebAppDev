@@ -4,6 +4,7 @@ import React from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { message } from "antd";
+import '../../public/css/ChangePassword.css';
 
 function ChangePassword() {
     const { userData, isAuthenticated, logout } = useAuth();
