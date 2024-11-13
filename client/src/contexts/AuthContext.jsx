@@ -34,18 +34,17 @@ export const AuthProvider = ( { children } ) => {
 
     useEffect(() => {
         const initializeAuth = async () => {
-            console.log('Initializing auth...');
+            
             const locallyStoredData = JSON.parse(localStorage.getItem('userData'));
-            console.log('Stored data:', locallyStoredData);
+            
             if (locallyStoredData) {
                 setToken(locallyStoredData.userToken);
                 const userData = await fetchUserStatus(locallyStoredData.userToken);
-                console.log('User data after init:', userData);
+                
                 if (userData) {
                     setIsAuthenticated(true);
                     setUserData(userData)
                 } else {
-                    console.log('No user data found, clearing auth...');
                     // Clear everything if we couldn't get user data
                     localStorage.removeItem('userData');
                     setToken(null);
@@ -61,9 +60,7 @@ export const AuthProvider = ( { children } ) => {
 
     const login = async (newToken) => {
         try {
-            console.log('Login called with:', { newToken });
             const userData = await fetchUserStatus(newToken);
-            console.log('User data after status fetch:', userData);
     
             if (userData) {
                 localStorage.setItem('userData', JSON.stringify({ 
@@ -73,9 +70,7 @@ export const AuthProvider = ( { children } ) => {
                 setToken(newToken);
                 setUserData(userData);
                 setIsAuthenticated(true);
-                console.log('Login completed successfully:', { userData, isAuthenticated: true });
             } else {
-                console.error('No user data received from status check');
                 throw new Error('Failed to get user data');
             }
         } catch (error) {

@@ -10,7 +10,6 @@ import { useAuth } from './contexts/AuthContext.jsx';
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
  
-  console.log('App render - Auth state:', { isAuthenticated, userData })
   const dashboard = toDashboard(isAuthenticated, userData);
 
   return (
