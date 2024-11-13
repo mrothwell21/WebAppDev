@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import '../../public/css/TeacherLanding.css'
+import '../../public/css/TeacherLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,37 +15,35 @@ function TeacherPage() {
 
 
     return (
-        <div className="window">
-            <div className="window-header">Teacher Landing</div>
-            <div className="content">
-                <nav className="nav">
-                    <a href="#">Home</a>
-                    <a href="#">Create</a>
-                    <a href="#">Update</a>
-                    <a href="#">Activate</a>
-                    <a href="#">Your Courses</a>
-                </nav>
-                <h1>Welcome</h1>
-                <div className="column left">
-                    <div className="button-container">
-                        <button className="button">Your Courses</button>
-                    </div>
-                </div>
-                <div className="column right">
-                    <div className="button-container">
-                        <button className="button">Activate Courses</button>
-                    </div>
-                </div>
-                <div className="center column">
-                    <div className="button-container">
-                        <button className="button" onClick={handleChangeP}>Change Password</button>
-                    </div>
-                </div>
-                <div className="column right">
-                <button className="button red small logout" id="logout" onClick={logout}>Logout</button>
-                </div>
+        <div class="container">
+    <div class="banner">Teacher Landing</div>
+    <div class="content">
+        <div class="navbar">
+            <nav>
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Courses</a>
+                <a href="#" class="nav-link">Activate</a>
+            </nav>
+            <hr class="navbar-divider"/>
+        </div>
+
+        <div class="main-content">
+            <br/><br/>
+            <h1>Welcome</h1>
+            <br/><br/>
+            <div class="button-group-inline">
+                <button class="btn green-btn">Your Courses</button>
+                <button class="btn green-btn">Activate Courses</button>
+            </div>
+
+            <div class="button-group">
+                <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
             </div>
         </div>
+    </div>
+
+    <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
+</div>
     );
 }
 

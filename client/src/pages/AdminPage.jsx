@@ -1,40 +1,56 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import '../../public/css/adminRole.css'
+import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function AdminPage() {
 
     const { userData, isAuthenticated, logout } = useAuth();
 
+    const navigate = useNavigate();
+
+    function handleChangeP() {
+        navigate("/change-password")
+    }
+
 
     return (
-        <div className="window">
-            <div className="window-header">Admin Landing</div>
-            <div className="content">
-                <nav className="nav">
-                    <a href="#">Home</a>
-                    <a href="#">Add Users</a>
-                    <a href="#">Delete Users</a>
-                    <a href="#">Edit Users</a>
-                    <a href="#">View Users</a>
-                </nav>
-                <h1>Welcome</h1>
-                <div className="column left">
-                    <div className="button-container">
-                        <button className="button">Add Users</button>
-                        <button className="button">Edit Users</button>
-                    </div>
+        <div class="container">
+            <div class="banner">Admin Landing</div>
+            <div class="content">
+                <div class="navbar">
+                    <nav>
+                        <a href="#" class="nav-link">Home</a>
+                        <a href="#" class="nav-link">View Users</a>
+                        <a href="#" class="nav-link">Delete Users</a>
+                        <a href="#" class="nav-link">View Roles</a>
+                        <a href="#" class="nav-link">Delete Roles</a>
+                    </nav>
+                    <hr class="navbar-divider" />
                 </div>
-                <div className="column right">
-                    <div className="button-container">
-                        <button className="button">Delete Users</button>
+
+                <div class="main-content">
+                    <br /><br />
+                    <h1>Welcome</h1>
+                    <br /><br />
+                    <div class="button-group-inline">
+                        <button class="btn green-btn">View Users</button>
+                        <button class="btn green-btn">Delete Users</button>
                     </div>
-                </div>
-                <div className="column right">
-                    <button className="button red small logout" id="logout" onClick={logout}>Logout</button>
+
+                    <div class="button-group-inline">
+                        <button class="btn green-btn">View Roles</button>
+                        <button class="btn green-btn">Delete Roles</button>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
+                    </div>
                 </div>
             </div>
+
+            <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
         </div>
     );
 }
