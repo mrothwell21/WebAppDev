@@ -17,40 +17,11 @@ function AdminPage() {
 
 
     return (
-        <div className="window">
-            <div className="window-header">Admin Landing
-            <NavigationBar role={"admin"}/>
-            </div>
-            <div className="content">
-                <h1>Welcome</h1>
-                <div className="column left">
-                    <div className="button-container">
-                        <button className="button">Add Users</button>
-                        <button className="button">Edit Users</button>
         <div class="container">
-            <div class="banner">Admin Landing</div>
+            <div class="banner">
+                    <NavigationBar role={"admin"}></NavigationBar>
+            </div>
             <div class="content">
-                <div class="navbar">
-                    <nav>
-                        <a href="#" class="nav-link">Home</a>
-                        <a href="#" class="nav-link">View Users</a>
-                        <a href="#" class="nav-link">Delete Users</a>
-                        <a href="#" class="nav-link">View Roles</a>
-                        <a href="#" class="nav-link">Delete Roles</a>
-                    </nav>
-                    <hr class="navbar-divider" />
-                </div>
-
-                <div class="main-content">
-                    <br /><br />
-                    <h1>Welcome</h1>
-                    <br /><br />
-                    <div class="button-group-inline">
-                        <button class="btn green-btn">View Users</button>
-                        <button class="btn green-btn">Delete Users</button>
-                    </div>
-                </div>
-
                 <div class="main-content">
                     <br /><br />
                     <h1>Welcome</h1>
