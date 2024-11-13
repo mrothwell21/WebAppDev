@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
+import { message } from "antd";
 
 function ChangePassword() {
     const { userData, isAuthenticated, logout } = useAuth();
@@ -15,19 +16,19 @@ function ChangePassword() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-
         const response = await fetch("http://localhost:5050/api/password/change", {
             method: "POST",
-            body: new URLSearchParams({ username: inputs.uname, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirimPassword: inputs.confirmPassword }),
+            body: new URLSearchParams({ username: userData.username, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirmPassword: inputs.confirmPassword }),
             headers: { 
-                'Content-Type': 'application/json',
                 'x-auth': token
             }
         });
 
         if (response.status === 200) {
+            message.success("Password changed sucessfully!");
             const data = await response.json();
             localStorage.setItem("userData", data.token);
+
 
             switch (userData.role) {
                 case 1:
@@ -45,18 +46,18 @@ function ChangePassword() {
             }
 
         }
+        else {
+            message.error(response.error);
+        }
 
     }
 
 
     const handleChange = (event) => {
-        const username = event.target.username;
-        const nPass = event.target.newPassword;
-        const curPass = event.target.currentPassword;
-        const conPass = event.target.confirmPassword;
-
-        setInputs(values => ({ ...values, "uname": username, "newPassword": nPass, "currentPassword": curPass, "confirmPassword": conPass }));
-        console.log(inputs);
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({...values, [name]: value}))
+        // console.log(inputs);
     }
 
 
