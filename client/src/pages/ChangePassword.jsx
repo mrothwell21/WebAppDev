@@ -87,22 +87,22 @@ function ChangePassword() {
             <div className="password-container">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label for="username">Username:</label>
+                        <label htmlFor="username">Username:</label>
                         <input type="text" id="username" name="username" value={userData.username} onChange={handleChange} required disabled />
                     </div>
 
                     <div className="form-group">
-                        <label for="current-password">Current Password:</label>
+                        <label htmlFor="current-password">Current Password:</label>
                         <input type="password" id="currentPassword" name="currentPassword" onChange={handleChange} required />
                     </div>
 
                     <div className="form-group">
-                        <label for="new-password">New Password:</label>
+                        <label htmlFor="new-password">New Password:</label>
                         <input type="password" id="newPassword" name="newPassword" onChange={handleChange} required />
                     </div>
 
                     <div className="form-group">
-                        <label for="confirm-password">Retype New Password:</label>
+                        <label htmlFor="confirm-password">Retype New Password:</label>
                         <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleChange} required />
                     </div>
 
