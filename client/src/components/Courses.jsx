@@ -102,12 +102,12 @@ const Courses = ({ role, courseList }) => {
           </Modal.Header>
           <Modal.Body>
             <Form>
-              <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
                 <Form.Label>Course Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="name"
-                  value={formValues.name}
+                  name="courseId"
+                  value={formValues.courseId}
                   readOnly
                 />
               </Form.Group>
@@ -169,7 +169,7 @@ const Courses = ({ role, courseList }) => {
                   type="text"
                   name="courseId"
                   value={formValues.courseId}
-                  readOnly
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -187,7 +187,7 @@ const Courses = ({ role, courseList }) => {
                   type="text"
                   name="majorId"
                   value={formValues.majorId}
-                  readOnly
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
