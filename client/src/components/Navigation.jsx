@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const NavigationBar = ({ role, onLogout }) => {
   // Common links for all roles
   const commonLinks = [
-    { path: '/home', label: 'Home' },
+    { path: `/dashboard-${role}`, label: 'Home' },
   ];
 
   // Role-specific links
