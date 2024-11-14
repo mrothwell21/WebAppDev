@@ -30,7 +30,7 @@ function TeacherCourses() {
 
             if (response.ok) {
                 const data = await response.json();
-                const courseIDArray = data.map(course  => course.courseId);
+                const courseIDArray = data.map(course  => course.courseId.toString());
                 setCourses(courseIDArray);
             } else {
                 console.error('Failed to fetch courses');
@@ -47,7 +47,7 @@ function TeacherCourses() {
                     <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
             </div>
             <br></br><br></br>
-            <div class="content">
+            <div className="content">
                 <ButtonGroup size="lg" className="mb-2">
                     <Button>All</Button>
                     <Button>Active</Button>

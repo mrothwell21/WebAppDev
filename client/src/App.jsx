@@ -7,7 +7,6 @@ import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
 import TeacherCourses from './pages/TeacherCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
-import TeacherCourses from './pages/TeacherCourses.jsx';
 
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
