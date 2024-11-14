@@ -17,27 +17,27 @@ function TeacherPage() {
     }
 
     function handleChangePCourses(){
-        navigate("/TeacherCourses")
+        navigate("/teacher-courses")
     }
 
 
     return (
-        <div class="container">
-        <div class="banner">
+        <div className="container">
+        <div className="banner">
         <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
         </div>
 
-        <div class="main-content">
+        <div className="main-content">
             <br/><br/><br/>
             <h1>Welcome</h1>
             <br/><br/>
-            <div class="button-group-inline">
-                <button class="btn green-btn" onClick={handleChangePCourses}>Your Courses</button>
-                <button class="btn green-btn">Activate Courses</button>
+            <div className="button-group-inline">
+                <button className="btn green-btn" onClick={handleChangePCourses}>Your Courses</button>
+                <button className="btn green-btn">Activate Courses</button>
             </div>
 
-            <div class="button-group">
-                <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
+            <div className="button-group">
+                <button className="btn green-btn" onClick={handleChangeP}>Change Password</button>
             </div>
 
             

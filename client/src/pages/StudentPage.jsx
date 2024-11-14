@@ -49,27 +49,15 @@ function StudentPage() {
 
     return (
         <div className="container">
-            <div className="banner">Student Landing</div>
-            <div className="content">
-                <div className="navbar">
-                    <nav>
-                        <a href="#" className="nav-link">Home</a>
-                        <a href="#" className="nav-link">Register</a>
-                        <a href="#" className="nav-link">Drop</a>
-                        <a href="#" className="nav-link">Courses</a>
-                    </nav>
-                    <hr className="navbar-divider" />
-                </div>
-        <div class="container">
-            <div class="banner">
-            <div class="banner">
+            <div className="banner">
+            <div className="banner">
                     <NavigationBar role={"student"} onLogout={logout}></NavigationBar>
             </div>
             </div>
 
                 <div className="main-content">
                     <br /><br />
-                <div class="main-content">
+                <div className="main-content">
                     <br /><br />< br />
                     <h1>Welcome</h1>
                     <br /><br />
@@ -102,8 +90,6 @@ function StudentPage() {
                     </div>
                 </div>
             </div>
-
-            <button className="btn red-btn logout-btn" onClick={logout}>Logout</button>
         </div>
     );
 }

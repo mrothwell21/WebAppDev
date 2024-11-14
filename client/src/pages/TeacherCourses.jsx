@@ -14,12 +14,12 @@ function TeacherCourses() {
 
 
     return (
-        <div class="container">
-            <div class="banner">
+        <div className="container">
+            <div className="banner">
                     <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
             </div>
-            <div class="content">
-                <nav class="nav-bot">
+            <div className="content">
+                <nav className="nav-bot">
                         <a href="#">All</a>
                         <a href="#">Active</a>
                         <a href="#">Inactive</a>
