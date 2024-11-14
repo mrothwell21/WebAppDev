@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import '../../public/css/StudentLanding.css';
 import { useNavigate } from "react-router-dom";
+import NavigationBar from '../components/Navigation';
+
 
 function StudentPage() {
 
@@ -58,9 +60,17 @@ function StudentPage() {
                     </nav>
                     <hr className="navbar-divider" />
                 </div>
+        <div class="container">
+            <div class="banner">
+            <div class="banner">
+                    <NavigationBar role={"student"} onLogout={logout}></NavigationBar>
+            </div>
+            </div>
 
                 <div className="main-content">
                     <br /><br />
+                <div class="main-content">
+                    <br /><br />< br />
                     <h1>Welcome</h1>
                     <br /><br />
                     <div className="select-container">

@@ -3,6 +3,7 @@ import React from 'react';
 import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import NavigationBar from "../components/Navigation";
 
 function AdminPage() {
 
@@ -17,19 +18,10 @@ function AdminPage() {
 
     return (
         <div class="container">
-            <div class="banner">Admin Landing</div>
+            <div class="banner">
+                    <NavigationBar role={"admin"} onLogout={logout}></NavigationBar>
+            </div>
             <div class="content">
-                <div class="navbar">
-                    <nav>
-                        <a href="#" class="nav-link">Home</a>
-                        <a href="#" class="nav-link">View Users</a>
-                        <a href="#" class="nav-link">Delete Users</a>
-                        <a href="#" class="nav-link">View Roles</a>
-                        <a href="#" class="nav-link">Delete Roles</a>
-                    </nav>
-                    <hr class="navbar-divider" />
-                </div>
-
                 <div class="main-content">
                     <br /><br />
                     <h1>Welcome</h1>
@@ -49,8 +41,6 @@ function AdminPage() {
                     </div>
                 </div>
             </div>
-
-            <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
         </div>
     );
 }
