@@ -1,16 +1,41 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
-
 function TeacherCourses() {
 
     const { userData, isAuthenticated, logout } = useAuth();
-
+    const [courses, setCourses] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchCourses();
+    }, []);
+
+    const fetchCourses = async () => {
+        try {
+            const storedData = JSON.parse(localStorage.getItem('userData'));
+            const response = await fetch(`http://localhost:5050/api/courses/${encodeURIComponent(userData.username)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth': storedData.userToken
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setCourses(data);
+            } else {
+                console.error('Failed to fetch courses');
+            }
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+        }
+    };
 
 
     return (
@@ -25,7 +50,7 @@ function TeacherCourses() {
                         <a href="#">Inactive</a>
                 </nav>
 
-                <Courses role={"teacher"} courseList={["CSC434", "CSC290", "CSC101"]}></Courses>
+                <Courses role={"teacher"} courseList={courses}></Courses>
 
 
             </div>
