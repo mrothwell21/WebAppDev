@@ -28,7 +28,8 @@ function TeacherCourses() {
 
             if (response.ok) {
                 const data = await response.json();
-                setCourses(data);
+                const courseID = data[0].courseId;
+                setCourses(courseID);
             } else {
                 console.error('Failed to fetch courses');
             }

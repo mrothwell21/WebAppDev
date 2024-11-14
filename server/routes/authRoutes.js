@@ -2,11 +2,13 @@ const express = require('express');
 const authController = require('../controllers/users');
 const passController = require('../controllers/password');
 const majorRoutes = require('../controllers/majors');
+const coursesRoutes = require('../controllers/courses');
 const router = express.Router();
 
 //router.post('/login', authController.login);
 router.use("/api/users", authController);
 router.use("/api/password", passController);
 router.use("/api/major", majorRoutes); 
+router.use("/api/courses", coursesRoutes); 
 
 module.exports = router;
