@@ -4,14 +4,20 @@ import '../../public/css/TeacherLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from '../components/Navigation';
+import TeacherCourses from './TeacherCourses';
 
 function TeacherPage() {
 
     const { userData, isAuthenticated, logout } = useAuth();
+
     const navigate = useNavigate();
 
     function handleChangeP(){
         navigate("/change-password")
+    }
+
+    function handleChangePCourses(){
+        navigate("/TeacherCourses")
     }
 
 
@@ -26,13 +32,16 @@ function TeacherPage() {
             <h1>Welcome</h1>
             <br/><br/>
             <div class="button-group-inline">
-                <button class="btn green-btn">Your Courses</button>
+                <button class="btn green-btn" onClick={handleChangePCourses}>Your Courses</button>
                 <button class="btn green-btn">Activate Courses</button>
             </div>
 
             <div class="button-group">
                 <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
             </div>
+
+            
+
         </div>
 </div>
     );
