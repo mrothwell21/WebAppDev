@@ -17,20 +17,22 @@ const Courses = ({ role, courseList }) => {
 
     return (
     <div>
-    <h5>Courses</h5>
+    <h5 className="text-center">Courses</h5>
     <ListGroup>
         {courseList.map((course, index) => (
           <ListGroup.Item
             key={index}
             action
             onClick={() => handleShowModal(course)}
+            className="d-flex justify-content-between align-items-center"
           >
             {course}{" "}
 
             {role === "teacher" && (
+            <div className="ms-auto">
              <>
                 <span
-                    className="text-primary ms-3"
+                    className="text-primary ms-3 "
                     style={{ cursor: "pointer" }}
                     onClick={() => handleEnrolledClick(course.name)}
                 >
@@ -44,6 +46,7 @@ const Courses = ({ role, courseList }) => {
                 Unenrolled
                 </span>
             </>
+            </div>
       )}
           </ListGroup.Item>
         ))}
