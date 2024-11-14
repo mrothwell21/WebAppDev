@@ -18,7 +18,7 @@ function TeacherPage() {
     return (
         <div class="container">
         <div class="banner">
-        <NavigationBar role={"teacher"}></NavigationBar>
+        <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
         </div>
 
         <div class="main-content">
@@ -34,9 +34,6 @@ function TeacherPage() {
                 <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
             </div>
         </div>
-    
-
-    <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
 </div>
     );
 }

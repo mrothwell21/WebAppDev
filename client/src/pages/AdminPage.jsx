@@ -19,7 +19,7 @@ function AdminPage() {
     return (
         <div class="container">
             <div class="banner">
-                    <NavigationBar role={"admin"}></NavigationBar>
+                    <NavigationBar role={"admin"} onLogout={logout}></NavigationBar>
             </div>
             <div class="content">
                 <div class="main-content">
@@ -41,8 +41,6 @@ function AdminPage() {
                     </div>
                 </div>
             </div>
-
-            <button class="btn red-btn logout-btn" onClick={logout}>Logout</button>
         </div>
     );
 }

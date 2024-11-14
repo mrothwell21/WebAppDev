@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const NavigationBar = ({ role }) => {
+const NavigationBar = ({ role, onLogout }) => {
   // Common links for all roles
   const commonLinks = [
     { path: '/home', label: 'Home' },
@@ -49,6 +49,12 @@ const NavigationBar = ({ role }) => {
               {link.label}
             </Nav.Link>
           ))}
+
+        <Nav.Link onClick={onLogout}>
+            Logout
+        </Nav.Link>
+
+          
         </Nav>
       </Navbar.Collapse>
     </Navbar>
