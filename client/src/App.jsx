@@ -5,6 +5,7 @@ import AdminPage from './pages/AdminPage.jsx';
 import StudentPage from './pages/StudentPage.jsx';
 import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
+import TeacherCourses from './pages/TeacherCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/dashboard-teacher' element={isAuthenticated && userData?.role === 2 ? <TeacherPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/dashboard-student' element={isAuthenticated && userData?.role === 3 ? <StudentPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/change-password' element={isAuthenticated ? <ChangePassword /> : <Navigate to={dashboard.to} />} />
+        <Route path='/TeacherCourses' element={isAuthenticated ? <TeacherCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );

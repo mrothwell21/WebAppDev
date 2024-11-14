@@ -18,6 +18,7 @@ function TeacherCourses() {
             <div class="banner">
                     <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
             </div>
+            <br></br><br></br>
             <div class="content">
                 <nav class="nav-bot">
                         <a href="#">All</a>
