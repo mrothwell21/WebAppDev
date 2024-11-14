@@ -5,6 +5,7 @@ import AdminPage from './pages/AdminPage.jsx';
 import StudentPage from './pages/StudentPage.jsx';
 import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
+import TeacherCourses from './pages/TeacherCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
 import TeacherCourses from './pages/TeacherCourses.jsx';
 

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 function TeacherCourses() {
@@ -44,12 +46,13 @@ function TeacherCourses() {
             <div className="banner">
                     <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
             </div>
-            <div className="content">
-                <nav className="nav-bot">
-                        <a href="#">All</a>
-                        <a href="#">Active</a>
-                        <a href="#">Inactive</a>
-                </nav>
+            <br></br><br></br>
+            <div class="content">
+                <ButtonGroup size="lg" className="mb-2">
+                    <Button>All</Button>
+                    <Button>Active</Button>
+                    <Button>Inactive</Button>
+                </ButtonGroup>
 
                 <Courses role={"teacher"} courseList={courses}></Courses>
 
