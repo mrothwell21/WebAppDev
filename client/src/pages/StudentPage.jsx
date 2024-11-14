@@ -16,6 +16,10 @@ function StudentPage() {
         navigate("/change-password")
     }
 
+    function handleCourses() {
+        navigate("/StudentCourses")
+    }
+
 
     return (
         <div class="container">
@@ -36,7 +40,7 @@ function StudentPage() {
                     </div>
 
                     <div class="button-group">
-                        <button class="btn green-btn">Courses</button>
+                        <button class="btn green-btn" onClick={handleCourses}>Courses</button>
                     </div>
 
                     <div class="button-group-inline">

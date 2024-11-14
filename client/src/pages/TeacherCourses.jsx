@@ -88,21 +88,21 @@ function TeacherCourses() {
         </Modal.Header>
         <Modal.Body>
           <Form>
+          <Form.Group className="mb-3">
+              <Form.Label>Course Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={formValues.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Course ID</Form.Label>
               <Form.Control
                 type="text"
                 name="courseId"
                 value={formValues.courseId}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={formValues.name}
                 onChange={handleChange}
               />
             </Form.Group>
