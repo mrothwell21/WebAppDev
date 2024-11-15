@@ -1,0 +1,146 @@
+/* Ensure the body and html take up the full height and width */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main container styling */
+.container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Top banner styling */
+.banner {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    position: fixed; /* Fix the banner at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make the banner span the full width */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width */
+}
+
+/* Content layout */
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start;
+    width: 100%; /* Ensures content fills the entire width */
+    padding-top: 60px; /* Add padding to push content below the fixed banner */
+}
+
+/* Navigation bar styling */
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px; /* Slight margin to push navbar below banner */
+}
+
+.navbar nav {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.nav-link {
+    color: gray;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Horizontal line under navbar */
+.navbar-divider {
+    width: 100%;
+    border: none;
+    border-top: 2px solid gray;
+    margin: 0;
+}
+
+/* Main content styling */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    width: 100%;
+}
+
+/* Select box styling */
+.select-container {
+    margin: 10px 0;
+}
+
+.select-major {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Button groups */
+.button-group, .button-group-inline {
+    margin: 10px 0;
+}
+
+.button-group-inline {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons styling */
+.btn {
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Green button styling */
+.green-btn {
+    background-color: green;
+}
+
+.green-btn:hover {
+    opacity: 0.8;
+}
+
+/* Red Logout Button */
+.red-btn {
+    background-color: red;
+    font-weight: bold;
+}
+
+.red-btn:hover {
+    opacity: 0.9;
+}
+
+/* Logout button positioning */
+.logout-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+h1 {
+    font-size: 40px; /* Make the text a few points larger */
+    color: green;    /* Change the text color to green */
+    text-align: center; /* Optional: centers the text */
+    margin-top: 20px; /* Optional: adds some spacing above the header */
+}
