@@ -42,9 +42,9 @@ function StudentPage() {
         navigate("/change-password")
     }
 
-    const handleMajorChange = (event) => {
-        setSelectedMajor(event.target.value);
-    };
+    function handleCourses() {
+        navigate("/StudentCourses")
+    }
 
 
     return (
@@ -76,8 +76,8 @@ function StudentPage() {
                         </select>
                     </div>
 
-                    <div className="button-group">
-                        <button className="btn green-btn">Courses</button>
+                    <div class="button-group">
+                        <button class="btn green-btn" onClick={handleCourses}>Courses</button>
                     </div>
 
                     <div className="button-group-inline">

@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
+import { Modal, Form } from 'react-bootstrap';
+
 function TeacherCourses() {
 
     const { userData, isAuthenticated, logout } = useAuth();
@@ -39,19 +41,57 @@ function TeacherCourses() {
         }
     };
 
+  const [showModal, setShowModal] = useState(false);
+  const [formValues, setFormValues] = useState({
+    courseId: '',
+    name: '',
+    maxEnrolled: '',
+    majorId: '',
+    description: '',
+  });
 
-    return (
-        <div className="container">
-            <div className="banner">
-                    <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
-            </div>
-            <br/><br/><br/><br/>
-            <div className="content">
-                <ButtonGroup size="lg" className="mb-2">
-                    <Button>All</Button>
-                    <Button>Active</Button>
-                    <Button>Inactive</Button>
-                </ButtonGroup>
+  // Open modal to add a new course
+  const handleAddCourse = () => {
+    setFormValues({
+      courseId: '',
+      name: '',
+      maxEnrolled: '',
+      majorId: '',
+      description: '',
+    });
+    setShowModal(true);
+  };
+
+  // Close modal
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // Handle form field changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Save course (add or edit logic)
+  const handleSave = () => {
+    console.log('Saved course:', formValues);
+    // Add logic to save the new course (either through state or API)
+    setShowModal(false); // Close the modal after saving
+  };
+
+  return (
+    <div className="container">
+      <div className="banner">
+        <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
+      </div>
+      <br></br><br></br>
+      <div className="content">
+        <ButtonGroup size="lg" className="mb-2">
+          <Button>All</Button>
+          <Button>Active</Button>
+          <Button>Inactive</Button>
+        </ButtonGroup>
 
                 <Courses role={"teacher"} courseList={courses}></Courses>
 
