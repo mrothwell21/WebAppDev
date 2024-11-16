@@ -43,7 +43,7 @@ function StudentPage() {
     }
 
     function handleCourses() {
-        navigate("/StudentCourses")
+        navigate("/student-courses")
     }
 
 
