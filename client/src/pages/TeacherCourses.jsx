@@ -12,7 +12,6 @@ function TeacherCourses() {
 
     const { userData, isAuthenticated, logout } = useAuth();
     const [courses, setCourses] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCourses();

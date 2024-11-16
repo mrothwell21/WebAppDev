@@ -46,6 +46,10 @@ function StudentPage() {
         navigate("/student-courses")
     }
 
+    function handleMajorChange() {
+        console.log("Nothing yet");
+    }
+
 
     return (
         <div className="container">
@@ -76,8 +80,8 @@ function StudentPage() {
                         </select>
                     </div>
 
-                    <div class="button-group">
-                        <button class="btn green-btn" onClick={handleCourses}>Courses</button>
+                    <div className="button-group">
+                        <button className="btn green-btn" onClick={handleCourses}>Courses</button>
                     </div>
 
                     <div className="button-group-inline">
