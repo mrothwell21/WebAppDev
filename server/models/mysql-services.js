@@ -52,10 +52,12 @@ module.exports = db = {
 
     getCoursesByUsername: async function(conn, username) {
         const sql = `
-            SELECT Course.courseId
+            SELECT Major.prefix, Course.courseId
             FROM User
             JOIN CoursesToUser ON User.userId = CoursesToUser.userId
             JOIN Course ON CoursesToUser.courseId = Course.courseId
+            JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
+            JOIN Major ON CourseInMajor.majorId = Major.majorId
             WHERE User.username = ?`;
     
         const results = await conn.promise().query(sql, [username]);

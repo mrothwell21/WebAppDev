@@ -29,7 +29,7 @@ function TeacherCourses() {
 
             if (response.ok) {
                 const data = await response.json();
-                const courseIDArray = data.map(course  => course.courseId.toString());
+                const courseIDArray = data.map(course  => course.prefix + course.courseId);
                 setCourses(courseIDArray);
             } else {
                 console.error('Failed to fetch courses');
@@ -45,7 +45,7 @@ function TeacherCourses() {
             <div className="banner">
                     <NavigationBar role={"teacher"} onLogout={logout}></NavigationBar>
             </div>
-            <br></br><br></br>
+            <br/><br/><br/><br/>
             <div className="content">
                 <ButtonGroup size="lg" className="mb-2">
                     <Button>All</Button>
@@ -54,7 +54,6 @@ function TeacherCourses() {
                 </ButtonGroup>
 
                 <Courses role={"teacher"} courseList={courses}></Courses>
-
 
             </div>
         </div>
