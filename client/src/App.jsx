@@ -24,7 +24,7 @@ function App() {
         <Route path='/dashboard-student' element={isAuthenticated && userData?.role === 3 ? <StudentPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/change-password' element={isAuthenticated ? <ChangePassword /> : <Navigate to={dashboard.to} />} />
         <Route path='/teacher-courses' element={isAuthenticated ? <TeacherCourses /> : <Navigate to={dashboard.to} />} />
-        <Route path='/StudentCourses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-courses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );
