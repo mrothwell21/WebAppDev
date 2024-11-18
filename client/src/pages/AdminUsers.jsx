@@ -14,7 +14,7 @@ function AdminUsers() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [filterStatus, setFilterStatus] = useState('all');
+    const [filterStatus, setFilterStatus] = useState('All');
     const location = useLocation();
     const navigate = useNavigate();
     // const params = new URLSearchParams(location.search);
@@ -53,7 +53,7 @@ function AdminUsers() {
                 username: user.username || '',
                 role: user.role || '',
                 phoneNumber: user.phoneNumber || '',
-                status: user.status || 'inactive'
+                status: user.status || 'Inactive'
               }));
         
               setUsers(transformedData);
@@ -66,9 +66,19 @@ function AdminUsers() {
           };
 
     const getFilteredUsers = () => {
-        if (filterStatus === 'all') return users;
+        if (filterStatus === 'All') return users;
         return users.filter(user => user.status === filterStatus);
       };
+    
+    // const getActiveUsers = () => {
+    //     if (filterStatus === 'Active') return users;
+    //     return users.filter(user => user.status === filterStatus);
+    // };
+    
+    // const getInactiveUsers = () => {
+    //     if (filterStatus === 'all') return users;
+    //     return users.filter(user => user.status === filterStatus);
+    // };
 
 if (error) {
     return (
@@ -95,26 +105,28 @@ if (error) {
       <div className="content" style={{paddingTop: "87px"}}>
       <ButtonGroup size="lg" className="mb-2">
           <Button 
-            variant={filterStatus === 'all' ? 'primary' : 'outline-primary'}
-            onClick={() => setFilterStatus('all')}
+            variant={filterStatus === 'All' ? 'primary' : 'outline-primary'}
+            onClick={() => setFilterStatus('All')}
           >
             All
           </Button>
+          {/* <Users role={"admin"} userList={getFilteredUsers()}/> */}
           <Button 
-            variant={filterStatus === 'active' ? 'primary' : 'outline-primary'}
-            onClick={() => setFilterStatus('active')}
+            variant={filterStatus === 'Active' ? 'primary' : 'outline-primary'}
+            onClick={() => setFilterStatus('Active')}
           >
             Active
           </Button>
+          {/* <Users role={"admin"} userList={getActiveUsers()}/> */}
           <Button 
-            variant={filterStatus === 'inactive' ? 'primary' : 'outline-primary'}
-            onClick={() => setFilterStatus('inactive')}
+            variant={filterStatus === 'Inactive' ? 'primary' : 'outline-primary'}
+            onClick={() => setFilterStatus('Inactive')}
           >
             Inactive
           </Button>
+          {/* <Users role={"admin"} userList={getInactiveUsers()}/> */}
         </ButtonGroup>
 
-        {/* Display courses */}
         <Users role={"admin"} userList={getFilteredUsers()}/>
 
         <br></br>
