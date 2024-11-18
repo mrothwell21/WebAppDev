@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const db = require("../models/mysql-services");
 const { secret } = db;
 
-router.get("/:username", async function (req, res) {
+router.get("/:selectedMajor", async function (req, res) {
     if (!req.headers["x-auth"]) {
         return res.status(401).json({ error: "Missing X-Auth header" });
     }
@@ -14,7 +14,7 @@ router.get("/:username", async function (req, res) {
     try {
         const decoded = jwt.decode(token, secret);
         const conn = mysql.createConnection(db.mydb);
-        const [results] = await db.getCoursesByUsername(conn, req.params.username);
+        const [results] = await db.getCoursesByMajor(conn, req.params.selectedMajor);
         if (!results || results.length === 0) {
             return res.status(404).json({ error: "No Courses found for this user" });
         }

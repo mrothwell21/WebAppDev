@@ -50,17 +50,15 @@ module.exports = db = {
         return results;
     },
 
-    getCoursesByUsername: async function(conn, username) {
+    getCoursesByMajor: async function(conn, major) {
         const sql = `
             SELECT Major.prefix, Course.courseId
-            FROM User
-            JOIN CoursesToUser ON User.userId = CoursesToUser.userId
-            JOIN Course ON CoursesToUser.courseId = Course.courseId
-            JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
-            JOIN Major ON CourseInMajor.majorId = Major.majorId
-            WHERE User.username = ?`;
+            FROM Major 
+            JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
+            JOIN Course on CourseInMajor.courseId = Course.courseId
+            WHERE Major.name = ?`;
     
-        const results = await conn.promise().query(sql, [username]);
+        const results = await conn.promise().query(sql, [major]);
         return results;
     },
 

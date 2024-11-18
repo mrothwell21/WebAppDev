@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import '../../public/css/StudentLanding.css';
 import { useNavigate } from "react-router-dom";
 import NavigationBar from '../components/Navigation';
-
 
 function StudentPage() {
 
@@ -43,11 +42,16 @@ function StudentPage() {
     }
 
     function handleCourses() {
-        navigate("/student-courses")
+        if (selectedMajor) {
+            navigate(`/student-courses?major=${encodeURIComponent(selectedMajor)}`);
+        } else {
+            alert("Please select a major!");
+        }
     }
 
-    function handleMajorChange() {
-        console.log("Nothing yet");
+    function handleMajorChange(event) {
+        const pickedMajor = event.target.value;
+        setSelectedMajor(pickedMajor);
     }
 
 

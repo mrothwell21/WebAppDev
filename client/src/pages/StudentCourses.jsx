@@ -2,16 +2,21 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
+import StudentPage from './StudentPage';
 import { Modal, Form } from 'react-bootstrap';
 
 function StudentCourses() {
   const { userData, isAuthenticated, logout } = useAuth();
     const [courses, setCourses] = useState([]);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = new URLSearchParams(location.search);
+    const selectedMajor = params.get("major");
 
     useEffect(() => {
         fetchCourses();
@@ -20,7 +25,7 @@ function StudentCourses() {
     const fetchCourses = async () => {
         try {
             const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/courses/${encodeURIComponent(userData.username)}`, {
+            const response = await fetch(`http://localhost:5050/api/courses/${encodeURIComponent(selectedMajor)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,6 +37,7 @@ function StudentCourses() {
                 const data = await response.json();
                 const courseIDArray = data.map(course  => course.prefix + " " + course.courseId);
                 setCourses(courseIDArray);
+                console.log(courseIDArray);
             } else {
                 console.error('Failed to fetch courses');
             }
