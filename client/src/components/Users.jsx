@@ -19,8 +19,8 @@ const Users = ({ role, userList }) => {
   const handleShowModal = (user) => {
     setSelectedUser(user);
     setFormValues({
-      userId: user?.id || '',
-      firstname: user?.firstName || '',
+      userId: user?.userId || '',
+      firstName: user?.firstName || '',
       lastName: user?.lastName || '',
       username: user?.username || '',
       role: user?.role || '',

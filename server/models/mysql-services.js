@@ -10,7 +10,7 @@ module.exports = db = {
     secret: require('crypto').randomBytes(64).toString('hex'),
 
     selectAll: async function (conn, tableName) {
-        const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
+        const results = await conn.promise().query(`SELECT u.*, r.name as role FROM ${tableName} u Left JOIN Roles r ON u.role = r.id`);
 
         return results[0];
     },
