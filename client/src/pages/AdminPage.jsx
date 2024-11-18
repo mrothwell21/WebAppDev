@@ -15,29 +15,33 @@ function AdminPage() {
         navigate("/change-password")
     }
 
+    function handleListUsers() {
+        navigate("/list-users")
+    }
+
 
     return (
-        <div class="container">
-            <div class="banner">
+        <div className="container">
+            <div className="banner">
                     <NavigationBar role={"admin"} onLogout={logout}></NavigationBar>
             </div>
-            <div class="content">
-                <div class="main-content">
+            <div className="content">
+                <div className="main-content">
                     <br /><br />
                     <h1>Welcome</h1>
                     <br /><br />
-                    <div class="button-group-inline">
-                        <button class="btn green-btn">View Users</button>
-                        <button class="btn green-btn">Delete Users</button>
+                    <div className="button-group-inline">
+                        <button className="btn green-btn" onClick = {handleListUsers}>View Users</button>
+                        <button className="btn green-btn">Delete Users</button>
                     </div>
 
-                    <div class="button-group-inline">
-                        <button class="btn green-btn">View Roles</button>
-                        <button class="btn green-btn">Delete Roles</button>
+                    <div className="button-group-inline">
+                        <button className="btn green-btn">View Roles</button>
+                        <button className="btn green-btn">Delete Roles</button>
                     </div>
 
-                    <div class="button-group">
-                        <button class="btn green-btn" onClick={handleChangeP}>Change Password</button>
+                    <div className="button-group">
+                        <button className="btn green-btn" onClick={handleChangeP}>Change Password</button>
                     </div>
                 </div>
             </div>

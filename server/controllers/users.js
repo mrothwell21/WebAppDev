@@ -30,6 +30,8 @@ router.get("/getAll", async function (req, res) {
 
     const conn = mysql.createConnection(db.mydb);
     const user = await db.selectAll(conn, "User");
+    res.status(200).json(user);
+    console.log(user);
 })
 
 router.get("/status", async function (req, res) {
