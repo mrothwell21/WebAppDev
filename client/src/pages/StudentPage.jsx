@@ -20,6 +20,10 @@ function StudentPage() {
         navigate("/StudentCourses")
     }
 
+    function handleRegister() {
+        navigate("/StudentOpenCourses")
+    }
+
 
     return (
         <div class="container">
@@ -44,7 +48,7 @@ function StudentPage() {
                     </div>
 
                     <div class="button-group-inline">
-                        <button class="btn green-btn">Register</button>
+                        <button class="btn green-btn" onClick={handleRegister}>Register</button>
                         <button class="btn green-btn">Drop</button>
                     </div>
 
