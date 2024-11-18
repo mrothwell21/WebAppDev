@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
-import StudentPage from './StudentPage';
 import { Modal, Form } from 'react-bootstrap';
 
 function StudentCourses() {
@@ -25,7 +24,7 @@ function StudentCourses() {
     const fetchCourses = async () => {
         try {
             const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/courses/${encodeURIComponent(selectedMajor)}`, {
+            const response = await fetch(`http://localhost:5050/api/student-courses/${encodeURIComponent(selectedMajor)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +36,6 @@ function StudentCourses() {
                 const data = await response.json();
                 const courseIDArray = data.map(course  => course.prefix + " " + course.courseId);
                 setCourses(courseIDArray);
-                console.log(courseIDArray);
             } else {
                 console.error('Failed to fetch courses');
             }

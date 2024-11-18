@@ -4,7 +4,6 @@ import '../../public/css/TeacherLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from '../components/Navigation';
-import TeacherCourses from './TeacherCourses';
 
 function TeacherPage() {
 
