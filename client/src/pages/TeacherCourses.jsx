@@ -7,38 +7,21 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import { Modal, Form } from 'react-bootstrap';
+import fetchCourses from '../hooks/getTeacherCourses';
 
-function TeacherCourses() {
+const TeacherCourses = () => {
 
     const { userData, isAuthenticated, logout } = useAuth();
     const [courses, setCourses] = useState([]);
 
-    useEffect(() => {
-        fetchCourses();
-    }, []);
+    const { getTeacherCourses } = fetchCourses();
 
-    const fetchCourses = async () => {
-        try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/teacher-courses/${encodeURIComponent(userData.username)}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const courseIDArray = data.map(course  => course.prefix + " " + course.courseId);
-                setCourses(courseIDArray);
-            } else {
-                console.error('Failed to fetch courses');
-            }
-        } catch (error) {
-            console.error('Error fetching courses:', error);
-        }
-    };
+    const handleGetCourses = async (event) => {
+      const data = await getTeacherCourses();
+      console.log(data);
+      const courseArray = data.map(course => course.prefix + course.courseId);
+      setCourses (courseArray);
+    }    
 
   const [showModal, setShowModal] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -87,7 +70,7 @@ function TeacherCourses() {
       <div className="content" style={{paddingTop: "87px"}}>
 
         <ButtonGroup size="lg" className="mb-2">
-          <Button>All</Button>
+          <Button onClick={handleGetCourses}>All</Button>
           <Button>Active</Button>
           <Button>Inactive</Button>
         </ButtonGroup>
