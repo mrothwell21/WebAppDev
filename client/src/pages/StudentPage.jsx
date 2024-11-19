@@ -24,6 +24,10 @@ function StudentPage() {
         navigate("/StudentOpenCourses")
     }
 
+    function handleDrop() {
+        navigate("/StudentEnrolledCourses")
+    }
+
 
     return (
         <div class="container">
@@ -49,7 +53,7 @@ function StudentPage() {
 
                     <div class="button-group-inline">
                         <button class="btn green-btn" onClick={handleRegister}>Register</button>
-                        <button class="btn green-btn">Drop</button>
+                        <button class="btn green-btn" onClick={handleDrop}>Drop</button>
                     </div>
 
                     <div class="button-group">
