@@ -17,6 +17,7 @@ const ChangePassword = () => {
     const { passChange } = changePassword();
 
 
+    //hook not returning
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -24,7 +25,7 @@ const ChangePassword = () => {
 
         const res = await passChange(values);
 
-        if (res.success) {
+        if (res) {
             
             switch (userData.role) {
                 case 1:
@@ -48,8 +49,9 @@ const ChangePassword = () => {
 
     }
 
+
     useEffect(() => {
-        // const storedRole = localStorage.getItem("userRole");
+        const storedRole = userData.role
         const storedUserData = JSON.parse(localStorage.getItem("userData"));
         const isReload = performance.navigation?.type === 1 || (window.performance?.getEntriesByType('navigation')[0]?.type === 'reload');
         

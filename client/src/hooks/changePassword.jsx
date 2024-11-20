@@ -17,17 +17,19 @@ const changePassword = () => {
                     'x-auth': token
                 }
             });
+            console.log("fetch");
 
             const data = await res.json();
             if (res.status === 200) {
+                console.log("success");
                 message.success("Password changed sucessfully!");
                 const data = await response.json();
                 localStorage.setItem("userData", JSON.stringify(data.token));
-                return {sucess: true};
+                return {success: true};
             }
             else {
                 message.error("Something went wrong!");
-                return {sucess: false};
+                return {success: false};
             }
         }
         catch (err) { message.error(err); }
