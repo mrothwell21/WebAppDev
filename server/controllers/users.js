@@ -21,7 +21,8 @@ router.post("/auth", async function (req, res) {
         console.log("bad username and/or password");
     } else {
         const token = jwt.encode({ Username: user[0].username, Password: user[0].password }, secret);
-        res.status(200).json({ token: token, user: { username: user[0].username, role: user[0].role } });
+        res.status(200).json({ token: token });
+        // , user: { username: user[0].username, role: user[0].role }
     }
     return;
 });
@@ -52,14 +53,16 @@ router.get("/status", async function (req, res) {
 
 router.post("/time", async function (req, res) {
 
-    if (!req.body.username) {
-        res.status(401).json({ error: "Missing username" });
+    if (!req.body.token) {
+        res.status(401).json({ error: "Missing token" });
         return;
     }
 
+    const decoded = jwt.decode(req.body.token, secret);
+
     const conn = mysql.createConnection(db.mydb);
 
-    const user = await db.updateLastLogin(conn, req.body.username);
+    const user = await db.updateLastLogin(conn, decoded.Username);
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username" });

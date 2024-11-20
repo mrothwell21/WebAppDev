@@ -63,10 +63,7 @@ export const AuthProvider = ( { children } ) => {
             const userData = await fetchUserStatus(newToken);
     
             if (userData) {
-                localStorage.setItem('userData', JSON.stringify({ 
-                    userToken: newToken, 
-                    user: userData 
-                }));
+                localStorage.setItem('userData', JSON.stringify({userToken: newToken}));
                 setToken(newToken);
                 setUserData(userData);
                 setIsAuthenticated(true);
