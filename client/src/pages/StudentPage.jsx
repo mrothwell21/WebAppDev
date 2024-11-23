@@ -54,6 +54,22 @@ function StudentPage() {
         setSelectedMajor(pickedMajor);
     }
 
+    function handleRegister() {
+        navigate("/StudentOpenCourses");
+    }
+
+    function handleDrop() {
+        navigate("/StudentEnrolledCourses");
+    }
+
+    function handleRegister() {
+        navigate("/StudentOpenCourses");
+    }
+
+    function handleDrop() {
+        navigate("/StudentEnrolledCourses");
+    }
+
 
     return (
         <div className="container">
