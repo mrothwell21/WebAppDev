@@ -20,6 +20,10 @@ function TeacherPage() {
         navigate("/TeacherCourses")
     }
 
+    function handleActivate() {
+        navigate("/teacher-active-courses")
+    }
+
 
     return (
         <div class="container">
@@ -33,7 +37,7 @@ function TeacherPage() {
             <br/><br/>
             <div class="button-group-inline">
                 <button class="btn green-btn" onClick={handleChangePCourses}>Your Courses</button>
-                <button class="btn green-btn">Activate Courses</button>
+                <button class="btn green-btn" onClick={handleActivate}>Activate Courses</button>
             </div>
 
             <div class="button-group">

@@ -10,6 +10,7 @@ import StudentCourses from './pages/StudentCourses.jsx';
 import StudentOpenCourses from './pages/StudentOpenCourses.jsx';
 import StudentEnrolledCourses from './pages/StudentEnrolledCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
+import TeacherActiveCourses from './pages/TeacherActivateCourses.jsx';
 
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
@@ -29,6 +30,7 @@ function App() {
         <Route path='/StudentCourses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
         <Route path='/StudentOpenCourses' element={isAuthenticated ? <StudentOpenCourses /> : <Navigate to={dashboard.to} />} />
         <Route path='/StudentEnrolledCourses' element={isAuthenticated ? <StudentEnrolledCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/teacher-active-courses' element={isAuthenticated ? <TeacherActiveCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );
