@@ -55,19 +55,11 @@ function StudentPage() {
     }
 
     function handleRegister() {
-        navigate("/StudentOpenCourses");
+        navigate("/student-open-courses");
     }
 
     function handleDrop() {
-        navigate("/StudentEnrolledCourses");
-    }
-
-    function handleRegister() {
-        navigate("/StudentOpenCourses");
-    }
-
-    function handleDrop() {
-        navigate("/StudentEnrolledCourses");
+        navigate("/student-enrolled-courses");
     }
 
 
@@ -105,8 +97,8 @@ function StudentPage() {
                     </div>
 
                     <div className="button-group-inline">
-                        <button className="btn green-btn">Register</button>
-                        <button className="btn green-btn">Drop</button>
+                        <button className="btn green-btn" onClick={handleRegister}>Register</button>
+                        <button className="btn green-btn" onClick={handleDrop}>Drop</button>
                     </div>
 
                     <div className="button-group">

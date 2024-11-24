@@ -27,8 +27,8 @@ function App() {
         <Route path='/change-password' element={isAuthenticated ? <ChangePassword /> : <Navigate to={dashboard.to} />} />
         <Route path='/teacher-courses' element={isAuthenticated ? <TeacherCourses /> : <Navigate to={dashboard.to} />} />
         <Route path='/student-courses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
-        <Route path='/StudentOpenCourses' element={isAuthenticated ? <StudentOpenCourses /> : <Navigate to={dashboard.to} />} />
-        <Route path='/StudentEnrolledCourses' element={isAuthenticated ? <StudentEnrolledCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-open-courses' element={isAuthenticated ? <StudentOpenCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-enrolled-courses' element={isAuthenticated ? <StudentEnrolledCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );

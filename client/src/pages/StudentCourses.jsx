@@ -8,41 +8,22 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import { Modal, Form } from 'react-bootstrap';
+import fetchCourses from '../hooks/getStudentCourses';
 
-function StudentCourses() {
+const StudentCourses = () => {
   const { userData, isAuthenticated, logout } = useAuth();
     const [courses, setCourses] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
-    const params = new URLSearchParams(location.search);
-    const selectedMajor = params.get("major");
 
-    useEffect(() => {
-        fetchCourses();
-    }, []);
+    const { getStudentCourses } = fetchCourses();
 
-    const fetchCourses = async () => {
-        try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/student-courses/${encodeURIComponent(selectedMajor)}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
-                }
-            });
+    const handleGetCourses = async (event) => {
+      const data = await getStudentCourses();
+      const courseArray = data.map(course => course.prefix + course.courseId);
+      setCourses (courseArray);
+    }  
 
-            if (response.ok) {
-                const data = await response.json();
-                const courseIDArray = data.map(course  => course.prefix + " " + course.courseId);
-                setCourses(courseIDArray);
-            } else {
-                console.error('Failed to fetch courses');
-            }
-        } catch (error) {
-            console.error('Error fetching courses:', error);
-        }
-    };
 
   return (
     <div className="container">
@@ -52,7 +33,7 @@ function StudentCourses() {
       <br></br><br></br>
       <div className="content" style={{paddingTop: "87px"}}>
         <ButtonGroup size="lg" className="mb-2">
-          <Button>All</Button>
+          <Button onClick={handleGetCourses}>All</Button>
           <Button>Enrolled</Button>
           <Button>Dropped</Button>
         </ButtonGroup>

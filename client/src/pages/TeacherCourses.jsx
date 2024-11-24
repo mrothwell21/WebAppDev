@@ -18,7 +18,6 @@ const TeacherCourses = () => {
 
     const handleGetCourses = async (event) => {
       const data = await getTeacherCourses();
-      console.log(data);
       const courseArray = data.map(course => course.prefix + course.courseId);
       setCourses (courseArray);
     }    
