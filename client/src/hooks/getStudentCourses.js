@@ -8,14 +8,16 @@ const fetchCourses = () => {
 
     const getStudentCourses = async () => {
         try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
+            console.log(selectedMajor);
             const response = await fetch(`http://localhost:5050/api/student-courses/${encodeURIComponent(selectedMajor)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
+                    'x-auth': userData.token
                 }
             });
+
+            // console.log(response);
 
             if (response.ok) {
                 const data = await response.json();

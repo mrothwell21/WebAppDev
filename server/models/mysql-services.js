@@ -70,9 +70,9 @@ module.exports = db = {
             FROM Major 
             JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
             JOIN Course on CourseInMajor.courseId = Course.courseId
-            WHERE Major.name = ?`;
+            WHERE Major.name = '${major}'`;
     
-        const results = await conn.promise().query(sql, [major]);
+        const results = await conn.promise().query(sql);
         return results;
     },
 
