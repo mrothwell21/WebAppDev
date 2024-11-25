@@ -11,17 +11,34 @@ import fetchCourses from '../hooks/getTeacherCourses';
 
 const TeacherCourses = () => {
 
-    const { userData, isAuthenticated, logout } = useAuth();
-    const [courses, setCourses] = useState([]);
+  const { userData, isAuthenticated, logout } = useAuth();
+  const [courses, setCourses] = useState([]);
 
-    const { getTeacherCourses } = fetchCourses();
+  useEffect(() => {
+    handleGetCourses();
+  }, []);
 
-    const handleGetCourses = async (event) => {
-      const data = await getTeacherCourses();
-      console.log(data);
-      const courseArray = data.map(course => course.prefix + course.courseId);
-      setCourses (courseArray);
-    }    
+  const { getTeacherCourses } = fetchCourses();
+
+  const handleGetCourses = async (event) => {
+    const data = await getTeacherCourses();
+    const courseArray = data.map(course => course.prefix + course.courseId);
+    setCourses (courseArray);
+  }
+
+  const handleActiveCourses = async (event) => {
+    const data = await getTeacherCourses();
+    const activeCourses = data.filter(course => course.status === 'Active');
+    const courseArray = activeCourses.map(course => course.prefix + course.courseId);
+    setCourses(courseArray);
+  }
+
+  const handleInactiveCourses = async (event) => {
+    const data = await getTeacherCourses();
+    const inactiveCourses = data.filter(course => course.status === 'Inactive');
+    const courseArray = inactiveCourses.map(course => course.prefix + course.courseId);
+    setCourses(courseArray);
+  }
 
   const [showModal, setShowModal] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -71,8 +88,8 @@ const TeacherCourses = () => {
 
         <ButtonGroup size="lg" className="mb-2">
           <Button onClick={handleGetCourses}>All</Button>
-          <Button>Active</Button>
-          <Button>Inactive</Button>
+          <Button onClick={handleActiveCourses}>Active</Button>
+          <Button onClick={handleInactiveCourses}>Inactive</Button>
         </ButtonGroup>
 
                 <Courses role={"teacher"} courseList={courses}></Courses>

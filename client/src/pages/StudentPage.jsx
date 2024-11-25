@@ -54,6 +54,14 @@ function StudentPage() {
         setSelectedMajor(pickedMajor);
     }
 
+    function handleRegister() {
+        navigate("/student-open-courses");
+    }
+
+    function handleDrop() {
+        navigate("/student-enrolled-courses");
+    }
+
 
     return (
         <div className="container">
@@ -89,8 +97,8 @@ function StudentPage() {
                     </div>
 
                     <div className="button-group-inline">
-                        <button className="btn green-btn">Register</button>
-                        <button className="btn green-btn">Drop</button>
+                        <button className="btn green-btn" onClick={handleRegister}>Register</button>
+                        <button className="btn green-btn" onClick={handleDrop}>Drop</button>
                     </div>
 
                     <div className="button-group">

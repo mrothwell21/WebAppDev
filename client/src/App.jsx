@@ -7,6 +7,8 @@ import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
 import TeacherCourses from './pages/TeacherCourses.jsx';
 import StudentCourses from './pages/StudentCourses.jsx';
+import StudentOpenCourses from './pages/StudentOpenCourses.jsx';
+import StudentEnrolledCourses from './pages/StudentEnrolledCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
 import AdminUsers from './pages/AdminUsers.jsx';
 
@@ -27,6 +29,8 @@ function App() {
         <Route path='/list-users' element={isAuthenticated ? <AdminUsers /> : <Navigate to={dashboard.to} />} />
         <Route path='/teacher-courses' element={isAuthenticated ? <TeacherCourses /> : <Navigate to={dashboard.to} />} />
         <Route path='/student-courses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-open-courses' element={isAuthenticated ? <StudentOpenCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-enrolled-courses' element={isAuthenticated ? <StudentEnrolledCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );
