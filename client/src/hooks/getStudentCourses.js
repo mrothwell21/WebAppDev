@@ -3,10 +3,8 @@ import { useAuth } from "../contexts/AuthContext";
 
 const fetchCourses = () => {
     const { userData } = useAuth();
-    const params = new URLSearchParams(location.search);
-    const selectedMajor = params.get("major");
 
-    const getStudentCourses = async () => {
+    const getStudentCourses = async (selectedMajor) => {
         try {
             console.log(selectedMajor);
             const response = await fetch(`http://localhost:5050/api/student-courses/${encodeURIComponent(selectedMajor)}`, {
