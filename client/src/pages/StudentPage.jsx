@@ -66,44 +66,37 @@ function StudentPage() {
     return (
         <div className="container">
             <div className="banner">
-            <div className="banner">
                     <NavigationBar role={"student"} onLogout={logout}></NavigationBar>
             </div>
-            </div>
 
-                <div className="main-content">
-                    <br /><br />
-                <div className="main-content">
-                    <br /><br />< br />
-                    <h1>Welcome</h1>
-                    <br /><br />
-                    <div className="select-container">
-                        <select 
-                            className="select-major"
-                            value={selectedMajor}
-                            onChange={handleMajorChange}
-                        >
-                            <option value="">Select Major</option>
+            <div className="main-content" style={{paddingTop: "87px"}}>
+                <h1>Welcome</h1>
+                <div className="select-container">
+                    <select 
+                        className="select-major"
+                        value={selectedMajor}
+                        onChange={handleMajorChange}
+                    >
+                        <option value="">Select Major</option>
                             {majors.map((major, index) => (
                                 <option key={index} value={major.name}>
                                     {major.name}
                                 </option>
                             ))}
-                        </select>
-                    </div>
+                    </select>
+                </div>
 
-                    <div className="button-group">
-                        <button className="btn green-btn" onClick={handleCourses}>Courses</button>
-                    </div>
+                <div className="button-group">
+                    <button className="btn green-btn" onClick={handleCourses}>Courses</button>
+                </div>
 
-                    <div className="button-group-inline">
-                        <button className="btn green-btn" onClick={handleRegister}>Register</button>
-                        <button className="btn green-btn" onClick={handleDrop}>Drop</button>
-                    </div>
+                <div className="button-group-inline">
+                    <button className="btn green-btn" onClick={handleRegister}>Register</button>
+                    <button className="btn green-btn" onClick={handleDrop}>Drop</button>
+                </div>
 
-                    <div className="button-group">
-                        <button className="btn green-btn" onClick={handleChangeP}>Change Password</button>
-                    </div>
+                <div className="button-group">
+                    <button className="btn green-btn" onClick={handleChangeP}>Change Password</button>
                 </div>
             </div>
         </div>
