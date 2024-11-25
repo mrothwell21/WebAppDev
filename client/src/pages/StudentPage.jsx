@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import '../../public/css/StudentLanding.css';
 import { useNavigate } from "react-router-dom";
 import NavigationBar from '../components/Navigation';
+import userMajors from '../hooks/userMajors';
 
 function StudentPage() {
 
@@ -10,6 +11,7 @@ function StudentPage() {
     const navigate = useNavigate();
     const [majors, setMajors] = useState([]);
     const [selectedMajor, setSelectedMajor] = useState('');
+    const {getMajor} = userMajors();
 
     useEffect(() => {
         
