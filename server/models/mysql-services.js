@@ -87,10 +87,10 @@ module.exports = db = {
 
     updateLastLogin : async function(conn, username){
 
-        const now = new Date();
-        const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
 
-        const sql = `UPDATE User SET lastLogin = '${formattedTimestamp}' WHERE username = '${username}'`;
+        const sql = `UPDATE User SET lastLogin = '${localISOTime}' WHERE username = '${username}'`;
 
         const results = await conn.promise().query(sql);
 

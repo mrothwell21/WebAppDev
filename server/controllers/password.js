@@ -9,10 +9,10 @@ const { secret } = db;
 
 router.post("/change", async function (req, res) {
     // console.log("received");
-    if (!req.headers["x-auth"]) {
-        return res.status(401).json({ error: "Missing X-Auth headers" });
-    }
-    else if (!req.body.username || !req.body.currentPassword || !req.body.newPassword || !req.body.confirmPassword) {
+    // if (!req.headers["x-auth"]) {
+    //     return res.status(401).json({ error: "Missing X-Auth headers" });
+    // }
+    if (!req.body.username || !req.body.currentPassword || !req.body.newPassword || !req.body.confirmPassword) {
         res.status(401).json({ error: "Missing username and/or password" });
         return;
     }
