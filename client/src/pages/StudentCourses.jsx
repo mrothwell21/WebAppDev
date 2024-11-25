@@ -4,6 +4,7 @@ import '../../public/css/AdminLanding.css';
 import { useAuth } from "../contexts/AuthContext";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Alert from 'react-bootstrap/Alert';
 import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import SelectMajor from '../components/SelectMajor';
@@ -15,6 +16,7 @@ const StudentCourses = () => {
   const [courses, setCourses] = useState([]);    
   const [selectedMajor, setSelectedMajor] = useState('');
   const [majors, setMajors] = useState([]);
+  const [alert, setAlert] = useState(false);
   const {getMajor} = userMajors();
 
   useEffect(() => {
@@ -32,7 +34,17 @@ const StudentCourses = () => {
   const { getStudentCourses } = fetchCourses();
 
   const handleGetCourses = async (event) => {
-    if (selectedMajor !== "") {
+    if (selectedMajor === "") {
+      setAlert(true);
+      const timeId = setTimeout(() => {
+        setAlert(false)
+      }, 2000)
+
+      return () => {
+        clearTimeout(timeId)
+      }
+    }
+    else {
       const data = await getStudentCourses(selectedMajor);
       const courseArray = data.map(course => course.prefix + course.courseId);
       setCourses (courseArray);
@@ -54,6 +66,7 @@ const StudentCourses = () => {
           options={majors}
           value={selectedMajor}
           onChange={handleMajorChange}></SelectMajor>
+        {alert && (<Alert key="warning" variant="warning">Please select a major</Alert>)}
         <ButtonGroup size="lg" className="mb-2">
           <Button onClick={handleGetCourses}>All</Button>
           <Button>Enrolled</Button>
