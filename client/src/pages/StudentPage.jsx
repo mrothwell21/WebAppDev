@@ -2,7 +2,8 @@ import React, { useState, useEffect} from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import '../../public/css/StudentLanding.css';
 import { useNavigate } from "react-router-dom";
-import userMajors from "../hooks/userMajors";
+import NavigationBar from '../components/Navigation';
+import userMajors from '../hooks/userMajors';
 
 function StudentPage() {
 
@@ -11,7 +12,6 @@ function StudentPage() {
     const [majors, setMajors] = useState([]);
     const [selectedMajor, setSelectedMajor] = useState('');
     const {getMajor} = userMajors();
-
 
     useEffect(() => {
         
@@ -24,7 +24,6 @@ function StudentPage() {
         listMajors();
     
     }, []);
-
 
     function handleChangeP() {
         navigate("/change-password")
