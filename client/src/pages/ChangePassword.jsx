@@ -5,38 +5,27 @@ import { useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { message } from "antd";
+import  changePassword  from "../hooks/changePassword";
 import '../../public/css/ChangePassword.css';
 
-function ChangePassword() {
+const ChangePassword = () => {
     const { userData, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    const token = storedData?.userToken;
     const [inputs, setInputs] = useState({});
+    const { passChange } = changePassword();
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch("http://localhost:5050/api/password/change", {
-            method: "POST",
-            body: new URLSearchParams({ username: userData.username, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirmPassword: inputs.confirmPassword }),
-            headers: { 
-                'x-auth': token
-            }
-        });
+        const values = { username: userData.username, currentPassword: inputs.currentPassword, newPassword: inputs.newPassword, confirmPassword: inputs.confirmPassword };
 
-        if (response.status === 200) {
+        const res = await passChange(values);
+
+        if (res) {
+
             message.success("Password changed sucessfully!");
-            const data = await response.json();
             
-            const updatedUserData = {
-                userToken: data.token,
-                user: storedData.user
-            };
-            localStorage.setItem("userData", JSON.stringify(updatedUserData));
-
-
             switch (userData.role) {
                 case 1:
                     navigate("/dashboard-admin");
@@ -53,22 +42,26 @@ function ChangePassword() {
             }
 
         }
+        else if (!res){
+            message.error("Password could not update! Check values.")
+        }
         else {
-            message.error(response.error);
+            message.error("Something went wrong!");
         }
 
     }
 
+
     useEffect(() => {
-        const storedRole = localStorage.getItem("userRole");
-        const storedUserData = JSON.parse(localStorage.getItem("userData"));
+        const storedRole = userData.role
+        // const storedUserData = JSON.parse(localStorage.getItem("userData"));
         const isReload = performance.navigation?.type === 1 || (window.performance?.getEntriesByType('navigation')[0]?.type === 'reload');
         
-        if (isReload && (storedRole || storedUserData?.user?.role)) {
-            const roleToUse = storedRole ? parseInt(storedRole) : storedUserData.user.role;
-            localStorage.removeItem("userRole"); // Clean up if it exists
+        if (isReload && storedRole) {
+            // const roleToUse = storedRole ? parseInt(storedRole) : storedUserData.user.role;
+            // localStorage.removeItem("userRole"); // Clean up if it exists
             
-            switch (roleToUse) {
+            switch (storedRole) {
                 case 1:
                     window.location.href = "/dashboard-admin";
                     break;
@@ -88,7 +81,6 @@ function ChangePassword() {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
-        // console.log(inputs);
     }
 
 

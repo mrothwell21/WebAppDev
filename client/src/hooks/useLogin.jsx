@@ -25,13 +25,13 @@ const useLogin = () => {
                 const updateLogTime = await fetch('http://localhost:5050/api/users/time',
                     {
                         method: 'POST',
-                        body: new URLSearchParams({ username: data.user.username})
+                        body: new URLSearchParams({ token: data.token})
                     }
                 );
 
                 if (updateLogTime.status === 200){
                     message.success("Time update success");
-                    await login(data.token, data.user);
+                    await login(data.token);
                 }
                 else {
                     message.error("Time update failed");
