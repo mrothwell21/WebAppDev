@@ -44,9 +44,9 @@ module.exports = db = {
             FROM Major
             JOIN UserInMajor ON Major.majorid = UserInMajor.majorid
             JOIN User ON User.userid = UserInMajor.userid
-            WHERE User.username = ?`;
+            WHERE User.username = '${username}'`;
     
-        const results = await conn.promise().query(sql, [username]);
+        const results = await conn.promise().query(sql);
         return results;
     },
 
@@ -58,9 +58,9 @@ module.exports = db = {
             JOIN Course ON CoursesToUser.courseId = Course.courseId
             JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
             JOIN Major ON CourseInMajor.majorId = Major.majorId
-            WHERE User.username = ?`;
+            WHERE User.username = '${username}'`;
     
-        const results = await conn.promise().query(sql, [username]);
+        const results = await conn.promise().query(sql);
         return results;
     },
 
@@ -72,6 +72,31 @@ module.exports = db = {
             JOIN Course on CourseInMajor.courseId = Course.courseId
             WHERE Major.name = '${major}'`;
     
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    getCoursesByMajorWithCapacity: async function(conn, major) {
+        const sql = `
+            SELECT Major.prefix, Course.courseId, Course.currentEnrollment, Course.maxCapacity
+            FROM Major 
+            JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
+            JOIN Course on CourseInMajor.courseId = Course.courseId
+            WHERE Major.name = '${major}'`;
+    
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    registerCourse: async function(conn, username, courseId) {
+        const sql = `
+        SELECT Major.prefix, Course.courseId, Course.currentEnrollment, Course.maxCapacity
+        FROM Major 
+        JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
+        JOIN Course on CourseInMajor.courseId = Course.courseId
+        WHERE Major.name = '${major}'`;
+
+
         const results = await conn.promise().query(sql);
         return results;
     },
