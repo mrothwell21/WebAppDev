@@ -25,10 +25,10 @@ function StudentOpenCourses() {
         <h1>Select Courses</h1>
 
         <OpenCourseList role={"student"} courseList={[
-  { name: 'CSC101', occupied: 20, capacity: 25 },
-  { name: 'CSC201', occupied: 15, capacity: 20 },
-  { name: 'CIS101', occupied: 18, capacity: 18 },
-]}></OpenCourseList>
+          { name: 'CSC101', occupied: 20, capacity: 25 },
+          { name: 'CSC201', occupied: 15, capacity: 20 },
+          { name: 'CIS101', occupied: 18, capacity: 18 },
+        ]}></OpenCourseList>
 
           <Button
           variant="danger"
@@ -38,7 +38,6 @@ function StudentOpenCourses() {
           </Button>
         <br></br>
       </div>
-
     </div>
   );
 }

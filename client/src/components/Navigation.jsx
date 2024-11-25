@@ -23,9 +23,9 @@ const NavigationBar = ({ role, onLogout }) => {
       { path: '/your-courses', label: 'Your Courses' },
     ],
     student: [
-      { path: '/StudentOpenCourses', label: 'Register' },
-      { path: '/StudentEnrolledCourses', label: 'Drop' },
-      { path: '/courses', label: 'Courses' },
+      { path: '/student-courses', label: 'Courses' },
+      { path: '/student-open-courses', label: 'Register' },
+      { path: '/student-enrolled-courses', label: 'Drop' },
     ],
   };
 
@@ -41,20 +41,29 @@ const NavigationBar = ({ role, onLogout }) => {
         <Nav className="ms-auto">
           {/* Render common links */}
           {commonLinks.map((link) => (
-            <Nav.Link as={Link} key={link.path} to={link.path}>
+            <Nav.Link as={Link} key={link.path} to={link.path}
+            style={{ color: 'white', transition: 'color 0.5s' }}
+            onMouseEnter={(e) => (e.target.style.color = 'gray')}
+            onMouseLeave={(e) => (e.target.style.color = 'white')}>
               {link.label}
             </Nav.Link>
           ))}
 
           {/* Render role-specific links */}
           {roleSpecificLinks[role]?.map((link) => (
-            <Nav.Link as={Link} key={link.path} to={link.path}>
+            <Nav.Link as={Link} key={link.path} to={link.path} 
+            style={{ color: 'white', transition: 'color 0.5s' }}
+            onMouseEnter={(e) => (e.target.style.color = 'gray')}
+            onMouseLeave={(e) => (e.target.style.color = 'white')}>
               {link.label}
             </Nav.Link>
           ))}
 
           {/* Logout link */}
-          <Nav.Link as="button" onClick={onLogout}>
+          <Nav.Link as="button" onClick={onLogout} 
+          style={{ color: 'white', transition: 'color 0.5s' }}
+          onMouseEnter={(e) => (e.target.style.color = 'red')}
+          onMouseLeave={(e) => (e.target.style.color = 'white')}>
             Logout
           </Nav.Link>
         </Nav>

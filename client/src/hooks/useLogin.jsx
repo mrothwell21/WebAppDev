@@ -22,7 +22,20 @@ const useLogin = () => {
             const data = await res.json();
             if (res.status === 200) {
                 message.success('User logged-in successfully');
-                await login(data.token, data.user);
+                const updateLogTime = await fetch('http://localhost:5050/api/users/time',
+                    {
+                        method: 'POST',
+                        body: new URLSearchParams({ username: data.user.username})
+                    }
+                );
+
+                if (updateLogTime.status === 200){
+                    message.success("Time update success");
+                    await login(data.token, data.user);
+                }
+                else {
+                    message.error("Time update failed");
+                }
             }
             else if (res.status === 404) {
                 message.error('No such user');
