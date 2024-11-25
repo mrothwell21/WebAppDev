@@ -30,11 +30,7 @@ function StudentPage() {
     }
 
     function handleCourses() {
-        if (selectedMajor) {
-            navigate(`/student-courses?major=${encodeURIComponent(selectedMajor)}`);
-        } else {
-            alert("Please select a major!");
-        }
+        navigate(`/student-courses`);
     }
 
     function handleMajorChange(event) {
@@ -59,20 +55,6 @@ function StudentPage() {
 
             <div className="main-content" style={{paddingTop: "87px"}}>
                 <h1>Welcome</h1>
-                <div className="select-container">
-                    <select 
-                        className="select-major"
-                        value={selectedMajor}
-                        onChange={handleMajorChange}
-                    >
-                        <option value="">Select Major</option>
-                            {majors.map((major, index) => (
-                                <option key={index} value={major.name}>
-                                    {major.name}
-                                </option>
-                            ))}
-                    </select>
-                </div>
 
                 <div className="button-group">
                     <button className="btn green-btn" onClick={handleCourses}>Courses</button>

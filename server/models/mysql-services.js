@@ -88,13 +88,36 @@ module.exports = db = {
         return results;
     },
 
-    registerCourse: async function(conn, username, courseId) {
+    registerCourse: async function(conn, username, courseId, prefix) {
         const sql = `
-        SELECT Major.prefix, Course.courseId, Course.currentEnrollment, Course.maxCapacity
-        FROM Major 
-        JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
-        JOIN Course on CourseInMajor.courseId = Course.courseId
-        WHERE Major.name = '${major}'`;
+        INSERT INTO CoursesToUser (courseId, userId) 
+        SELECT c.courseId, u.userId
+        FROM User u, Course c JOIN CourseInMajor ON c.courseId = CourseInMajor.courseId
+        JOIN Major m ON m.majorId = CourseInMajor.majorId
+        WHERE m.prefix = '${prefix}' AND c.courseId = '${courseId}' AND u.username = '${username}';
+        UPDATE Course c
+        SET c.currentEnrollment = c.currentEnrollment + 1
+        WHERE c.courseId = '${courseId}' 
+        AND c.currentEnrollment < c.maxCapacity;`;
+
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    dropCourse: async function(conn, username, courseId, prefix) {
+        const sql = `
+        UPDATE CoursesToUser cu
+        SET cu.status = 'Inactive'
+        WHERE cu.userId = (SELECT u.userId
+        FROM User u, Course c JOIN CourseInMajor ON c.courseId = CourseInMajor.courseId
+        JOIN Major m ON m.majorId = CourseInMajor.majorId
+        WHERE m.prefix = '${prefix}' AND c.courseId = '${cNum}' AND u.username = '${username}');
+        UPDATE Course c
+        SET c.currentEnrollment = c.currentEnrollment - 1
+        WHERE c.courseId = '${courseId}' 
+        AND c.currentEnrollment > 0;`;
+
 
 
         const results = await conn.promise().query(sql);
