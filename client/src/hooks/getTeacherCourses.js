@@ -6,12 +6,11 @@ const fetchCourses = () => {
 
     const getTeacherCourses = async () => {
         try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
             const response = await fetch(`http://localhost:5050/api/teacher-courses/${encodeURIComponent(userData.username)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
+                    'x-auth': userData.token
                 }
             });
 
