@@ -31,9 +31,7 @@ const useLogin = () => {
 
                 if (updateLogTime.status === 200){
                     message.success("Time update success");
-                    await login(data.token
-                        // , data.user
-                        );
+                    await login(data.token);
                 }
                 else {
                     message.error("Time update failed");

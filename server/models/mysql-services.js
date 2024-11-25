@@ -65,7 +65,6 @@ module.exports = db = {
         var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
 
         const sql = `UPDATE User SET lastLogin = '${localISOTime}' WHERE username = '${username}'`;
-        console.log(sql);
 
         const results = await conn.promise().query(sql);
 

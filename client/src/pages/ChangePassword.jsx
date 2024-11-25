@@ -11,13 +11,10 @@ import '../../public/css/ChangePassword.css';
 const ChangePassword = () => {
     const { userData, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
-    // const storedData = JSON.parse(localStorage.getItem("userData"));
-    // const token = storedData?.userToken;
     const [inputs, setInputs] = useState({});
     const { passChange } = changePassword();
 
 
-    //hook not returning
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -26,6 +23,8 @@ const ChangePassword = () => {
         const res = await passChange(values);
 
         if (res) {
+
+            message.success("Password changed sucessfully!");
             
             switch (userData.role) {
                 case 1:
@@ -43,8 +42,11 @@ const ChangePassword = () => {
             }
 
         }
+        else if (!res){
+            message.error("Password could not update! Check values.")
+        }
         else {
-            message.error(response.error);
+            message.error("Something went wrong!");
         }
 
     }
@@ -52,14 +54,14 @@ const ChangePassword = () => {
 
     useEffect(() => {
         const storedRole = userData.role
-        const storedUserData = JSON.parse(localStorage.getItem("userData"));
+        // const storedUserData = JSON.parse(localStorage.getItem("userData"));
         const isReload = performance.navigation?.type === 1 || (window.performance?.getEntriesByType('navigation')[0]?.type === 'reload');
         
-        if (isReload && (storedRole || storedUserData?.user?.role)) {
-            const roleToUse = storedRole ? parseInt(storedRole) : storedUserData.user.role;
-            localStorage.removeItem("userRole"); // Clean up if it exists
+        if (isReload && storedRole) {
+            // const roleToUse = storedRole ? parseInt(storedRole) : storedUserData.user.role;
+            // localStorage.removeItem("userRole"); // Clean up if it exists
             
-            switch (roleToUse) {
+            switch (storedRole) {
                 case 1:
                     window.location.href = "/dashboard-admin";
                     break;
@@ -79,7 +81,6 @@ const ChangePassword = () => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
-        // console.log(inputs);
     }
 
 

@@ -12,24 +12,18 @@ const changePassword = () => {
             setError(null);
             const res = await fetch("http://localhost:5050/api/password/change", {
                 method: "POST",
-                body: new URLSearchParams({ username: values.username, currentPassword: values.currentPassword, newPassword: values.newPassword, confirmPassword: values.confirmPassword }),
-                headers: {
-                    'x-auth': token
-                }
+                body: new URLSearchParams({ username: values.username, currentPassword: values.currentPassword, newPassword: values.newPassword, confirmPassword: values.confirmPassword })
             });
-            console.log("fetch");
 
             const data = await res.json();
             if (res.status === 200) {
-                console.log("success");
-                message.success("Password changed sucessfully!");
-                const data = await response.json();
+                // message.success("Password changed sucessfully!");
                 localStorage.setItem("userData", JSON.stringify(data.token));
-                return {success: true};
+                return true;
             }
             else {
-                message.error("Something went wrong!");
-                return {success: false};
+                // message.error("Something went wrong!");
+                return false;
             }
         }
         catch (err) { message.error(err); }
