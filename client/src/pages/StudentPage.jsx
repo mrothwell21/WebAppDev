@@ -17,7 +17,7 @@ function StudentPage() {
         
         async function listMajors() {
             const majorList = await getMajor();
-            console.log(majorList);
+            // console.log(majorList);
             setMajors(majorList);
         }
 
