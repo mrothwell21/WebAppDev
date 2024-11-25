@@ -12,30 +12,16 @@ function StudentPage() {
     const [selectedMajor, setSelectedMajor] = useState('');
 
     useEffect(() => {
-        fetchUserMajors();
-    }, []);
-
-    const fetchUserMajors = async () => {
-        try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/major/${encodeURIComponent(userData.username)}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setMajors(data);
-            } else {
-                console.error('Failed to fetch majors');
-            }
-        } catch (error) {
-            console.error('Error fetching majors:', error);
+        
+        async function listMajors() {
+            const majorList = await getMajor();
+            // console.log(majorList);
+            setMajors(majorList);
         }
-    };
+
+        listMajors();
+    
+    }, []);
 
     function handleChangeP() {
         navigate("/change-password")
