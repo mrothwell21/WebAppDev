@@ -10,6 +10,7 @@ import StudentCourses from './pages/StudentCourses.jsx';
 import StudentOpenCourses from './pages/StudentOpenCourses.jsx';
 import StudentEnrolledCourses from './pages/StudentEnrolledCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
+import TeacherActiveCourses from './pages/TeacherActivateCourses.jsx';
 
 function App() {
   const { isAuthenticated, userData } = useAuth() || { isAuthenticated: false, userData: null };
