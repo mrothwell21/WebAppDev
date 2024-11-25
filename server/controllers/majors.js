@@ -12,7 +12,6 @@ router.get("/:username", async function (req, res) {
     const token = req.headers["x-auth"];
 
     try {
-        const decoded = jwt.decode(token, secret);
         const conn = mysql.createConnection(db.mydb);
         const [results] = await db.getMajorByUsername(conn, req.params.username);
 

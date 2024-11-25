@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import '../../public/css/StudentLanding.css';
 import { useNavigate } from "react-router-dom";
+import userMajors from "../hooks/userMajors";
 
 function StudentPage() {
 
@@ -9,32 +10,21 @@ function StudentPage() {
     const navigate = useNavigate();
     const [majors, setMajors] = useState([]);
     const [selectedMajor, setSelectedMajor] = useState('');
+    const {getMajor} = userMajors();
+
 
     useEffect(() => {
-        fetchUserMajors();
+        
+        async function listMajors() {
+            const majorList = await getMajor();
+            console.log(majorList);
+            setMajors(majorList);
+        }
+
+        listMajors();
+    
     }, []);
 
-    const fetchUserMajors = async () => {
-        try {
-            const storedData = JSON.parse(localStorage.getItem('userData'));
-            const response = await fetch(`http://localhost:5050/api/major/${encodeURIComponent(userData.username)}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth': storedData.userToken
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setMajors(data);
-            } else {
-                console.error('Failed to fetch majors');
-            }
-        } catch (error) {
-            console.error('Error fetching majors:', error);
-        }
-    };
 
     function handleChangeP() {
         navigate("/change-password")
