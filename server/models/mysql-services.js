@@ -18,7 +18,7 @@ module.exports = db = {
     selectAllMajors: async function (conn, tableName) {
         const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
 
-        return results[0];
+        return results;
     },
 
 
