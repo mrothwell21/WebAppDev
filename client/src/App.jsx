@@ -7,6 +7,7 @@ import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
 import TeacherCourses from './pages/TeacherCourses.jsx';
 import AdminUsers from './pages/AdminUsers.jsx';
+import AdminMajors from './pages/AdminMajors.jsx';
 import StudentCourses from './pages/StudentCourses.jsx';
 import StudentOpenCourses from './pages/StudentOpenCourses.jsx';
 import StudentEnrolledCourses from './pages/StudentEnrolledCourses.jsx';
@@ -25,6 +26,7 @@ function App() {
         <Route path='/login' element={isAuthenticated?<Navigate to={dashboard.to} />:<Login />} />
         <Route path='/dashboard-admin' element={isAuthenticated && userData?.role === 1 ? <AdminPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/list-users' element={isAuthenticated ? <AdminUsers /> : <Navigate to={dashboard.to} />} />
+        <Route path='/list-majors' element={isAuthenticated ? <AdminMajors /> : <Navigate to={dashboard.to} />} />
         <Route path='/dashboard-teacher' element={isAuthenticated && userData?.role === 2 ? <TeacherPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/dashboard-student' element={isAuthenticated && userData?.role === 3 ? <StudentPage /> : <Navigate to={dashboard.to} />} />
         <Route path='/change-password' element={isAuthenticated ? <ChangePassword /> : <Navigate to={dashboard.to} />} />

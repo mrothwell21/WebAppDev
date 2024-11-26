@@ -15,6 +15,13 @@ module.exports = db = {
         return results[0];
     },
 
+    selectAllMajors: async function (conn, tableName) {
+        const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
+
+        return results[0];
+    },
+
+
     //can add role later if needed
     getOne : async function(conn, tableName, name, password) {
         const sql = `SELECT * FROM ${tableName} WHERE username = '${name}' AND

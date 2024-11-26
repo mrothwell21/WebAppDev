@@ -19,6 +19,10 @@ function AdminPage() {
         navigate("/list-users")
     }
 
+    function handleListMajors() {
+        navigate("/list-majors")
+    }
+
 
     return (
         <div className="container">
@@ -36,7 +40,7 @@ function AdminPage() {
                     </div>
 
                     <div className="button-group-inline">
-                        <button className="btn green-btn">View Roles</button>
+                        <button className="btn green-btn" onClick = {handleListMajors}>View Majors</button>
                         <button className="btn green-btn">Delete Roles</button>
                     </div>
 
