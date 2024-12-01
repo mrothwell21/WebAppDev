@@ -31,6 +31,18 @@ const Courses = ({ role, courseList }) => {
     setShowModal(true);
   };
 
+  // Open modal for adding new course (Add mode)
+  const handleShowAddCourseModal = () => {
+    setFormValues({
+      courseId: '',
+      name: '',
+      description: '',
+      maxEnrolled: '',
+      majorId: '',
+    });
+    setShowModal(true);
+  };
+
   // Close modal
   const handleCloseModal = () => {
     setShowModal(false);
@@ -114,6 +126,17 @@ const Courses = ({ role, courseList }) => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+
+      {/* Add Course Button, visible only for teachers */}
+      {role === 'teacher' && (
+        <Button
+          variant="primary"
+          className="mt-3"
+          onClick={handleShowAddCourseModal}
+        >
+          Add Course
+        </Button>
+      )}
 
       {/* Modal for student registration or dropping */}
       {role === 'student' && (
@@ -274,6 +297,74 @@ const Courses = ({ role, courseList }) => {
             </Modal.Footer>
           </Modal>
           </>)}
+    
+      {/* Add Course Modal */}
+      {role === 'teacher' && !selectedCourse && (
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add New Course</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Course Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={formValues.name}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Course ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="courseId"
+                  value={formValues.courseId}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Max Enrolled</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="maxEnrolled"
+                  value={formValues.maxEnrolled}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Major ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="majorId"
+                  value={formValues.majorId}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  name="description"
+                  value={formValues.description}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={() => console.log('Add Course')}>
+              Add Course
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+
     </div>
   );
 };
