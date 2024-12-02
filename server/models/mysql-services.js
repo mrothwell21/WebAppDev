@@ -135,8 +135,14 @@ module.exports = db = {
         return results;
     },
 
-    setActiveInactiveCourses: async function(conn, courseId, userId) {
-        
+    setActiveInactiveCourse: async function(conn, courseId) {
+        const sql = `
+        UPDATE Course C
+        SET C.status = IF(C.status = 'Active', 'Inactive', 'Active')
+        WHERE C.courseId = '${courseId}'`;
+
+        const results = await conn.promise().query(sql);
+        return results;
     },
 
     updatePass : async function(conn, tableName, currentPass, newPass, name){
