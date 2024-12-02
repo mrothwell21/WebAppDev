@@ -1,5 +1,5 @@
 module.exports = db = {
-    mydb : {
+    mydb: {
         host: "webappdev-webappdev.b.aivencloud.com",
         user: "avnadmin",
         password: "AVNS_yvUKc4DsBnUuplfviLU",
@@ -16,7 +16,7 @@ module.exports = db = {
     },
 
     //can add role later if needed
-    getOne : async function(conn, tableName, name, password) {
+    getOne: async function (conn, tableName, name, password) {
         const sql = `SELECT * FROM ${tableName} WHERE username = '${name}' AND
         password = '${password}'`;
         const results = await conn.promise().query(sql);
@@ -25,7 +25,7 @@ module.exports = db = {
         return results[0];
     },
 
-    addOne : async function(conn, tableName, user) {
+    addOne: async function (conn, tableName, user) {
 
         const newValues = `"${user.name}", "${user.address}",
         "${user.password}"`;
@@ -38,19 +38,19 @@ module.exports = db = {
         return results;
     },
 
-    getMajorByUsername: async function(conn, username) {
+    getMajorByUsername: async function (conn, username) {
         const sql = `
             SELECT Major.name
             FROM Major
             JOIN UserInMajor ON Major.majorid = UserInMajor.majorid
             JOIN User ON User.userid = UserInMajor.userid
             WHERE User.username = '${username}'`;
-    
+
         const results = await conn.promise().query(sql);
         return results;
     },
 
-    getCoursesByUsername: async function(conn, username) {
+    getCoursesByUsername: async function (conn, username) {
         const sql = `
             SELECT Major.prefix, Course.courseId, Course.status
             FROM User
@@ -59,12 +59,12 @@ module.exports = db = {
             JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
             JOIN Major ON CourseInMajor.majorId = Major.majorId
             WHERE User.username = '${username}'`;
-    
+
         const results = await conn.promise().query(sql);
         return results;
     },
 
-    getCoursesByUsernameStudent: async function(conn, username, major) {
+    getCoursesByUsernameStudent: async function (conn, username, major) {
         const sql = `
             SELECT Major.prefix, Course.courseId, CoursesToUser.status
             FROM User
@@ -73,36 +73,48 @@ module.exports = db = {
             JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
             JOIN Major ON CourseInMajor.majorId = Major.majorId
             WHERE User.username = '${username}' AND Major.name = '${major}'`;
-    
+
         const results = await conn.promise().query(sql);
         return results;
     },
 
-    getCoursesByMajor: async function(conn, major) {
+    getCoursesByMajor: async function (conn, major) {
         const sql = `
             SELECT Major.prefix, Course.courseId
             FROM Major 
             JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
             JOIN Course on CourseInMajor.courseId = Course.courseId
             WHERE Major.name = '${major}'`;
-    
+
         const results = await conn.promise().query(sql);
         return results;
     },
 
-    getCoursesByMajorWithCapacity: async function(conn, major) {
+    getCoursesByMajorWithCapacity: async function (conn, major) {
         const sql = `
             SELECT Major.prefix, Course.courseId, Course.currentEnrollment, Course.maxCapacity
             FROM Major 
             JOIN CourseInMajor on Major.majorId = CourseInMajor.majorId 
             JOIN Course on CourseInMajor.courseId = Course.courseId
             WHERE Major.name = '${major}'`;
-    
+
         const results = await conn.promise().query(sql);
         return results;
     },
 
-    registerCourse: async function(conn, username, courseId, prefix) {
+    getCourseDetails: async function (conn, courseId) {
+        const sql = `
+            SELECT M.prefix, C.courseId, C.name, C.description
+            FROM Course C
+            JOIN CourseInMajor CM on C.courseId = CM.courseId
+            JOIN Major M on CM.majorId = M.majorId
+            WHERE C.courseId = '${courseId}'`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    registerCourse: async function (conn, username, courseId, prefix) {
         const sql = `
         INSERT INTO CoursesToUser (courseId, userId) 
         SELECT c.courseId, u.userId
@@ -119,7 +131,7 @@ module.exports = db = {
         return results;
     },
 
-    dropCourse: async function(conn, username, courseId, prefix) {
+    dropCourse: async function (conn, username, courseId, prefix) {
         const sql = `
         UPDATE CoursesToUser cu
         SET cu.status = 'Inactive'
@@ -138,7 +150,7 @@ module.exports = db = {
         return results;
     },
 
-    updatePass : async function(conn, tableName, currentPass, newPass, name){
+    updatePass: async function (conn, tableName, currentPass, newPass, name) {
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
 
@@ -147,7 +159,7 @@ module.exports = db = {
         return results;
     },
 
-    updateLastLogin : async function(conn, username){
+    updateLastLogin: async function (conn, username) {
 
         const now = new Date();
         const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
