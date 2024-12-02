@@ -146,14 +146,14 @@ module.exports = db = {
     },
 
     addCourse: async function(conn, courseId, name, max, majorId, description) {
-        const now = new Date();
-        const time = now.toISOString().slice(0, 19).replace('T', ' ');
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
         
         const sql = `
         INSERT INTO Course
         (courseId, name, description, maxCapacity, currentEnrollment, lastUpdated) 
         VALUES
-        ('${courseId}', '${name}', '${description}', '${maxCapacity}', '0', ${time});
+        ('${courseId}', '${name}', '${description}', '${maxCapacity}', '0', ${localISOTime});
 
         INSERT INTO CourseInMajor
         (courseId, majorId)
@@ -170,8 +170,8 @@ module.exports = db = {
     },
 
     updateCourse: async function(conn, courseId, name, max, description) {
-        const now = new Date();
-        const time = now.toISOString().slice(0, 19).replace('T', ' ');
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
 
         const sql = `
         UPDATE Course
@@ -179,7 +179,7 @@ module.exports = db = {
         name = '${name}', 
         description = '${description}', 
         maxCapacity = '${max}', 
-        lastUpdated = '${time}'
+        lastUpdated = '${localISOTime}'
         WHERE courseId = '${courseId}';`;
 
         const results = await conn.promise().query(sql);
