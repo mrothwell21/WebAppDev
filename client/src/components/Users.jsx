@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, Modal, Button, Form } from 'react-bootstrap';
 
-const Users = ({ role, userList }) => {
+const Users = ({ role, userList, onUpdateUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [formValues, setFormValues] = useState({
@@ -14,6 +14,8 @@ const Users = ({ role, userList }) => {
     phoneNumber: '',
     status: ''
   });
+  const [updateError, setUpdateError] = useState(null);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   // Open modal and populate form with selected course details
   const handleShowModal = (user) => {
@@ -28,12 +30,16 @@ const Users = ({ role, userList }) => {
       status: user?.status
     });
     setShowModal(true);
+    setUpdateError(null);
+    setUpdateSuccess(false);
   };
 
   // Close modal
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedUser(null);
+    setUpdateError(null);
+    setUpdateSuccess(false);
   };
 
   // Handle form field changes
@@ -42,10 +48,22 @@ const Users = ({ role, userList }) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleStatusUpdate = () => {
-    console.log(`Updating user status for ${formValues.username}`);
-    handleCloseModal();
-  }
+  const handleStatusUpdate = async () => {
+    if (!selectedUser) return;
+
+    try {
+      const success = await onUpdateUser(selectedUser.userId, formValues);
+      
+      if (success) {
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          handleCloseModal();
+        }, 1500);
+      }
+    } catch (error) {
+      setUpdateError('Failed to update user. Please try again.');
+    }
+  };
 
 
   return (
@@ -77,6 +95,12 @@ const Users = ({ role, userList }) => {
           <Modal.Title>User Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {updateError && (
+            <Alert variant="danger">{updateError}</Alert>
+          )}
+          {updateSuccess && (
+            <Alert variant="success">User updated successfully!</Alert>
+          )}
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>User ID</Form.Label>
@@ -156,7 +180,11 @@ const Users = ({ role, userList }) => {
             Close
           </Button>
           {role === 'admin' && (
-            <Button variant="primary" onClick={handleStatusUpdate}>
+            <Button 
+              variant="primary" 
+              onClick={handleStatusUpdate}
+              disabled={updateSuccess}
+            >
               Save Changes
             </Button>
           )}

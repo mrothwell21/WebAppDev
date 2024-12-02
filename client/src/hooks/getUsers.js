@@ -44,9 +44,42 @@ export const useUsers = () => {
     }
   };
 
+  const updateUser = async (userId, updatedData) => {
+    try {
+      setError(null);
+      const response = await fetch(`http://localhost:5050/api/users/update/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth': userData.userToken
+        },
+        body: JSON.stringify(updatedData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to update user: ${response.statusText}`);
+      }
+
+      const updatedUser = await response.json();
+      
+      // Update the local state with the new user data
+      setUsers(prevUsers => 
+        prevUsers.map(user => 
+          user.userId === userId ? { ...user, ...updatedUser } : user
+        )
+      );
+
+      return true;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      setError(error.message);
+      return false;
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  return { users, loading, error, fetchUsers };
+  return { users, loading, error, fetchUsers, updateUser };
 };

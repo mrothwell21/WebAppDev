@@ -12,7 +12,7 @@ function AdminUsers() {
     const { logout } = useAuth();
     const [filterStatus, setFilterStatus] = useState('All');
     const navigate = useNavigate();
-    const { users, loading, error, fetchUsers } = useUsers();
+    const { users, loading, error, fetchUsers, updateUser } = useUsers();
 
     const getFilteredUsers = () => {
         if (filterStatus === 'All') return users;
@@ -66,8 +66,11 @@ if (error) {
           {/* <Users role={"admin"} userList={getInactiveUsers()}/> */}
         </ButtonGroup>
 
-        <Users role={"admin"} userList={getFilteredUsers()}/>
-
+        <Users 
+        role={"admin"} 
+        userList={getFilteredUsers()}
+        onUpdateUser={updateUser}
+        />
         <br></br>
       </div>
 
