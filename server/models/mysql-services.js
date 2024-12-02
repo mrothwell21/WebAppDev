@@ -33,11 +33,7 @@ module.exports = db = {
 
     addOne : async function(conn, tableName, user) {
 
-        const newValues = `"${user.name}", "${user.address}",
-        "${user.password}"`;
-
-        const sql = `INSERT INTO ${tableName} (name,address,password)
-        Values (${newValues})`;
+        const sql = `INSERT INTO ${tableName} VALUES (${user.userId},'${user.firstName}', '${user.lastName}', '${user.username}', '${user.password}', ${user.role}, '${user.phoneNumber}', '', '2024-12-02 22:19:30', '${user.status}')`;
 
         const results = await conn.promise().query(sql);
 

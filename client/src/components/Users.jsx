@@ -6,6 +6,7 @@ import { useUsers } from '../hooks/getUsers';
 const Users = ({ role, userList, onUpdateUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isAddingNewUser, setIsAddingNewUser] = useState(false);
   const [formValues, setFormValues] = useState({
     courseId: '',
     firstName: '',
@@ -53,6 +54,23 @@ const Users = ({ role, userList, onUpdateUser }) => {
     }
   }, [userList, selectedUser, showModal]);
 
+  const handleAddUser = () => {
+    setIsAddingNewUser(true);
+    setSelectedUser(null);
+    setFormValues({
+      userId: '',
+      firstName: '',
+      lastName: '',
+      username: '',
+      role: '',
+      phoneNumber: '',
+      status: 'inactive'
+    });
+    setShowModal(true);
+    setUpdateError(null);
+    setUpdateSuccess(false);
+  };
+
   // Open modal and populate form with selected course details
   const handleShowModal = (user) => {
     setSelectedUser(user);
@@ -95,7 +113,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
 
 
   const handleStatusUpdate = async () => {
-    if (!selectedUser) return;
+    if (!selectedUser && !setIsAddingNewUser) return;
 
     const updatedFormValues = {
       ...formValues,
@@ -105,7 +123,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
     };
 
     try {
-      const success = await onUpdateUser(selectedUser.userId, updatedFormValues);
+      const success = await onUpdateUser(selectedUser?.userId, updatedFormValues);
       
       if (success) {
         setUpdateSuccess(true);
@@ -144,11 +162,18 @@ const Users = ({ role, userList, onUpdateUser }) => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+      {role === 'admin' && (
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="primary" onClick={handleAddUser}>
+            Add User
+          </Button>
+        </div>
+      )}
 
       {/* Modal for viewing/editing user details */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>User Details</Modal.Title>
+          <Modal.Title>{isAddingNewUser ? 'Add New User' : 'User Details'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -158,8 +183,9 @@ const Users = ({ role, userList, onUpdateUser }) => {
                 type="text"
                 name="userId"
                 value={formValues.userId || ''} 
-                readOnly
-                disabled
+                onChange={handleChange}
+                readOnly={role !== 'admin'}
+                disabled={!isAddingNewUser}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -197,7 +223,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
               <Form.Control
                 type="text"
                 name="role"
-                value={formValues.role || '3'}
+                value={formValues.role}
                 onChange={handleChange}
                 readOnly={role !== 'admin'}
               />
@@ -236,7 +262,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
               onClick={handleStatusUpdate}
               disabled={updateSuccess}
             >
-              Save Changes
+               {isAddingNewUser ? 'Add User' : 'Save Changes'}
             </Button>
           )}
         </Modal.Footer>
