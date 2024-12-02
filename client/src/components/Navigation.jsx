@@ -12,9 +12,8 @@ const NavigationBar = ({ role, onLogout }) => {
   // Role-specific links
   const roleSpecificLinks = {
     admin: [
-      { path: '/add-user', label: 'Add User' },
-      { path: '/delete-user', label: 'Delete User' },
-      { path: '/edit-user', label: 'Edit User' },
+      { path: '/list-users', label: 'View Users' },
+      { path: '/list-majors', label: 'View Majors' },
     ],
     teacher: [
       { path: '/create-course', label: 'Create Course' },

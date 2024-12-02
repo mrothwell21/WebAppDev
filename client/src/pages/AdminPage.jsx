@@ -36,14 +36,8 @@ function AdminPage() {
                     <br /><br />
                     <div className="button-group-inline">
                         <button className="btn green-btn" onClick = {handleListUsers}>View Users</button>
-                        <button className="btn green-btn">Delete Users</button>
-                    </div>
-
-                    <div className="button-group-inline">
                         <button className="btn green-btn" onClick = {handleListMajors}>View Majors</button>
-                        <button className="btn green-btn">Delete Roles</button>
                     </div>
-
                     <div className="button-group">
                         <button className="btn green-btn" onClick={handleChangeP}>Change Password</button>
                     </div>
