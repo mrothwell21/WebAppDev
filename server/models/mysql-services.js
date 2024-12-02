@@ -135,6 +135,10 @@ module.exports = db = {
         return results;
     },
 
+    setActiveInactiveCourses: async function(conn, courseId, userId) {
+        
+    },
+
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
