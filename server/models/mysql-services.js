@@ -145,6 +145,47 @@ module.exports = db = {
         return results;
     },
 
+    addCourse: async function(conn, courseId, name, max, majorId, description) {
+        const now = new Date();
+        const time = now.toISOString().slice(0, 19).replace('T', ' ');
+        
+        const sql = `
+        INSERT INTO Course
+        (courseId, name, description, maxCapacity, currentEnrollment, lastUpdated) 
+        VALUES
+        ('${courseId}', '${name}', '${description}', '${maxCapacity}', '0', ${time});
+
+        INSERT INTO CourseInMajor
+        (courseId, majorId)
+        VALUES
+        ('${courseId}', '${majorId}');
+
+        INSERT INTO CoursesToUser
+        (userId, courseId)
+        VALUES
+        ('${userId}', '${courseId}');`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    updateCourse: async function(conn, courseId, name, max, description) {
+        const now = new Date();
+        const time = now.toISOString().slice(0, 19).replace('T', ' ');
+
+        const sql = `
+        UPDATE Course
+        SET 
+        name = '${name}', 
+        description = '${description}', 
+        maxCapacity = '${max}', 
+        lastUpdated = '${time}'
+        WHERE courseId = '${courseId}';`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
