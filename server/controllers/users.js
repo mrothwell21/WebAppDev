@@ -15,11 +15,17 @@ router.post("/auth", async function (req, res) {
 
     const conn = mysql.createConnection(db.mydb);
     const user = await db.getOne(conn, "User", req.body.user, req.body.password);
+    // console.log(user.stats);
 
     if (!user || !user.length) {
         res.status(401).json({ error: "Bad username and/or password" });
         console.log("bad username and/or password");
-    } else {
+    } 
+    else if(user[0].status != 'Active'){
+        res.status(401).json({error: "User does not exist!"});
+        console.log("User does not exist or is inactive");
+    }
+    else {
         const token = jwt.encode({ Username: user[0].username, Password: user[0].password }, secret);
         res.status(200).json({ token: token });
         // , user: { username: user[0].username, role: user[0].role }
