@@ -8,17 +8,20 @@ import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import { Modal, Form } from 'react-bootstrap';
 import fetchCourses from '../hooks/getTeacherCourses';
+import fetchStudents from '../hooks/getStudentsInCourse';
 
 const TeacherCourses = () => {
 
   const { userData, isAuthenticated, logout } = useAuth();
   const [courses, setCourses] = useState([]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     handleGetCourses();
   }, []);
 
   const { getTeacherCourses } = fetchCourses();
+  const { getStudentsInCourse } = fetchStudents();
 
   const handleGetCourses = async (event) => {
     const data = await getTeacherCourses();
@@ -38,6 +41,20 @@ const TeacherCourses = () => {
     const inactiveCourses = data.filter(course => course.status === 'Inactive');
     const courseArray = inactiveCourses.map(course => course.prefix + course.courseId);
     setCourses(courseArray);
+  }
+
+  const handleEnrolledStudents = async (event) => {
+    const data = await getStudentsInCourse();
+    const activeStudents = data.filter(student => student.status === 'Active');
+    const studentArray = activeStudents.map(student => student.firstName + student.lastName);
+    setStudents(studentArray);
+  }
+
+  const handleUnenrolledStudents = async (event) => {
+    const data = await getStudentsInCourse();
+    const inactiveStudents = data.filter(student => student.status === 'Inactive');
+    const studentArray = inactiveStudents.map(student => student.firstName + student.lastName);
+    setStudents(studentArray);
   }
 
   const [showModal, setShowModal] = useState(false);

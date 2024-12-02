@@ -124,6 +124,17 @@ module.exports = db = {
         return results;
     },
 
+    getStudentsInCourse: async function(conn, courseId) {
+        const sql =  `
+            SELECT U.firstName, U.lastName, Cu.status
+            FROM User U
+            JOIN CoursesToUser Cu ON U.userId = Cu.userId
+            WHERE Cu.courseId = '${courseId}' AND U.role = 3`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
