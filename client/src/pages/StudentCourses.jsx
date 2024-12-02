@@ -33,6 +33,10 @@ const StudentCourses = () => {
 
   const { getStudentCourses } = fetchCourses();
 
+
+
+//add in course name and description
+
   const handleGetCourses = async (event) => {
     if (selectedMajor === "") {
       setAlert(true);
@@ -49,6 +53,21 @@ const StudentCourses = () => {
       const courseArray = data.map(course => course.prefix + course.courseId);
       setCourses (courseArray);
     }
+  }
+
+  const handleActiveCourses = async (event) => {
+    const data = await getStudentCourses(selectedMajor);
+    console.log(data);
+    const activeCourses = data.filter(course => course.status === 'Active');
+    const courseArray = activeCourses.map(course => course.prefix + course.courseId);
+    setCourses(courseArray);
+  }
+
+  const handleInactiveCourses = async (event) => {
+    const data = await getStudentCourses(selectedMajor);
+    const inactiveCourses = data.filter(course => course.status === 'Inactive');
+    const courseArray = inactiveCourses.map(course => course.prefix + course.courseId);
+    setCourses(courseArray);
   }
 
   function handleMajorChange(event) {
@@ -69,8 +88,8 @@ const StudentCourses = () => {
         {alert && (<Alert key="warning" variant="warning">Please select a major</Alert>)}
         <ButtonGroup size="lg" className="mb-2">
           <Button onClick={handleGetCourses}>All</Button>
-          <Button>Enrolled</Button>
-          <Button>Dropped</Button>
+          <Button onClick={handleActiveCourses}>Enrolled</Button>
+          <Button onClick={handleInactiveCourses}>Dropped</Button>
         </ButtonGroup>
 
         {/* Display courses */}

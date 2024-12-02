@@ -71,6 +71,20 @@ module.exports = db = {
         return results;
     },
 
+    getCoursesByUsernameStudent: async function(conn, username, major) {
+        const sql = `
+            SELECT Major.prefix, Course.courseId, CoursesToUser.status
+            FROM User
+            JOIN CoursesToUser ON User.userId = CoursesToUser.userId
+            JOIN Course ON CoursesToUser.courseId = Course.courseId
+            JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
+            JOIN Major ON CourseInMajor.majorId = Major.majorId
+            WHERE User.username = '${username}' AND Major.name = '${major}'`;
+    
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
     getCoursesByMajor: async function(conn, major) {
         const sql = `
             SELECT Major.prefix, Course.courseId
@@ -153,3 +167,12 @@ module.exports = db = {
 
     }
 };
+
+
+
+
+/*
+
+
+
+*/
