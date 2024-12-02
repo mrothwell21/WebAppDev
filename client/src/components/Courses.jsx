@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, Modal, Button, Form } from 'react-bootstrap';
+import fetchStudents from '../hooks/getStudentsInCourse';
 
 const Courses = ({ role, courseList }) => {
   const [showModal, setShowModal] = useState(false);
@@ -14,9 +15,24 @@ const Courses = ({ role, courseList }) => {
     maxEnrolled: '',
     majorId: '',
   });
+  const { getStudentsInCourse } = fetchStudents();
 
   const dummyEnrolledStudents = ['John Doe', 'Jane Smith', 'Alice Johnson']; // Placeholder data
   const dummyUnenrolledStudents = ['Bob Brown', 'Emily Davis']; // Placeholder data
+
+  const handleEnrolledStudents = async (event) => {
+    const data = await getStudentsInCourse();
+    const activeStudents = data.filter(student => student.status === 'Active');
+    const studentArray = activeStudents.map(student => student.firstName + student.lastName);
+    setStudents(studentArray);
+  }
+
+  const handleUnenrolledStudents = async (event) => {
+    const data = await getStudentsInCourse();
+    const inactiveStudents = data.filter(student => student.status === 'Inactive');
+    const studentArray = inactiveStudents.map(student => student.firstName + student.lastName);
+    setStudents(studentArray);
+  }
 
   // Open modal and populate form with selected course details
   const handleShowModal = (course) => {
