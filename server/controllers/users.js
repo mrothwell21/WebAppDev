@@ -73,4 +73,10 @@ router.post("/time", async function (req, res) {
     return;
 });
 
+router.post("/update", async function (req, res) {
+
+    const conn = mysql.createConnection(db.mydb);
+    const user = await db.getUserAndUpdate(conn, req.body);
+    res.status(200).json(user);
+});
 module.exports = router;

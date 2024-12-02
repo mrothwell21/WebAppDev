@@ -7,6 +7,7 @@ export const useUsers = () => {
   const [error, setError] = useState(null);
   const { userData } = useAuth();
 
+
   const fetchUsers = async () => {
     try {
       setLoading(true);
@@ -26,13 +27,13 @@ export const useUsers = () => {
       const data = await response.json();
       
       const transformedData = data.map(user => ({
-        userId: user.userId,
+        userId: user.userId || '',
         firstName: user.firstName || '',
         lastName: user.lastName || '',
         username: user.username || '',
         role: user.role || '',
         phoneNumber: user.phoneNumber || '',
-        status: user.status || 'Inactive'
+        status: (user.status || 'inactive').toLowerCase() 
       }));
 
       setUsers(transformedData);
@@ -47,13 +48,20 @@ export const useUsers = () => {
   const updateUser = async (userId, updatedData) => {
     try {
       setError(null);
-      const response = await fetch(`http://localhost:5050/api/users/update/${userId}`, {
-        method: 'PUT',
+
+      const dataToSend = {
+        ...updatedData,
+        userId,
+        status: updatedData.status.toLowerCase() // ensure consistent case
+      };
+
+      const response = await fetch(`http://localhost:5050/api/users/update`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-auth': userData.userToken
         },
-        body: JSON.stringify(updatedData)
+        body: JSON.stringify(dataToSend)
       });
 
       if (!response.ok) {
@@ -65,7 +73,7 @@ export const useUsers = () => {
       // Update the local state with the new user data
       setUsers(prevUsers => 
         prevUsers.map(user => 
-          user.userId === userId ? { ...user, ...updatedUser } : user
+          user.userId === userId ? { ...user, ...updatedUser, status: (updatedUser.status || 'inactive').toLowerCase() } : user
         )
       );
 

@@ -16,7 +16,20 @@ function AdminUsers() {
 
     const getFilteredUsers = () => {
         if (filterStatus === 'All') return users;
-        return users.filter(user => user.status === filterStatus);
+        return users.filter(user => user.status.toLowerCase() === filterStatus.toLowerCase());
+      };
+
+      useEffect(() => {
+        fetchUsers();
+      }, []);
+
+      const handleUserUpdate = async (userId, userData) => {
+        const success = await updateUser(userId, userData);
+        if (success) {
+          // Refetch the user list after successful update
+          await fetchUsers();
+        }
+        return success;
       };
     
 if (error) {
@@ -69,7 +82,7 @@ if (error) {
         <Users 
         role={"admin"} 
         userList={getFilteredUsers()}
-        onUpdateUser={updateUser}
+        onUpdateUser={handleUserUpdate}
         />
         <br></br>
       </div>

@@ -10,7 +10,7 @@ module.exports = db = {
     secret: require('crypto').randomBytes(64).toString('hex'),
 
     selectAll: async function (conn, tableName) {
-        const results = await conn.promise().query(`SELECT u.*, r.name as role FROM ${tableName} u Left JOIN Roles r ON u.role = r.id`);
+        const results = await conn.promise().query(`SELECT * FROM ${tableName}`);
 
         return results[0];
     },
@@ -20,7 +20,6 @@ module.exports = db = {
 
         return results;
     },
-
 
     //can add role later if needed
     getOne : async function(conn, tableName, name, password) {
@@ -43,6 +42,15 @@ module.exports = db = {
         const results = await conn.promise().query(sql);
 
         return results;
+    },
+
+    getUserAndUpdate: async function(conn, user){
+        const sql = `UPDATE User SET firstName = '${user.firstName}', lastName = '${user.lastName}', username = '${user.username}', role = '${user.role}', phoneNumber = '${user.phoneNumber}', status = '${user.status}' WHERE userId = '${user.userId}'`;
+
+        const results = await conn.promise().query(sql);
+
+        return results;
+
     },
 
     getMajorByUsername: async function(conn, username) {
