@@ -7,6 +7,28 @@ export const useUsers = () => {
   const [error, setError] = useState(null);
   const { userData } = useAuth();
 
+  const checkUserIdExists = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:5050/api/users/checkid/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth': userData.userToken
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to check userId: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      return data.exists;
+    } catch (error) {
+      console.error('Error checking userId:', error);
+      return false;
+    }
+  };
 
   const fetchUsers = async () => {
     try {
@@ -100,5 +122,5 @@ export const useUsers = () => {
     fetchUsers();
   }, []);
 
-  return { users, loading, error, fetchUsers, updateUser };
+  return { users, loading, error, fetchUsers, updateUser, checkUserIdExists };
 };

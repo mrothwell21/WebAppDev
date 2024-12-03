@@ -7,6 +7,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isAddingNewUser, setIsAddingNewUser] = useState(false);
+  const [userIdError, setUserIdError] = useState('');
   const [formValues, setFormValues] = useState({
     courseId: '',
     firstName: '',
@@ -18,7 +19,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
   });
   const [updateError, setUpdateError] = useState(null);
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const { fetchUsers } = useUsers(); 
+  const { fetchUsers, checkUserIdExists } = useUsers(); 
 
   const userRoleToNumber = {
     'Admin': 1,
@@ -54,6 +55,24 @@ const Users = ({ role, userList, onUpdateUser }) => {
     }
   }, [userList, selectedUser, showModal]);
 
+  const validateUserId = async (id) => {
+    if (!id) {
+      setUserIdError('User ID is required');
+      return false;
+    }
+    
+    if (isAddingNewUser && id) {
+      const exists = await checkUserIdExists(id);
+      if (exists) {
+        setUserIdError('This User ID already exists');
+        return false;
+      }
+    }
+    setUserIdError('');
+    return true;
+  };
+
+
   const handleAddUser = () => {
     setIsAddingNewUser(true);
     setSelectedUser(null);
@@ -74,6 +93,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
   // Open modal and populate form with selected course details
   const handleShowModal = (user) => {
     setSelectedUser(user);
+    setIsAddingNewUser(false);
     setFormValues({
       userId: user?.userId || '',
       firstName: user?.firstName || '',
@@ -106,20 +126,29 @@ const Users = ({ role, userList, onUpdateUser }) => {
   };
 
   // Handle form field changes
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
+    if (name === 'userId') {
+      await validateUserId(value);
+    }
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-
   const handleStatusUpdate = async () => {
-    if (!selectedUser && !setIsAddingNewUser) return;
+    if (!selectedUser && !isAddingNewUser) return;
+
+    if (isAddingNewUser) {
+      const isValid = await validateUserId(formValues.userId);
+      if (!isValid) {
+        return;
+      }
+    }
 
     const updatedFormValues = {
       ...formValues,
       username: formValues.username.trim(),
       role: userRoleToNumber[formValues.role],
-      status: formValues.status// Convert string back to number
+      status: formValues.status
     };
 
     try {
@@ -127,9 +156,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
       
       if (success) {
         setUpdateSuccess(true);
-        
         await fetchUsers();
-
         setTimeout(() => {
           handleCloseModal();
         }, 1000);
@@ -186,7 +213,11 @@ const Users = ({ role, userList, onUpdateUser }) => {
                 onChange={handleChange}
                 readOnly={role !== 'admin'}
                 disabled={!isAddingNewUser}
-              />
+                isInvalid={!!userIdError}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {userIdError}
+                </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>

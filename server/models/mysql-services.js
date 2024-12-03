@@ -31,6 +31,13 @@ module.exports = db = {
         return results[0];
     },
 
+    checkId: async function (conn, tableName, userId) {
+        const sql = `SELECT COUNT(*) as count FROM ${tableName} WHERE userId = ${userId}`;
+        const results = await conn.promise().query(sql);
+        
+        return results[0];
+    },
+
     addOne: async function (conn, tableName, user) {
 
         const sql = `INSERT INTO ${tableName} VALUES (${user.userId},'${user.firstName}', '${user.lastName}', '${user.username}', '${user.password}', ${user.role}, '${user.phoneNumber}', '', '2024-12-02 22:19:30', '${user.status}')`;
