@@ -94,6 +94,7 @@ const Users = ({ role, userList, onUpdateUser }) => {
   const handleShowModal = (user) => {
     setSelectedUser(user);
     setIsAddingNewUser(false);
+    setUserIdError('')
     setFormValues({
       userId: user?.userId || '',
       firstName: user?.firstName || '',
