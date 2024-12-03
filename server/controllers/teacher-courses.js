@@ -47,6 +47,23 @@ router.get("/students/:courseId", async function (req, res){
         console.error("Error getting courses:", ex);
         res.status(401).json({ error: "Invalid JWT or database error" });
     }
-})
+});
+
+router.post("/activate", async function (req, res){
+    try {
+        const conn = mysql.createConnection(db.mydb);
+        const [results] = await db.setActiveInactiveCourse(conn, req.body.course);
+        if (!results || results.length === 0) {
+            return res.status(404).json({ error: "Course doesn't exist" });
+        }
+
+        res.status(200).json(results);
+    }
+    catch (ex) {
+        console.error("Error getting courses:", ex);
+        res.status(401).json({ error: "Invalid JWT or database error" });
+    }
+});
+
 
 module.exports = router;
