@@ -16,10 +16,8 @@ const NavigationBar = ({ role, onLogout }) => {
       { path: '/list-majors', label: 'View Majors' },
     ],
     teacher: [
-      { path: '/create-course', label: 'Create Course' },
-      { path: '/update-course', label: 'Update Course' },
-      { path: '/teacher-active-courses', label: 'Activate Course' },
-      { path: '/your-courses', label: 'Your Courses' },
+      { path: '/teacher-courses', label: 'Your Courses' },
+      { path: '/teacher-active-courses', label: 'Activate Course' }
     ],
     student: [
       { path: '/student-courses', label: 'Courses' },

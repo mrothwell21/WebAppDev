@@ -8,6 +8,8 @@ const Courses = ({ role, courseList }) => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [showEnrolledModal, setShowEnrolledModal] = useState(false);
   const [showUnenrolledModal, setShowUnenrolledModal] = useState(false);
+  const [enrolledStudents, setEnrolledStudents] = useState([]);
+  const [unenrolledStudents, setUnenrolledStudents] = useState([]);
   const [formValues, setFormValues] = useState({
     courseId: '',
     name: '',
@@ -15,8 +17,30 @@ const Courses = ({ role, courseList }) => {
     maxEnrolled: '',
     majorId: '',
   });
+  const { getStudentsInCourse } = fetchStudents();
 
-  const {getStudentCourseInfo} = fetchCourses();
+  const handleEnrolledStudents = async (courseId) => {
+    try {
+      const data = await getStudentsInCourse(courseId);
+      const activeStudents = data.filter(student => student.status === 'Active');
+      const studentArray = activeStudents.map(student => student.firstName + student.lastName);
+      setEnrolledStudents(studentArray);
+    } catch (error) {
+      console.error("Error fetching enrolled students:", error);
+    }
+  }
+  
+  const handleUnenrolledStudents = async (courseId) => {
+    try {
+      const data = await getStudentsInCourse(courseId);
+      const inactiveStudents = data.filter(student => student.status === 'Inactive');
+      const studentArray = inactiveStudents.map(student => student.firstName + student.lastName);
+      setUnenrolledStudents(studentArray);
+    } catch (error) {
+      console.error("Error fetching unenrolled students:", error);
+    }
+  }
+  
 
   // Open modal and populate form with selected course details
   const handleShowModal = async(course) => {
@@ -105,6 +129,7 @@ const Courses = ({ role, courseList }) => {
                   style={{ cursor: 'pointer' }}
                   onClick={(e) => {
                     e.stopPropagation();
+                    handleEnrolledStudents(typeof course === 'string' ? course.slice(-3) : course.name.slice(-3))
                     handleShowEnrolledModal(course);
                   }}
                 >
@@ -117,6 +142,7 @@ const Courses = ({ role, courseList }) => {
                   style={{ cursor: 'pointer' }}
                   onClick={(e) => {
                     e.stopPropagation();
+                    handleUnenrolledStudents(typeof course === 'string' ? course.slice(-3) : course.name.slice(-3))
                     handleShowUnenrolledModal(course);
                   }}
                 >
@@ -267,7 +293,7 @@ const Courses = ({ role, courseList }) => {
             </Modal.Header>
             <Modal.Body>
               <ul>
-                {dummyEnrolledStudents.map((student, index) => (
+                {enrolledStudents.map((student, index) => (
                   <li key={index}>{student}</li>
                 ))}
               </ul>
@@ -286,7 +312,7 @@ const Courses = ({ role, courseList }) => {
             </Modal.Header>
             <Modal.Body>
               <ul>
-                {dummyUnenrolledStudents.map((student, index) => (
+                {unenrolledStudents.map((student, index) => (
                   <li key={index}>{student}</li>
                 ))}
               </ul>

@@ -175,7 +175,69 @@ module.exports = db = {
         return results;
     },
 
-    updatePass: async function (conn, tableName, currentPass, newPass, name) {
+    getStudentsInCourse: async function(conn, courseId) {
+        const sql =  `
+            SELECT U.firstName, U.lastName, Cu.status
+            FROM User U
+            JOIN CoursesToUser Cu ON U.userId = Cu.userId
+            WHERE Cu.courseId = '${courseId}' AND U.role = 3`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    setActiveInactiveCourse: async function(conn, courseId) {
+        const sql = `
+        UPDATE Course C
+        SET C.status = IF(C.status = 'Active', 'Inactive', 'Active')
+        WHERE C.courseId = '${courseId}'`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    addCourse: async function(conn, courseId, name, max, majorId, description) {
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
+        
+        const sql = `
+        INSERT INTO Course
+        (courseId, name, description, maxCapacity, currentEnrollment, lastUpdated) 
+        VALUES
+        ('${courseId}', '${name}', '${description}', '${maxCapacity}', '0', ${localISOTime});
+
+        INSERT INTO CourseInMajor
+        (courseId, majorId)
+        VALUES
+        ('${courseId}', '${majorId}');
+
+        INSERT INTO CoursesToUser
+        (userId, courseId)
+        VALUES
+        ('${userId}', '${courseId}');`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    updateCourse: async function(conn, courseId, name, max, description) {
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
+
+        const sql = `
+        UPDATE Course
+        SET 
+        name = '${name}', 
+        description = '${description}', 
+        maxCapacity = '${max}', 
+        lastUpdated = '${localISOTime}'
+        WHERE courseId = '${courseId}';`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
+    updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
 

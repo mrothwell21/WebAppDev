@@ -9,10 +9,23 @@ import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import OpenCourseList from '../components/OpenCourseList';
 import { Modal, Form } from 'react-bootstrap';
+import fetchCourses from '../hooks/getTeacherCourses';
 
 function TeacherActiveCourses() {
   const { userData, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const [courses, setCourses] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+
+  const { getTeacherCourses } = fetchCourses();
+
+  const handleGetCourses = async (event) => {
+    const data = await getTeacherCourses();
+    const courseArray = data.map(course => course.prefix + course.courseId);
+    const statusArray = data.map(status => status.status);
+    setCourses (courseArray);
+    setStatuses (statusArray);
+  }
 
   return (
     <div className="container">

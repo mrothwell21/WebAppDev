@@ -13,6 +13,7 @@ const TeacherCourses = () => {
 
   const { userData, isAuthenticated, logout } = useAuth();
   const [courses, setCourses] = useState([]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     handleGetCourses();
@@ -39,6 +40,7 @@ const TeacherCourses = () => {
     const courseArray = inactiveCourses.map(course => course.prefix + course.courseId);
     setCourses(courseArray);
   }
+
 
   const [showModal, setShowModal] = useState(false);
   const [formValues, setFormValues] = useState({
