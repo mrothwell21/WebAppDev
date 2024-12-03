@@ -1,8 +1,97 @@
 {
-  "hash": "134c2926",
+  "hash": "24e37a78",
   "configHash": "08d5c5c3",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "15cc8b8c",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "c434f0e0",
+  "browserHash": "abdad9a3",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "61df6a05",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "e9bdf584",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "57d6d5ca",
+      "needsInterop": false
+    },
+    "react-bootstrap/Button": {
+      "src": "../../node_modules/react-bootstrap/esm/Button.js",
+      "file": "react-bootstrap_Button.js",
+      "fileHash": "e0e0c593",
+      "needsInterop": false
+    },
+    "react-bootstrap/ButtonGroup": {
+      "src": "../../node_modules/react-bootstrap/esm/ButtonGroup.js",
+      "file": "react-bootstrap_ButtonGroup.js",
+      "fileHash": "1e924a67",
+      "needsInterop": false
+    },
+    "react-bootstrap": {
+      "src": "../../node_modules/react-bootstrap/esm/index.js",
+      "file": "react-bootstrap.js",
+      "fileHash": "e034196d",
+      "needsInterop": false
+    },
+    "react-bootstrap/Alert": {
+      "src": "../../node_modules/react-bootstrap/esm/Alert.js",
+      "file": "react-bootstrap_Alert.js",
+      "fileHash": "45a7f522",
+      "needsInterop": false
+    },
+    "antd": {
+      "src": "../../node_modules/antd/es/index.js",
+      "file": "antd.js",
+      "fileHash": "853348a7",
+      "needsInterop": false
+    },
+    "react-bootstrap/Form": {
+      "src": "../../node_modules/react-bootstrap/esm/Form.js",
+      "file": "react-bootstrap_Form.js",
+      "fileHash": "219c5403",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-IYSBHBRS": {
+      "file": "chunk-IYSBHBRS.js"
+    },
+    "chunk-7GEBQIPZ": {
+      "file": "chunk-7GEBQIPZ.js"
+    },
+    "chunk-7YAQ7COO": {
+      "file": "chunk-7YAQ7COO.js"
+    },
+    "chunk-STIFYEUN": {
+      "file": "chunk-STIFYEUN.js"
+    },
+    "chunk-O4FE2KPJ": {
+      "file": "chunk-O4FE2KPJ.js"
+    },
+    "chunk-OZLTRIR3": {
+      "file": "chunk-OZLTRIR3.js"
+    },
+    "chunk-2RKFMSDA": {
+      "file": "chunk-2RKFMSDA.js"
+    },
+    "chunk-RLKDKNGR": {
+      "file": "chunk-RLKDKNGR.js"
+    },
+    "chunk-QPG7G3M7": {
+      "file": "chunk-QPG7G3M7.js"
+    },
+    "chunk-77BHLUBK": {
+      "file": "chunk-77BHLUBK.js"
+    },
+    "chunk-UTEJFLXC": {
+      "file": "chunk-UTEJFLXC.js"
+    }
+  }
 }
