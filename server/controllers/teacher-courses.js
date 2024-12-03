@@ -27,7 +27,7 @@ router.get("/:username", async function (req, res) {
     }
 });
 
-router.get("/students", async function (req, res){
+router.get("/students/:courseId", async function (req, res){
     if (!req.headers["x-auth"]) {
         return res.status(401).json({ error: "Missing X-Auth header" });
     }

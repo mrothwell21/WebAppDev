@@ -4,9 +4,9 @@ import { useAuth } from "../contexts/AuthContext";
 const fetchStudents = () => {
     const { userData } = useAuth();
 
-    const getStudentsInCourse = async () => {
+    const getStudentsInCourse = async (courseId) => {
         try {
-            const response = await fetch(`http://localhost:5050/api/teacher-courses/students`, {
+            const response = await fetch(`http://localhost:5050/api/teacher-courses/students/${courseId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
