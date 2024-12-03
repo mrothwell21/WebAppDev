@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, Modal, Button, Form } from 'react-bootstrap';
+import fetchCourses from '../hooks/getStudentCourseInfo';
 
 const Courses = ({ role, courseList }) => {
   const [showModal, setShowModal] = useState(false);
@@ -15,17 +16,17 @@ const Courses = ({ role, courseList }) => {
     majorId: '',
   });
 
-  const dummyEnrolledStudents = ['John Doe', 'Jane Smith', 'Alice Johnson']; // Placeholder data
-  const dummyUnenrolledStudents = ['Bob Brown', 'Emily Davis']; // Placeholder data
+  const {getStudentCourseInfo} = fetchCourses();
 
   // Open modal and populate form with selected course details
-  const handleShowModal = (course) => {
+  const handleShowModal = async(course) => {
     setSelectedCourse(course);
+    const data = await getStudentCourseInfo(course.slice(3));
     setFormValues({
-      courseId: course?.id || '',
-      name: course?.name || '',
-      description: course?.description || '',
-      maxEnrolled: course?.maxEnrolled || '',
+      courseId: data[0]?.prefix + data[0]?.courseId || '',
+      name: data[0]?.name || '',
+      description: data[0]?.description || '',
+      maxEnrolled: data[0]?.maxEnrolled || '',
       majorId: course?.id?.slice(0, 3) || '', // Extracting the first 3 letters of Course ID
     });
     setShowModal(true);
@@ -151,7 +152,7 @@ const Courses = ({ role, courseList }) => {
                 <Form.Control
                   type="text"
                   name="courseId"
-                  value={formValues.courseId}
+                  value={formValues.name}
                   readOnly
                 />
               </Form.Group>

@@ -9,6 +9,8 @@ function StudentPage() {
 
     const { userData, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
+
+    // delete these after important work is done
     const [majors, setMajors] = useState([]);
     const [selectedMajor, setSelectedMajor] = useState('');
     const {getMajor} = userMajors();
