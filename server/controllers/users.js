@@ -86,7 +86,7 @@ router.post("/update", async function (req, res) {
     const token = req.headers["x-auth"];
 
     const conn = mysql.createConnection(db.mydb);
-    const user = await db.getUserAndUpdate(conn, req.body);
+    const user = await db.getUserAndUpdate(conn, "User", req.body);
     res.status(200).json(user);
 });
 
@@ -98,7 +98,7 @@ router.post("/create", async function (req, res) {
     const token = req.headers["x-auth"];
 
     const conn = mysql.createConnection(db.mydb);
-    const user = await db.addOne(conn, "User", req.body);
+    const user = await db.addUser(conn, "User", req.body);
     res.status(200).json(user);
 });
 
@@ -109,7 +109,7 @@ router.get("/checkid/:userId", async function (req, res){
 
     try{
         const conn = mysql.createConnection(db.mydb);
-        const user = await db.checkId(conn, "User", req.params.userId);
+        const user = await db.checkUserId(conn, "User", req.params.userId);
         
         res.status(200).json({ exists: user[0].count > 0 });
     }

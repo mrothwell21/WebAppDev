@@ -31,14 +31,21 @@ module.exports = db = {
         return results[0];
     },
 
-    checkId: async function (conn, tableName, userId) {
+    checkUserId: async function (conn, tableName, userId) {
         const sql = `SELECT COUNT(*) as count FROM ${tableName} WHERE userId = ${userId}`;
         const results = await conn.promise().query(sql);
         
         return results[0];
     },
 
-    addOne: async function (conn, tableName, user) {
+    checkMajorId: async function (conn, tableName, majorId) {
+        const sql = `SELECT COUNT(*) as count FROM ${tableName} WHERE majorId = ${majorId}`;
+        const results = await conn.promise().query(sql);
+        
+        return results[0];
+    },
+
+    addUser: async function (conn, tableName, user) {
 
         const sql = `INSERT INTO ${tableName} VALUES (${user.userId},'${user.firstName}', '${user.lastName}', '${user.username}', '${user.password}', ${user.role}, '${user.phoneNumber}', '', '2024-12-02 22:19:30', '${user.status}')`;
 
@@ -47,8 +54,26 @@ module.exports = db = {
         return results;
     },
 
-    getUserAndUpdate: async function(conn, user){
-        const sql = `UPDATE User SET firstName = '${user.firstName}', lastName = '${user.lastName}', username = '${user.username}', role = '${user.role}', phoneNumber = '${user.phoneNumber}', status = '${user.status}' WHERE userId = '${user.userId}'`;
+    addMajor: async function (conn, tableName, major) {
+
+        const sql = `INSERT INTO ${tableName} VALUES (${major.majorId},'${major.prefix}', '${major.name}', '${major.description}')`;
+
+        const results = await conn.promise().query(sql);
+
+        return results;
+    },
+
+    getMajorAndUpdate: async function(conn, tableName, major){
+        const sql = `UPDATE ${tableName} SET majorId = ${major.majorId}, prefix = '${major.prefix}', name = '${major.name}', description = '${major.description}' WHERE majorId = '${major.majorId}'`;
+
+        const results = await conn.promise().query(sql);
+
+        return results;
+
+    },
+
+    getUserAndUpdate: async function(conn, tableName, user){
+        const sql = `UPDATE ${tableName} SET firstName = '${user.firstName}', lastName = '${user.lastName}', username = '${user.username}', role = '${user.role}', phoneNumber = '${user.phoneNumber}', status = '${user.status}' WHERE userId = '${user.userId}'`;
 
         const results = await conn.promise().query(sql);
 
