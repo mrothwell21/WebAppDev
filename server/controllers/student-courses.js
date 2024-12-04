@@ -26,7 +26,7 @@ router.get("/courseInfo/:courseId", async function (req, res) {
 
 });
 
-router.get("/:selectedMajor/:username", async function (req, res) {
+router.get("/courses/:selectedMajor/:username", async function (req, res) {
     // console.log("in fetch")
     if (!req.headers["x-auth"]) {
         return res.status(401).json({ error: "Missing X-Auth header" });
@@ -52,7 +52,7 @@ router.get("/:selectedMajor/:username", async function (req, res) {
     }
 });
 
-router.post("/courseInfo/:username/:courseId/:prefix", async function (req, res) {
+router.post("/register", async function (req, res) {
     // console.log("in fetch")
     if (!req.headers["x-auth"]) {
         return res.status(401).json({ error: "Missing X-Auth header" });
@@ -65,7 +65,7 @@ router.post("/courseInfo/:username/:courseId/:prefix", async function (req, res)
         // const decoded = jwt.decode(token, secret);
         const conn = mysql.createConnection(db.mydb);
         // console.log("connection")
-        const response = await db.registerCourse(conn, req.params.username, req.params.courseId, req.params.prefix);
+        const response = await db.registerCourse(conn, req.body.username, req.body.courseId, req.body.prefix);
         // console.log(results);
         if (!results || results.length === 0) {
             return res.status(404).json({ error: "No Courses found for this Major" });
@@ -76,6 +76,58 @@ router.post("/courseInfo/:username/:courseId/:prefix", async function (req, res)
         console.error("Error getting courses:", ex);
         res.status(401).json({ error: "Invalid JWT or database error" });
     }
+});
+
+router.get("/enrolled/:username/:majorId", async function (req, res) {
+    //console.log("in fetch")
+   if (!req.headers["x-auth"]) {
+       return res.status(401).json({ error: "Missing X-Auth header" });
+   }
+
+   const token = req.headers["x-auth"];
+   // console.log("x-auth");
+
+   try {
+       // const decoded = jwt.decode(token, secret);
+       const conn = mysql.createConnection(db.mydb);
+       // console.log("connection")
+       const [results] = await db.getCoursesByUsernameStudentCapacity(conn, req.params.username, req.params.majorId);
+       // console.log(results);
+       if (!results || results.length === 0) {
+           return res.status(404).json({ error: "No Courses found for this Major" });
+       }
+       res.status(200).json(results);
+   }
+   catch (ex) {
+       console.error("Error getting courses:", ex);
+       res.status(401).json({ error: "Invalid JWT or database error" });
+   }
+});
+
+router.get("/open-courses/:username/:majorId", async function (req, res) {
+    //console.log("in fetch")
+   if (!req.headers["x-auth"]) {
+       return res.status(401).json({ error: "Missing X-Auth header" });
+   }
+
+   const token = req.headers["x-auth"];
+   // console.log("x-auth");
+
+   try {
+       // const decoded = jwt.decode(token, secret);
+       const conn = mysql.createConnection(db.mydb);
+       // console.log("connection")
+       const [results] = await db.getCoursesByUsernameStudentCapacity(conn, req.params.username, req.params.majorId);
+       // console.log(results);
+       if (!results || results.length === 0) {
+           return res.status(404).json({ error: "No Courses found for this Major" });
+       }
+       res.status(200).json(results);
+   }
+   catch (ex) {
+       console.error("Error getting courses:", ex);
+       res.status(401).json({ error: "Invalid JWT or database error" });
+   }
 });
 
 module.exports = router;

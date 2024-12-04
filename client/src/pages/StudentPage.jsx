@@ -41,11 +41,11 @@ function StudentPage() {
     }
 
     function handleRegister() {
-        navigate("/student-open-courses");
+        navigate("/student-register-courses");
     }
 
     function handleDrop() {
-        navigate("/student-enrolled-courses");
+        navigate("/student-drop-courses");
     }
 
 

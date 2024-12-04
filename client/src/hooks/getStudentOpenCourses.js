@@ -7,7 +7,7 @@ const fetchCourses = () => {
     const getStudentOpenCourses = async (majorId) => {
         try {
             // console.log(selectedMajor);
-            const response = await fetch(`http://localhost:5050/api/student-open-courses/${encodeURIComponent(userData.username)}/${encodeURIComponent(majorId)}`, {
+            const response = await fetch(`http://localhost:5050/api/student-courses/open-courses/${encodeURIComponent(userData.username)}/${encodeURIComponent(majorId)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

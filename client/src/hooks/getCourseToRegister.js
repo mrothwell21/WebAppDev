@@ -6,7 +6,7 @@ const getCourseToRegister = () => {
 
     const getCourses = async () => {
         try {
-            const response = await fetch(`http://localhost:5050/api/student-open-courses/${encodeURIComponent(userData.username)}`, {
+            const response = await fetch(`http://localhost:5050/api/student-courses/${encodeURIComponent(userData.username)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

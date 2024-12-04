@@ -7,8 +7,8 @@ import TeacherPage from './pages/TeacherPage.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
 import TeacherCourses from './pages/TeacherCourses.jsx';
 import StudentCourses from './pages/StudentCourses.jsx';
-import StudentOpenCourses from './pages/StudentOpenCourses.jsx';
-import StudentEnrolledCourses from './pages/StudentEnrolledCourses.jsx';
+import StudentRegisterCourses from './pages/StudentRegisterCourses.jsx';
+import StudentDropCourses from './pages/StudentDropCourses.jsx';
 import { useAuth } from './contexts/AuthContext.jsx';
 import TeacherActiveCourses from './pages/TeacherActivateCourses.jsx';
 
@@ -28,8 +28,8 @@ function App() {
         <Route path='/change-password' element={isAuthenticated ? <ChangePassword /> : <Navigate to={dashboard.to} />} />
         <Route path='/teacher-courses' element={isAuthenticated ? <TeacherCourses /> : <Navigate to={dashboard.to} />} />
         <Route path='/student-courses' element={isAuthenticated ? <StudentCourses /> : <Navigate to={dashboard.to} />} />
-        <Route path='/student-open-courses' element={isAuthenticated ? <StudentOpenCourses /> : <Navigate to={dashboard.to} />} />
-        <Route path='/student-enrolled-courses' element={isAuthenticated ? <StudentEnrolledCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-register-courses' element={isAuthenticated ? <StudentRegisterCourses /> : <Navigate to={dashboard.to} />} />
+        <Route path='/student-drop-courses' element={isAuthenticated ? <StudentDropCourses /> : <Navigate to={dashboard.to} />} />
       </Routes>
     </BrowserRouter>
   );

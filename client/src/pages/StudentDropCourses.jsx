@@ -10,11 +10,11 @@ import NavigationBar from "../components/Navigation";
 import Courses from '../components/Courses';
 import OpenCourseList from '../components/OpenCourseList';
 import { Modal, Form } from 'react-bootstrap';
-import fetchCourses from '../hooks/getStudentOpenCourses';
+import fetchCourses from '../hooks/getStudentEnrolledCourses';
 import SelectMajor from '../components/SelectMajor';
 import userMajors from '../hooks/userMajors';
 
-function StudentOpenCourses() {
+function StudentDropCourses() {
   const { userData, isAuthenticated, logout } = useAuth();
   const [selectedMajor, setSelectedMajor] = useState('');
   const [majors, setMajors] = useState([]);
@@ -23,7 +23,7 @@ function StudentOpenCourses() {
   const { getMajor } = userMajors();
   const navigate = useNavigate();
 
-  const { getStudentOpenCourses } = fetchCourses()
+  const { getStudentEnrolledCourses } = fetchCourses()
 
   useEffect(() => {
     async function listMajors() {
@@ -47,9 +47,9 @@ function StudentOpenCourses() {
       }
     }
     else {
-      const openCourses = await getStudentOpenCourses(selectedMajor);
-      const inactiveCourses = openCourses.filter(openCourse => openCourse.status === 'Inactive');
-      const data = inactiveCourses.map((openCourse) => {
+      const openCourses = await getStudentEnrolledCourses(selectedMajor);
+      const activeCourses = openCourses.filter(openCourse => openCourse.status === 'Active');
+      const data = activeCourses.map((openCourse) => {
         return {
           name: openCourse.prefix + openCourse.courseId,
           occupied: openCourse.currentEnrollment,
@@ -68,7 +68,6 @@ function StudentOpenCourses() {
     listCourses()
   }
 
-
   return (
     <div className="container">
       <div className="banner">
@@ -77,7 +76,8 @@ function StudentOpenCourses() {
       <br></br><br></br>
       <div className="content">
 
-        <h1>Select Courses</h1>
+        <h1>Drop Courses</h1>
+
         <div style={{ marginBottom: '10px' }}>
           <SelectMajor
             options={majors}
@@ -86,18 +86,20 @@ function StudentOpenCourses() {
           {alert && (<Alert key="warning" variant="warning">Please select a major</Alert>)}
           <Button onClick={handleSubmitMajor}>GO</Button>
         </div>
+
         <OpenCourseList role={"student"} courseList={coursesArray}></OpenCourseList>
 
         <Button
           variant="danger"
           size="sm"
           style={{ width: '120px' }}>
-          Register
+          Drop
         </Button>
         <br></br>
       </div>
+
     </div>
   );
 }
 
-export default StudentOpenCourses;
+export default StudentDropCourses;

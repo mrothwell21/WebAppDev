@@ -24,8 +24,8 @@ const NavigationBar = ({ role, onLogout }) => {
     ],
     student: [
       { path: '/student-courses', label: 'Courses' },
-      { path: '/student-open-courses', label: 'Register' },
-      { path: '/student-enrolled-courses', label: 'Drop' },
+      { path: '/student-register-courses', label: 'Register' },
+      { path: '/student-drop-courses', label: 'Drop' },
     ],
   };
 
