@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, Modal, Button, Form } from 'react-bootstrap';
 import fetchStudents from '../hooks/getStudentsInCourse';
+import findCourse from '../hooks/getCourseDetails';
 
 const Courses = ({ role, courseList }) => {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +19,7 @@ const Courses = ({ role, courseList }) => {
     majorId: '',
   });
   const { getStudentsInCourse } = fetchStudents();
+  const { getCourseDetails } = findCourse();
 
   const handleEnrolledStudents = async (courseId) => {
     try {
@@ -43,14 +45,17 @@ const Courses = ({ role, courseList }) => {
   
 
   // Open modal and populate form with selected course details
-  const handleShowModal = (course) => {
+  const handleShowModal = async (course) => {
     setSelectedCourse(course);
+    // console.log(course.slice(3));
+    let details = await getCourseDetails(course.slice(3));
+    // console.log(details);
     setFormValues({
-      courseId: course?.courseId || '',
-      name: course?.name || '',
-      description: course?.description || '',
-      maxEnrolled: course?.maxEnrolled || '',
-      majorId: course?.id?.slice(0, 3) || '', // Extracting the first 3 letters of Course ID
+      courseId: details[0]?.courseId || '',
+      name: details[0]?.name || '',
+      description: details[0]?.description || '',
+      maxEnrolled: details[0]?.maxCapacity || '',
+      majorId: details[0]?.majorId || '', // Extracting the first 3 letters of Course ID
     });
     setShowModal(true);
   };
@@ -243,7 +248,7 @@ const Courses = ({ role, courseList }) => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Max Enrolled</Form.Label>
+                <Form.Label>Max Capacity</Form.Label>
                 <Form.Control
                   type="number"
                   name="maxEnrolled"

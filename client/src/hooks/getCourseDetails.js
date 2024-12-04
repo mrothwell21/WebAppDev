@@ -6,7 +6,7 @@ const findCourse = () => {
 
     const getCourseDetails = async (courseId) => {
         try {
-            const response = await fetch(`http://localhost:5050/api/student-courses/courses/${encodeURIComponent(courseId)}`, {
+            const response = await fetch(`http://localhost:5050/api/teacher-courses/courses/${encodeURIComponent(courseId)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
