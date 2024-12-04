@@ -65,5 +65,37 @@ router.post("/activate", async function (req, res){
     }
 });
 
+router.post("/update", async function (req, res){
+    try {
+        const conn = mysql.createConnection(db.mydb);
+        const [results] = await db.updateCourse(conn, req.body.courseId, req.body.name, req.body.maxCapacity, req.body.description);
+        if (!results || results.length === 0) {
+            return res.status(404).json({ error: "Course doesn't exist" });
+        }
+
+        res.status(200).json(results);
+    }
+    catch (ex) {
+        console.error("Error updating course:", ex);
+        res.status(401).json({ error: "Invalid JWT or database error" });
+    }
+});
+
+router.post("/add", async function (req, res){
+    try {
+        const conn = mysql.createConnection(db.mydb);
+        const [results] = await db.addCourse(conn, req.body.courseId, req.body.name, req.body.maxCapacity, req.body.majorId, req.body.description);
+        if (!results || results.length === 0) {
+            return res.status(404).json({ error: "Course doesn't exist" });
+        }
+
+        res.status(200).json(results);
+    }
+    catch (ex) {
+        console.error("Error adding course:", ex);
+        res.status(401).json({ error: "Invalid JWT or database error" });
+    }
+});
+
 
 module.exports = router;

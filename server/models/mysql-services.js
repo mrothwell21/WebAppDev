@@ -145,7 +145,7 @@ module.exports = db = {
         return results;
     },
 
-    addCourse: async function(conn, courseId, name, max, majorId, description) {
+    addCourse: async function(conn, courseId, name, maxCapacity, majorId, description) {
         var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 19).replace('T', ' ');
         
