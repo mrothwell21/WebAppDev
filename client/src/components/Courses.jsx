@@ -136,7 +136,7 @@ const Courses = ({ role, courseList }) => {
               </Form.Group>
             </Form>
           </Modal.Body>
-          <Modal.Footer>
+          {/* <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancel
             </Button>
@@ -146,7 +146,7 @@ const Courses = ({ role, courseList }) => {
             <Button variant="danger" onClick={handleDrop}>
               Drop
             </Button>
-          </Modal.Footer>
+          </Modal.Footer> */}
         </Modal>
       )}
 
