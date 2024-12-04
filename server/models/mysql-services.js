@@ -186,6 +186,18 @@ module.exports = db = {
         return results;
     },
 
+    getCourseById: async function (conn, courseId) {
+        const sql = `
+            SELECT Major.prefix, Major.majorId, Course.courseId, Course.maxCapacity, Course.description, Course.name
+            FROM Course
+            JOIN CourseInMajor ON Course.courseId = CourseInMajor.courseId
+            JOIN Major ON CourseInMajor.majorId = Major.majorId
+            WHERE Course.courseId = '${courseId}'`;
+
+        const results = await conn.promise().query(sql);
+        return results;
+    },
+
     updatePass : async function(conn, tableName, currentPass, newPass, name){
 
         const sql = `UPDATE ${tableName} SET password = '${newPass}'WHERE password = '${currentPass}' AND username = '${name}'`;
