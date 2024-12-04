@@ -117,7 +117,7 @@ router.get("/enrolled/:username/:majorId", async function (req, res) {
        // const decoded = jwt.decode(token, secret);
        const conn = mysql.createConnection(db.mydb);
        // console.log("connection")
-       const [results] = await db.getCoursesByUsernameStudentCapacity(conn, req.params.username, req.params.majorId);
+       const [results] = await db.getActiveCourses(conn, req.params.username, req.params.major);
        // console.log(results);
        if (!results || results.length === 0) {
            return res.status(404).json({ error: "No Courses found for this Major" });

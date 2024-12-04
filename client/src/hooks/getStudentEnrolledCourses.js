@@ -4,10 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 const fetchCourses = () => {
     const { userData } = useAuth();
 
-    const getStudentEnrolledCourses = async (majorId) => {
+    const getStudentEnrolledCourses = async (major) => {
         try {
             // console.log(selectedMajor);
-            const response = await fetch(`http://localhost:5050/api/student-courses/enrolled/${encodeURIComponent(userData.username)}/${encodeURIComponent(majorId)}`, {
+            const response = await fetch(`http://localhost:5050/api/student-courses/enrolled/${encodeURIComponent(userData.username)}/${encodeURIComponent(major)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
