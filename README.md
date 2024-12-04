@@ -31,13 +31,13 @@ A web application for managing course registration at higher education instituti
 
 - Frontend: Javascript and React
 - Backend: node.js
-- Database: MariaDB
+- Database: MySQL
 
 ## Development
 
 ### Prerequisites
 - Node.js
-- MariaDB
+- MySQL
 - React
 
 ### Installation
