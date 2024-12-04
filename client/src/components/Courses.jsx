@@ -23,7 +23,7 @@ const Courses = ({ role, courseList }) => {
     try {
       const data = await getStudentsInCourse(courseId);
       const activeStudents = data.filter(student => student.status === 'Active');
-      const studentArray = activeStudents.map(student => student.firstName + student.lastName);
+      const studentArray = activeStudents.map(student => student.firstName + " " + student.lastName);
       setEnrolledStudents(studentArray);
     } catch (error) {
       console.error("Error fetching enrolled students:", error);
@@ -34,7 +34,7 @@ const Courses = ({ role, courseList }) => {
     try {
       const data = await getStudentsInCourse(courseId);
       const inactiveStudents = data.filter(student => student.status === 'Inactive');
-      const studentArray = inactiveStudents.map(student => student.firstName + student.lastName);
+      const studentArray = inactiveStudents.map(student => student.firstName + " " + student.lastName);
       setUnenrolledStudents(studentArray);
     } catch (error) {
       console.error("Error fetching unenrolled students:", error);
